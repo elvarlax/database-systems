@@ -50,7 +50,7 @@ WHERE DeptName = 'Comp. Sci.'
    Get the rooms with a capacity between 25 and
    50, or located in the Painter building. */
 SELECT *
-from classroom
+FROM classroom
 WHERE Capacity BETWEEN 25 AND 50
    OR Building = 'Painter';
 
