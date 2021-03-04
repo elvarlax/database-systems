@@ -8,6 +8,9 @@ Sixth Edition, 2011.*/
 # Names of tables and attributes are changed slightly to improve the naming standard!
 
 # If the tables already exists, then they are deleted!
+
+CREATE DATABASE IF NOT EXISTS University;
+USE University;
  
 DROP TABLE IF EXISTS PreReq;
 DROP TABLE IF EXISTS TimeSlot;
