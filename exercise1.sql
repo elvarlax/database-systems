@@ -1,34 +1,27 @@
-USE university;
--- Basic SQL Queries
-
-/* Exercises
-   SQL queries should be run against the University
-   database. Have a print of the University Database Schema
-   Diagram and the Database Instance readily available.
-*/
+/* 2. Introductory SQL 1
 
 /* 2.13 SELECT all attributes
-   Get all data in the Student table */
+	Get all data in the Student table: */
 SELECT *
 FROM student;
 
 /* 2.14 SELECT all attributes
-   Get all data in the Course table */
+	Get all data in the Course table: */
 SELECT *
 FROM course;
 
 /* 2.15 SELECT only one attribute
-   Get the name of all students */
+	Get the name of all students: */
 SELECT StudName
 FROM student;
 
 /* 2.16 SELECT multiple attributes
-   Get the name and total credits of all students */
+	Get the name and total credits of all students: */
 SELECT StudName, TotCredits
 FROM student;
 
 /* 2.17 SELECT multiple attributes
-   Get the name, salary and department of all instructors. */
+	Get the name, salary and department of all instructors: */
 SELECT InstName, Salary, DeptName
 FROM instructor;
 
@@ -39,78 +32,73 @@ FROM student
 WHERE TotCredits > 100;
 
 /* 2.19 SELECT rows based on multiple conditions
-   Get the students in Computer Science with a total
-   credit of more than 100. */
+	Get the students in Computer Science with a total
+	credit of more than 100: */
 SELECT *
 FROM student
 WHERE DeptName = 'Comp. Sci.'
   AND TotCredits > 100;
 
 /* 2.20 SELECT rows based on multiple conditions
-   Get the rooms with a capacity between 25 and
-   50, or located in the Painter building. */
+	Get the rooms with a capacity between 25 and 50, or
+	located in the Painter building: */
 SELECT *
 FROM classroom
 WHERE Capacity BETWEEN 25 AND 50
    OR Building = 'Painter';
 
 /* 2.21 SELECT rows based on single condition
-   Get all department names not located in the
-   Taylor building. */
+	Get all department names not located in the Taylor building: */
 SELECT DeptName
 FROM department
 WHERE NOT Building = 'Taylor';
 
-/* 2.22 SELECT with two tables
-   What are the Course ID, year and grade for all
-   courses taken by student Shankar? */
+/* 2.22 SELECT based on two tables
+	What are the Course ID, year and grade for all
+	courses taken by student Shankar: */
 SELECT CourseID, StudyYear, Grade
 FROM takes
 WHERE StudID = 12345;
 
--- SQL Data Manipulation
-
 /* 2.23 INSERT with multiple rows
-   Create two new Comp. Sci. courses CS-102 and
-   CS-103 in table Course titled Weekly Seminar and
-   Monthly Seminar, both with 0 credits. */
+	Create two new Comp. Sci. courses CS-102 and CS-103 
+	in table Course titled Weekly Seminar 
+	and Monthly Seminar, both with 0 credits: */
 INSERT INTO course VALUES ('CS-102', 'Weekly Seminar', 'Comp. Sci.', 0);
 INSERT INTO course VALUES ('CS-103', 'Monthly Seminar', 'Comp. Sci.', 0);
 
 /* 2.24 INSERT with multiple NULL values
-   Create a section for both CS-102 and CS-103 in
-   Fall 2009, both with SectionID 1. */
+	Create a section for both CS-102 and CS-103 in Fall
+	2009, both with SectionID 1: */
 INSERT INTO section VALUE ('CS-102', '1', 'Fall', 2009, NULL, NULL, NULL);
 INSERT INTO section VALUE ('CS-103', '1', 'Fall', 2009, NULL, NULL, NULL);
 
 /* 2.25 INSERT with SELECT and NULL
-   In table Takes enroll every student in the Comp. Sci.
-   department in the section for CS-102. */
+	In table Takes enroll every student in the Comp. Sci.
+	department in the section for CS-102: */
 INSERT INTO takes
 SELECT StudID, 'CS-102', 1, 'Fall', 2009, NULL
 FROM student
 WHERE DeptName = 'Comp. Sci.';
 
 /* 2.26 DELETE
-   Delete both courses CS-102 and CS-103 in the
-   Takes table. */
+	Delete both courses CS-102 and CS-103 in the Takes table: */
 DELETE
 FROM takes
 WHERE CourseID = 'CS-102'
    OR 'CS-103';
 
-/* 2.27 UPDATE
-   Move the Finance department to the Taylor
-   building */
+/* 2.27 Update
+	Move the Finance department to the Taylor building. */
 UPDATE department
 SET Building = 'Taylor'
 WHERE DeptName = 'Finance';
 
--- Create a Database & Populate it with Data
+/* Run the UniversityDB Script to restore tables to initial instances. */
 
 /* 2.28 Create a Database
-   Write SQL DDL statements corresponding to
-   the Relation Schemas below for an Insurance Database
+	Write SQL DDL statements corresponding to the
+	Relation Schemas below for an Insurance Database.
 
    Person (DriverID, DriverName, Address)
    Car (License, Model, ProdYear)
@@ -171,8 +159,14 @@ CREATE TABLE Participants
 );
 
 /* 2.29 Populate a Database
-   Write SQL DML statements to populate the
-   database with data, to end up with: */
+	Write SQL DML statements to populate the database
+	with data, to end up with: 
+	SELECT * FROM Person;
+	SELECT * FROM Car;
+	SELECT * FROM Accident;
+	SELECT * FROM Owns;
+	SELECT * FROM Participants;
+	*/
 INSERT INTO Person VALUES ('31262549', 'Hans Hansen', 'Jernbane Alle 74, 2720 Vanlose');
 INSERT INTO Car VALUES ('JW46898', 'Honda Accord Aut. 2.0', 2001);
 INSERT INTO Accident VALUES ('3004000121', 20150618, '2605 Brondby');
