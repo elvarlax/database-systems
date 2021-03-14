@@ -9,8 +9,8 @@ Sixth Edition, 2011.*/
 
 # If the tables already exists, then they are deleted!
 
-CREATE DATABASE IF NOT EXISTS University;
-USE University;
+CREATE DATABASE IF NOT EXISTS UniversityDB;
+USE UniversityDB;
 
 DROP TABLE IF EXISTS PreReq;
 DROP TABLE IF EXISTS TimeSlot;
