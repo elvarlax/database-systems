@@ -1,4 +1,4 @@
-/* 2. Introductory SQL 1
+/* 2. Introductory SQL 1 */
 
 /* 2.13 SELECT all attributes
 	Get all data in the Student table: */
