@@ -53,7 +53,7 @@ WHERE Capacity BETWEEN 25 AND 50
 	Get all department names not located in the Taylor building: */
 SELECT DeptName
 FROM department
-WHERE NOT Building = 'Taylor';
+WHERE Building != 'Taylor';
 
 /* 2.22 SELECT based on two tables
 	What are the Course ID, year and grade for all
@@ -63,13 +63,11 @@ FROM takes
 WHERE StudID = 12345;
 
 /* 2.23 INSERT with multiple rows
-	Create two new Comp. Sci. courses CS-102 and CS-103 
-	in table Course titled Weekly Seminar 
+	Create two new Comp. Sci. courses CS-102 and CS-103
+	in table Course titled Weekly Seminar
 	and Monthly Seminar, both with 0 credits: */
-INSERT INTO course
-VALUES ('CS-102', 'Weekly Seminar', 'Comp. Sci.', 0);
-INSERT INTO course
-VALUES ('CS-103', 'Monthly Seminar', 'Comp. Sci.', 0);
+INSERT INTO course VALUES ('CS-102', 'Weekly Seminar', 'Comp. Sci.', 0);
+INSERT INTO course VALUES ('CS-103', 'Monthly Seminar', 'Comp. Sci.', 0);
 
 /* 2.24 INSERT with multiple NULL values
 	Create a section for both CS-102 and CS-103 in Fall
@@ -89,8 +87,7 @@ WHERE DeptName = 'Comp. Sci.';
 	Delete both courses CS-102 and CS-103 in the Takes table: */
 DELETE
 FROM takes
-WHERE CourseID = 'CS-102'
-   OR 'CS-103';
+WHERE CourseID = 'CS-102' OR 'CS-103';
 
 /* 2.27 Update
 	Move the Finance department to the Taylor building. */
@@ -164,20 +161,15 @@ CREATE TABLE Participants
 
 /* 2.29 Populate a Database
 	Write SQL DML statements to populate the database
-	with data, to end up with: 
+	with data, to end up with:
 	SELECT * FROM Person;
 	SELECT * FROM Car;
 	SELECT * FROM Accident;
 	SELECT * FROM Owns;
 	SELECT * FROM Participants;
 	*/
-INSERT INTO Person
-VALUES ('31262549', 'Hans Hansen', 'Jernbane Alle 74, 2720 Vanlose');
-INSERT INTO Car
-VALUES ('JW46898', 'Honda Accord Aut. 2.0', 2001);
-INSERT INTO Accident
-VALUES ('3004000121', 20150618, '2605 Brondby');
-INSERT INTO Owns
-VALUES ('31262549', 'JW46898');
-INSERT INTO Participants
-VALUES ('3004000121', 'JW46898', '31262549', 6800);
+INSERT INTO Person VALUES ('31262549', 'Hans Hansen', 'Jernbane Alle 74, 2720 Vanlose');
+INSERT INTO Car VALUES ('JW46898', 'Honda Accord Aut. 2.0', 2001);
+INSERT INTO Accident VALUES ('3004000121', 20150618, '2605 Brondby');
+INSERT INTO Owns VALUES ('31262549', 'JW46898');
+INSERT INTO Participants VALUES ('3004000121', 'JW46898', '31262549', 6800);
