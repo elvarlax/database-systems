@@ -1,5 +1,7 @@
 /* 4. Intermediate SQL */
 
+USE UniversityDB;
+
 /* 4.2.1 JOINs
 	Display the list of all departments, with the total
 	number of instructors in each department. Note:

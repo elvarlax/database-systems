@@ -1,5 +1,7 @@
 /* 3. Introductory SQL 2 */
 
+USE UniversityDB;
+
 /* 3.2.1 SELECT with MAX aggregation
 	Find the highest salary of any instructor: */
 

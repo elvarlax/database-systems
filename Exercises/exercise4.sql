@@ -1,5 +1,7 @@
 /* 5. Advanced SQL */
 
+USE UniversityDB;
+
 /* 5.2.1 Create a Function
 	Create a function named BuildingCapacityFct which
 	takes as input a Building and returns the capacity of the building.
