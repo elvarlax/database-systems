@@ -100,10 +100,10 @@ CREATE TABLE `game` (
   `score` int(11) NOT NULL,
   PRIMARY KEY (`idgame`),
   KEY `game_has_referee` (`referee_id`),
-  KEY `game.away_has_club` (`away`),
-  KEY `game.home_has_club` (`home`),
-  CONSTRAINT `game.away_has_club` FOREIGN KEY (`away`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `game.home_has_club` FOREIGN KEY (`home`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `game_away_has_club` (`away`),
+  KEY `game_home_has_club` (`home`),
+  CONSTRAINT `game_away_has_club` FOREIGN KEY (`away`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `game_home_has_club` FOREIGN KEY (`home`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `game_has_referee` FOREIGN KEY (`referee_id`) REFERENCES `referee` (`idreferee`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) DEFAULT CHARSET=utf8;
 
