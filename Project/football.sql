@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS `football`;
 CREATE DATABASE `football`;
 USE `football`;
 
