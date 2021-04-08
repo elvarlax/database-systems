@@ -12,7 +12,9 @@ CREATE TABLE `league`
 
 INSERT INTO `league`
 VALUES (1, 'England', 'Premier League'),
-       (2, 'Spain', 'La Liga');
+       (2, 'Spain', 'La Liga'),
+       (3, 'Germany', 'Bundasliga'),
+       (4, 'Italy', 'Serie A');
 
 CREATE TABLE `referee`
 (
@@ -53,7 +55,11 @@ CREATE TABLE `season`
 
 INSERT INTO `season`
 VALUES (1, '2011–12'),
-       (2, '2012–13');
+       (2, '2012–13'),
+       (3, '2016–17'),
+       (4, '2017–18'),
+       (5, '2018-19'),
+       (6, '2019-20');
 
 CREATE TABLE `stadium`
 (
