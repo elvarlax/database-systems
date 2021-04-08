@@ -7,7 +7,7 @@ CREATE TABLE `league`
     `country`  varchar(45) NOT NULL,
     `name`     varchar(45) NOT NULL,
     PRIMARY KEY (`idleague`)
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `league`
 VALUES (1, 'England', 'Premier League'),
@@ -21,7 +21,7 @@ CREATE TABLE `referee`
     `name`        varchar(45) NOT NULL,
     `nationality` varchar(45) NOT NULL,
     PRIMARY KEY (`idreferee`)
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `referee`
 VALUES (1, 'Martin Atkinson', 'England'),
@@ -50,15 +50,13 @@ CREATE TABLE `season`
     `idseason` int(11)     NOT NULL AUTO_INCREMENT,
     `name`     varchar(45) NOT NULL,
     PRIMARY KEY (`idseason`)
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `season`
-VALUES (1, '2011–12'),
-       (2, '2012–13'),
-       (3, '2016–17'),
-       (4, '2017–18'),
-       (5, '2018-19'),
-       (6, '2019-20');
+VALUES (1, '2016–17'),
+       (2, '2017–18'),
+       (3, '2018-19'),
+       (4, '2019-20');
 
 CREATE TABLE `stadium`
 (
@@ -66,7 +64,7 @@ CREATE TABLE `stadium`
     `name`      varchar(45) NOT NULL,
     `capacity`  int(11)     NOT NULL,
     PRIMARY KEY (`idstadium`)
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `stadium`
 VALUES (1, 'Emirates Stadium', 60361),
@@ -127,7 +125,7 @@ CREATE TABLE `club`
     CONSTRAINT `club_has_league` FOREIGN KEY (`league_id`) REFERENCES `league` (`idleague`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `club_has_stadium` FOREIGN KEY (`stadium_id`) REFERENCES `stadium` (`idstadium`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `club_has_captain` FOREIGN KEY (`captain_id`) REFERENCES `player` (`idplayer`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `club`
 VALUES (1, 1, 1, 'Arsenal', 1886, 'Mikel Arteta', 1, 'London'),
@@ -176,7 +174,7 @@ CREATE TABLE `position`
     `idposition` int(11)     NOT NULL AUTO_INCREMENT,
     `name`       varchar(45) NOT NULL,
     PRIMARY KEY (`idposition`)
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `position`
 VALUES (1, 'Goalkeeper'),
@@ -193,7 +191,7 @@ CREATE TABLE `player`
     PRIMARY KEY (`idplayer`),
     KEY `player_has_position` (`position_id`),
     CONSTRAINT `player_has_position` FOREIGN KEY (`position_id`) REFERENCES `position` (`idposition`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `player`
 VALUES (1, 1, 'Wojciech Szczęsny', 'Poland'),
@@ -651,7 +649,7 @@ CREATE TABLE `squad`
     CONSTRAINT `squad_has_club` FOREIGN KEY (`club_id`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `squad_has_player` FOREIGN KEY (`player_id`) REFERENCES `player` (`idplayer`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `squad_has_season` FOREIGN KEY (`season_id`) REFERENCES `season` (`idseason`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `squad`
 VALUES (1, 1, 1, 1, 0),
@@ -1551,7 +1549,7 @@ CREATE TABLE `game`
     CONSTRAINT `game_away_has_club` FOREIGN KEY (`away`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `game_home_has_club` FOREIGN KEY (`home`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `game_has_referee` FOREIGN KEY (`referee_id`) REFERENCES `referee` (`idreferee`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `game`
 VALUES (1, 1, 1, 2, 0, 0, 0),
