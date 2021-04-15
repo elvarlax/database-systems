@@ -1,3074 +1,2770 @@
-CREATE DATABASE `football`;
-USE `football`;
+create database football;
+use football;
 
-CREATE TABLE `league`
+create table league
 (
-    `idleague` int(11)     NOT NULL AUTO_INCREMENT,
-    `country`  varchar(45) NOT NULL,
-    `name`     varchar(45) NOT NULL,
-    PRIMARY KEY (`idleague`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idleague int auto_increment
+        primary key,
+    country  varchar(45) not null,
+    name     varchar(45) not null
+)
+    charset = utf8;
 
-INSERT INTO `league`
-VALUES (1, 'England', 'Premier League'),
-       (2, 'Spain', 'La Liga'),
-       (3, 'Germany', 'Bundasliga'),
-       (4, 'Italy', 'Serie A');
+INSERT INTO football.league (idleague, country, name) VALUES (1, 'England', 'Premier League');
+INSERT INTO football.league (idleague, country, name) VALUES (2, 'Spain', 'La Liga');
 
-CREATE TABLE `referee`
+create table season
 (
-    `idreferee`   int(11)     NOT NULL AUTO_INCREMENT,
-    `name`        varchar(45) NOT NULL,
-    `nationality` varchar(45) NOT NULL,
-    PRIMARY KEY (`idreferee`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idseason int auto_increment
+        primary key,
+    name     varchar(45) not null
+)
+    charset = utf8;
 
-INSERT INTO `referee`
-VALUES (1, 'Martin Atkinson', 'England'),
-       (2, 'Kevin Blom', 'Netherlands'),
-       (3, 'Felix Brych', 'Germany'),
-       (4, 'Mark Clattenburg', 'England'),
-       (5, 'Jonas Eriksson', 'Sweden'),
-       (6, 'Howard Webb', 'England'),
-       (7, 'Viktor Kassai', 'Hungary'),
-       (8, 'Björn Kuipers', 'Netherlands'),
-       (9, 'Stéphane Lannoy', 'France'),
-       (10, 'Florian Meyer', 'Germany'),
-       (11, 'Svein Oddvar Moen', 'Norway'),
-       (12, 'Pedro Proença', 'Portugal'),
-       (13, 'Nicola Rizzoli', 'Italy'),
-       (14, 'Gianluca Rocchi', 'Italy'),
-       (15, 'Damir Skomina', 'Slovenia'),
-       (16, 'Wolfgang Stark', 'Germany'),
-       (17, 'Paolo Tagliavento', 'Italy'),
-       (18, 'Craig Thomson', 'Scotland'),
-       (19, 'Alberto Undiano Mallenco', 'Spain'),
-       (20, 'Carlos Velasco Carballo', 'Spain');
+INSERT INTO football.season (idseason, name) VALUES (1, '2019-20');
+INSERT INTO football.season (idseason, name) VALUES (2, '2017–18');
 
-CREATE TABLE `season`
+create table position
 (
-    `idseason` int(11)     NOT NULL AUTO_INCREMENT,
-    `name`     varchar(45) NOT NULL,
-    PRIMARY KEY (`idseason`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idposition int auto_increment
+        primary key,
+    name       varchar(45) not null
+)
+    charset = utf8;
 
-INSERT INTO `season`
-VALUES (1, '2016–17'),
-       (2, '2017–18'),
-       (3, '2018-19'),
-       (4, '2019-20');
+INSERT INTO football.position (idposition, name) VALUES (1, 'Goalkeeper');
+INSERT INTO football.position (idposition, name) VALUES (2, 'Defender');
+INSERT INTO football.position (idposition, name) VALUES (3, 'Midfielder');
+INSERT INTO football.position (idposition, name) VALUES (4, 'Forward');
 
-CREATE TABLE `stadium`
+create table referee
 (
-    `idstadium` int(11)     NOT NULL AUTO_INCREMENT,
-    `name`      varchar(45) NOT NULL,
-    `capacity`  int(11)     NOT NULL,
-    PRIMARY KEY (`idstadium`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idreferee   int auto_increment
+        primary key,
+    name        varchar(45) not null,
+    nationality varchar(45) not null
+)
+    charset = utf8;
 
-INSERT INTO `stadium`
-VALUES (1, 'Emirates Stadium', 60361),
-       (2, 'Villa Park', 42788),
-       (3, 'Ewood Park', 31154),
-       (4, 'Reebok Stadium', 28723),
-       (5, 'Stamford Bridge', 41837),
-       (6, 'Goodison Park', 40157),
-       (7, 'Craven Cottage', 25700),
-       (8, 'Anfield', 45276),
-       (9, 'Etihad Stadium', 47805),
-       (10, 'Old Trafford', 75811),
-       (11, 'Sports Direct Arena', 52387),
-       (12, 'Carrow Road', 27033),
-       (13, 'Loftus Road', 18360),
-       (14, 'Britannia Stadium', 27598),
-       (15, 'Stadium of Light', 49000),
-       (16, 'Liberty Stadium', 20532),
-       (17, 'White Hart Lane', 36230),
-       (18, 'The Hawthorns', 26272),
-       (19, 'DW Stadium', 25133),
-       (20, 'Molineux Stadium', 27828),
-       (21, 'San Mamés', 40000),
-       (22, 'Vicente Calderón', 54960),
-       (23, 'Camp Nou', 99787),
-       (24, 'Benito Villamarín', 52745),
-       (25, 'Estadi Cornellà-El Prat', 40500),
-       (26, 'Coliseum Alfonso Pérez', 17700),
-       (27, 'Nuevo Los Cármenes', 22524),
-       (28, 'Estadi Ciutat de València', 25354),
-       (29, 'Iberostar Estadio', 23142),
-       (30, 'La Rosaleda', 28963),
-       (31, 'Estadio Reyno de Navarra', 19553),
-       (32, 'El Sardinero', 22271),
-       (33, 'Estadio de Vallecas', 15489),
-       (34, 'Santiago Bernabéu', 85454),
-       (35, 'Estadio Anoeta', 32076),
-       (36, 'Ramón Sánchez Pizjuán', 45500),
-       (37, 'El Molinón', 29800),
-       (38, 'Mestalla', 55000),
-       (39, 'El Madrigal', 25000),
-       (40, 'La Romareda', 34596);
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (1, 'Martin Atkinson', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (2, 'Michael Oliver', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (3, 'Anthony Taylor', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (4, 'Mike Dean', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (5, 'Chris Kavanagh', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (6, 'Kevin Friend', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (7, 'Jonathan Moss', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (8, 'Paul Tierney', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (9, 'Andre Marriner', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (10, 'Craig Pawson', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (11, 'Stuart Attwell', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (12, 'Graham Scott', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (13, 'David Coote', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (14, 'Lee Mason', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (15, 'Peter Bankes', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (16, 'Simon Hooper', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (17, 'Andy Madley', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (18, 'Darren England', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (19, 'Robert Jones', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (20, 'Tim Robinson', 'England');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (21, 'Javier Alberola Rojas', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (22, 'Alfonso Alvarez Izquierdo', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (23, 'Javier Estrada Fernandez', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (24, 'David Fernandez Borbalan', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (25, 'Jesus Gil Manzano', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (26, 'Pablo Gonzalez Fuertes', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (27, 'Jose Gonzalez Gonzalez', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (28, 'Alejandro Hernandez Hernandez', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (29, 'Ignacio Iglesias Villanueva', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (30, 'Santiago Jaime Latre', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (31, 'Alberto Undiano Mallenco', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (32, 'Juan Martinez Munuera', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (33, 'Antonio Miguel Mateu Lahoz	', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (34, 'David Medie Jimenez', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (35, 'Mario Melero Lopez', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (36, 'Jose Luis Munuera Montero', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (37, 'Jose Maria Sanchez Martinez', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (38, 'Daniel Jesus Trujillo Suarez	', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (39, 'Ricardo de Burgos', 'Spain');
+INSERT INTO football.referee (idreferee, name, nationality) VALUES (40, 'Carlos del Cerro Grande', 'Spain');
 
-CREATE TABLE `club`
+create table stadium
 (
-    `idclub`     int(11)     NOT NULL AUTO_INCREMENT,
-    `league_id`  int(11)     NOT NULL,
-    `stadium_id` int(11)     NOT NULL,
-    `name`       varchar(45) NOT NULL,
-    `founded`    int(11)     NOT NULL,
-    `manager`    varchar(45) NOT NULL,
-    `captain_id` int(11)     NOT NULL,
-    `city`       varchar(45) NOT NULL,
-    PRIMARY KEY (`idclub`),
-    KEY `club_has_league` (`league_id`),
-    KEY `club_has_stadium` (`stadium_id`),
-    KEY `club_has_captain` (`captain_id`),
-    CONSTRAINT `club_has_league` FOREIGN KEY (`league_id`) REFERENCES `league` (`idleague`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `club_has_stadium` FOREIGN KEY (`stadium_id`) REFERENCES `stadium` (`idstadium`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `club_has_captain` FOREIGN KEY (`captain_id`) REFERENCES `player` (`idplayer`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idstadium int auto_increment
+        primary key,
+    name      varchar(45) not null,
+    capacity  int         not null
+)
+    charset = utf8;
 
-INSERT INTO `club`
-VALUES (1, 1, 1, 'Arsenal', 1886, 'Mikel Arteta', 1, 'London'),
-       (2, 1, 2, 'Aston Villa', 1874, 'Dean Smith', 1, 'Birmingham'),
-       (3, 1, 3, 'Bournemouth', 1875, 'Steve Kean', 1, 'Blackburn'),
-       (4, 1, 4, 'Brighton & Hove Albions', 1874, 1, 'Owen Coyle', 'Manchester'),
-       (5, 1, 5, 'Burnley', 1905, 'Roberto Di Matteo', 1, 'London'),
-       (6, 1, 6, 'Chelsea', 1878, 'David Moyes', 1, 'Liverpool'),
-       (7, 1, 7, 'Crystal Palace', 1879, 'Martin Jol', 1, 'London'),
-       (8, 1, 8, 'Everton', 1892, 'Kenny Dalglish', 1, 'Liverpool'),
-       (9, 1, 9, 'Leicester City', 1880, 'Roberto Mancini', 1, 'Manchester'),
-       (10, 1, 10, 'Liverpool', 1878, 'Sir Alex Ferguson', 1, 'Manchester'),
-       (11, 1, 11, 'Manchester City', 1892, 'Alan Pardew', 1, 'Newcastle upon Tyne'),
-       (12, 1, 12, 'Manchester United', 1902, 'Paul Lambert', 1, 'Norwich'),
-       (13, 1, 13, 'Newcastle United', 1882, 'Mark Hughes', 1, 'London'),
-       (14, 1, 14, 'Norwich City', 1863, 'Tony Pulis', 1, 'Stoke on Trent'),
-       (15, 1, 15, 'Sheffield United', 1879, 'Martin O´Neill', 1, 'Sunderland'),
-       (16, 1, 16, 'Southampton', 1912, 'Brendan Rodgers', 1, 'Swansea'),
-       (17, 1, 17, 'Tottenham Hotspur', 1882, 'Harry Redknapp', 1, 'London'),
-       (18, 1, 18, 'Watford', 1878, 'Roy Hodgson', 1, 'Birmingham'),
-       (19, 1, 19, 'West Ham United', 1932, 'Roberto Martinez', 1, 'Manchester'),
-       (20, 1, 20, 'Wolverhampton Wanderers', 1877, 'Terry Connor', 1, 'Wolverhampton'),
-       (21, 2, 21, 'Athletic Bilbao', 1898, 'Marcelo Bielsa', 1, 'Bilbao'),
-       (22, 2, 22, 'Atlético Madrid', 1903, 'Diego Simeone', 1, 'Madrid'),
-       (23, 2, 23, 'Barcelona', 1899, 'Josep Guardiola', 1, 'Barcelona'),
-       (24, 2, 24, 'Real Betis', 1907, 'Pepe Mel', 1, 'Seville'),
-       (25, 2, 25, 'Espanyol', 1900, 'Mauricio Pochettino', 1, 'Barcelona'),
-       (26, 2, 26, 'Getafe', 1983, 'Luis García Plaza', 1, 'Madrid'),
-       (27, 2, 27, 'Granada', 1931, 'Abel Resino', 1, 'Granada'),
-       (28, 2, 28, 'Levante', 1909, 'Juan Ignacio Martínez', 1, 'Valencia'),
-       (29, 2, 29, 'Mallorca', 1916, 'Joaquín Caparrós', 1, 'Palma'),
-       (30, 2, 30, 'Málaga', 1948, 'Manuel Pellegrini', 1, 'Málaga'),
-       (31, 2, 31, 'Osasuna', 1920, 'José Luis Mendilibar', 1, 'Pamplona'),
-       (32, 2, 32, 'Racing de Santander', 1913, 'Álvaro Cervera', 1, 'Santander'),
-       (33, 2, 33, 'Rayo Vallecano', 1924, 'José Ramón Sandoval', 1, 'Madrid'),
-       (34, 2, 34, 'Real Madrid', 1902, 'José Mourinho', 1, 'Madrid'),
-       (35, 2, 35, 'Real Sociedad', 1909, 'Philippe Montanier', 1, 'San Sebastián'),
-       (36, 2, 36, 'Sevilla', 1905, 'Míchel González', 1, 'Seville'),
-       (37, 2, 37, 'Sporting Gijón', 1905, 'Javier Clemente', 1, 'Gijón'),
-       (38, 2, 38, 'Valencia', 1919, 'Unai Emery', 1, 'Valencia'),
-       (39, 2, 39, 'Villarreal', 1923, 'Miguel Ángel Lotina', 1, 'Villarreal'),
-       (40, 2, 40, 'Real Zaragoza', 1932, 'Manolo Jiménez', 1, 'Zaragoza');
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (1, 'Emirates Stadium', 60704);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (2, 'Villa Park', 42785);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (3, 'Dean Court', 11329);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (4, 'Falmer Stadium', 30750);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (5, 'Turf Moor', 21944);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (6, 'Stamford Bridge', 40834);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (7, 'Selhurst Park', 25486);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (8, 'Goodison Park', 39414);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (9, 'King Power Stadium', 32243);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (10, 'Anfield', 53394);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (11, 'City of Manchester Stadium', 55097);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (12, 'Old Trafford', 74879);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (13, 'St James'' Park', 52388);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (14, 'Carrow Road', 27244);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (15, 'Bramall Lane', 32125);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (16, 'St Mary''s Stadium', 32505);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (17, 'Tottenham Hotspur Stadium', 62303);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (18, 'Vicarage Road', 22220);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (19, 'London Stadium', 60000);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (20, 'Molineux Stadium', 27828);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (21, 'WWK Arena', 30660);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (22, 'Olympiastadion', 46356);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (23, 'Weser-Stadion', 73267);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (24, 'Signal Iduna', 36263);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (25, 'Merkur Spiel-Arena', 43555);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (26, 'Commerzbank-Arena', 436564);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (27, 'Schwarzwald-Stadion', 32222);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (28, 'HDI Arena', 32224);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (29, 'Red Bull Arena', 89847);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (30, 'BayArena', 40984);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (31, 'Opel Arena', 64333);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (32, 'Borussia-Park', 54332);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (33, 'Allianz Arena', 54333);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (34, 'Max-Morlock-Stadion', 63434);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (35, 'Veltins-Arena', 89744);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (36, 'Mercedes-Benz Arena', 60433);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (37, 'Volkswagen Arena', 76473);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (38, 'Mendizorrotza', 19840);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (39, 'San Mamés', 53289);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (40, 'Wanda Metropolitano', 67703);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (41, 'Camp Nou', 99354);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (42, 'Balaídos', 29000);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (43, 'Abanca-Riazor', 32912);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (44, 'Ipurua', 7083);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (45, 'RCDE Stadium', 40500);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (46, 'Coliseum Alfonso Pérez', 17000);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (47, 'Montilivi', 13450);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (48, 'Gran Canaria', 11454);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (49, 'Butarque', 26354);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (50, 'Ciutat de València', 26354);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (51, 'La Rosaleda', 30044);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (52, 'Benito Villamarín', 60720);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (53, 'Santiago Bernabéu', 81044);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (54, 'Anoeta', 32000);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (55, 'Ramón Sánchez Pizjuán', 42714);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (56, 'Mestalla', 49500);
+INSERT INTO football.stadium (idstadium, name, capacity) VALUES (57, 'Estadio de la Cerámica', 24890);
 
-CREATE TABLE `position`
+create table player
 (
-    `idposition` int(11)     NOT NULL AUTO_INCREMENT,
-    `name`       varchar(45) NOT NULL,
-    PRIMARY KEY (`idposition`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idplayer    int auto_increment
+        primary key,
+    position_id int         not null,
+    name        varchar(45) not null,
+    nationality varchar(45) not null,
+    constraint player_has_position
+        foreign key (position_id) references position (idposition)
+)
+    charset = utf8;
 
-INSERT INTO `position`
-VALUES (1, 'Goalkeeper'),
-       (2, 'Defender'),
-       (3, 'Midfielder'),
-       (4, 'Forward');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1, 1, 'Bernd Leno', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2, 2, 'Héctor Bellerín', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (3, 2, 'Sokratis Papastathopoulos', 'Greece');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (4, 2, 'Rob Holding', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (5, 2, 'Nacho Monreal', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (6, 3, 'Granit Xhaka', 'Switzerland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (7, 3, 'Matteo Guendouzi', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (8, 3, 'Nicolas Pepe', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (9, 4, 'Dani Ceballos', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (10, 4, 'Pierre-Emerick Aubameyang', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (11, 4, 'Alexandre Lacazette', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (12, 1, 'Tom Heaton', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (13, 2, 'Frederic Guilbert', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (14, 2, 'Bjorn Engels', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (15, 2, 'James Chester', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (16, 2, 'Matt Targett', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (17, 3, 'Conor Hourihane', 'Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (18, 3, 'John McGinn', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (19, 3, 'Jack Grealish', 'Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (20, 4, 'Anwar El Ghazi', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (21, 4, 'Wesley', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (22, 4, 'Jota', 'Spanish');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (23, 1, 'Begovic', 'Yugoslavia');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (24, 2, 'Adam Smith', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (25, 2, 'Nathan Ake', 'Netherlands');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (26, 2, 'Steve Cook', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (27, 2, 'Simon Francis', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (28, 3, 'Ryan Fraser', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (29, 3, 'Jefferson Lerma', 'Colombia');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (30, 3, 'Lewis Cook', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (31, 3, 'David Brooks', 'Wales');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (32, 3, 'Joshua King', 'Norway');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (33, 4, 'Callum Wilson', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (34, 1, 'Mathew Ryan', 'Australia');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (35, 2, 'Martin Montoya', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (36, 2, 'Lewis Dunk', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (37, 2, 'Shane Duffy', 'Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (38, 2, 'Gaetan Bong', 'Cameroon');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (39, 3, 'Dale Stephens', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (40, 3, 'Davy Propper', 'Netherlands');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (41, 3, 'Pascal Gross', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (42, 3, 'Leandro Trossard', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (43, 3, 'Neal Maupay', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (44, 4, 'Jose Izquierdo', 'Colombia');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (45, 1, 'Nick Pope', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (46, 2, 'Matt Lowton', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (47, 2, 'Ben Mee', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (48, 2, 'James Tarkowski', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (49, 2, 'Charlie Taylor', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (50, 3, 'Johann Berg Gudmundsson', 'Iceland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (51, 3, 'Jack Cork', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (52, 3, 'Jeff Hendrick', 'Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (53, 4, 'Dwight McNeil', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (54, 4, 'Jay Rodriguez', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (55, 4, 'Chris Wood', 'New Zealand');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (56, 1, 'Kepa Arrizabalaga', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (57, 2, 'Cesar Azpilicueta', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (58, 2, 'Antonio Rudiger', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (59, 2, 'Kurt Zouma', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (60, 2, 'Marcos Alonso', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (61, 3, 'N’Golo Kante', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (62, 3, 'Jorginho', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (63, 3, 'Pedro', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (64, 3, 'Mason Mount', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (65, 3, 'Christian Pulisic', 'United States');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (66, 4, 'Tammy Abraham', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (67, 1, 'Vicente Guaita', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (68, 2, 'Joel Ward', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (69, 2, 'James Tomkins', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (70, 2, 'Mamadou Sakho', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (71, 2, 'Patrick van Aanholt', 'Netherlands');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (72, 3, 'Luka Milivojevic', 'Serbia');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (73, 3, 'James McArthur', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (74, 3, 'Wilfried Zaha', 'Ivory Coast');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (75, 3, 'Jordan Ayew', 'Ghana');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (76, 4, 'Andros Townsend', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (77, 4, 'Christian Benteke', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (78, 1, 'Jordan Pickford', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (79, 2, 'Seamus Coleman', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (80, 2, 'Michael Keane', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (81, 2, 'Leighton Baines', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (82, 2, 'Lucas Digne', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (83, 3, 'Jean-Philippe Gbamin', 'Ivory Coast');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (84, 3, 'Andre Gomes', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (85, 4, 'Bernard', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (86, 4, 'Gylfi Sigurdsson', 'Iceland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (87, 4, 'Richarlison', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (88, 4, 'Moise Kean', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (89, 1, 'Kasper Schmeichel', 'Denmark');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (90, 2, 'Ricardo Pereira', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (91, 2, 'Wes Morgan', 'Jamaica');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (92, 2, 'Jonny Evans', 'Northern Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (93, 2, 'Ben Chilwell', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (94, 3, 'Wilfred Ndidi', 'Nigeria');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (95, 3, 'Youri Tielemans', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (96, 3, 'Demarai Gray', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (97, 3, 'James Maddison', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (98, 4, 'Harvey Barnes', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (99, 4, 'Jamie Vardy', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (100, 1, 'Alisson Becker', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (101, 2, 'Trent Alexander-Arnold', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (102, 2, 'Joel Matip', 'Cameroon');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (103, 2, 'Virgil Van Dijk', 'Netherlands');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (104, 2, 'Andrew Robertson', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (105, 3, 'Fabinho', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (106, 3, 'Georginio Wijnaldum', 'Netherlands');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (107, 3, 'Jordan Henderson', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (108, 3, 'Mohamed Salah', 'Egypt');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (109, 4, 'Roberto Firmino', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (110, 4, 'Sadio Mane', 'Senegal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (111, 1, 'Ederson', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (112, 2, 'Kyle Walker', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (113, 2, 'Aymeric Laporte', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (114, 2, 'John Stones', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (115, 2, 'Benjamin Mendy', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (116, 3, 'Rodri', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (117, 3, 'Bernardo Silva', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (118, 3, 'Kevin De Bruyne', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (119, 3, 'David Silva', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (120, 4, 'Raheem Sterling', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (121, 4, 'Sergio Aguero', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (122, 1, 'David De Gea', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (123, 2, 'Aaron Wan-Bissaka', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (124, 2, 'Victor Lindelof', 'Sweden');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (125, 2, 'Harry Maguire', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (126, 2, 'Luke Shaw', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (127, 3, 'Scott McTominay', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (128, 3, 'Nemanja Matic', 'Serbia');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (129, 3, 'Anthony Martial', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (130, 3, 'Paul Pogba', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (131, 4, 'Daniel James', 'Wales');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (132, 4, 'Marcus Rashford', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (133, 1, 'Martin Dubravka', 'Slovakia');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (134, 2, 'DeAndre Yedlin', 'United States');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (135, 2, 'Jamaal Lascelles', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (136, 2, 'Fabian Schar', 'Switzerland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (137, 2, 'Paul Dummett', 'Wales');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (138, 3, 'Miguel Almiron', 'Paraguay');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (139, 3, 'Jonjo Shelvey', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (140, 3, 'Isaac Hayden', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (141, 3, 'Sean Longstaff', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (142, 4, 'Matt Ritchie', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (143, 4, 'Joelinton', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (144, 1, 'Tim Krul', 'Netherlands');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (145, 2, 'Grant Hanley', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (146, 2, 'Timm Klose', 'Switzerland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (147, 2, 'Christoph Zimmermann', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (148, 2, 'Jamal Lewis', 'Northern Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (149, 3, 'Kenny McLean', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (150, 3, 'Mario Vrancic', 'Bosnia and Herzegovina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (151, 3, 'Marco Stiepermann', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (152, 3, 'Emiliano Buendia', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (153, 4, 'Onel Hernandez', 'Cuba');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (154, 4, 'Teemu Pukki', 'Finland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (155, 1, 'Dean Henderson', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (156, 2, 'Jack O’Connell', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (157, 2, 'Phil Jagielka', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (158, 2, 'Chris Basham', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (159, 2, 'Enda Stevens', 'Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (160, 3, 'John Fleck', 'Scotland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (161, 3, 'Oliver Norwood', 'Northern Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (162, 3, 'George Baldock', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (163, 3, 'Kieron Freeman', 'Wales');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (164, 4, 'Billy Sharp', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (165, 4, 'Lys Mousset', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (166, 1, 'Angus Gunn', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (167, 2, 'Yan Valery', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (168, 2, 'Jan Bednarek', 'Poland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (169, 2, 'Maya Yoshida', 'Japan');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (170, 2, 'Jannik Vestergaard', 'Denmark');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (171, 3, 'Ryan Bertrand', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (172, 3, 'Oriol Romeu', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (173, 3, 'Pierre Emile Hojbjerg', 'Denmark');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (174, 3, 'Nathan Redmond', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (175, 4, 'Danny Ings', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (176, 4, 'Che Adams', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (177, 1, 'Hugo Lloris', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (178, 2, 'Serge Aurier', 'Ivory Coast');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (179, 2, 'Toby Alderweireld', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (180, 2, 'Jan Vertonghen', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (181, 2, 'Danny Rose', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (182, 3, 'Moussa Sissoko', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (183, 3, 'Tanguy Ndombele', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (184, 3, 'Christian Eriksen', 'Denmark');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (185, 3, 'Dele Alli', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (186, 4, 'Son Heung-min', 'South Korea');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (187, 4, 'Harry Kane', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (188, 1, 'Heurelho Gomes', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (189, 2, 'Daryl Janmaat', 'Netherlands');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (190, 2, 'Christian Kabasele', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (191, 2, 'Craig Cathcart', 'Northern Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (192, 2, 'Jose Holebas', 'Greece');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (193, 3, 'Roberto Pereyra', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (194, 3, 'Abdoulaye Doucoure', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (195, 3, 'Etienne Capoue', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (196, 3, 'Gerard Deulofeu', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (197, 4, 'Andre Gray', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (198, 4, 'Troy Deeney', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (199, 1, 'Lukasz Fabianski', 'Poland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (200, 2, 'Pablo Zabaleta', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (201, 2, 'Issa Diop', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (202, 2, 'Fabian Balbuena', 'Paraguay');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (203, 2, 'Arthur Masuaku', 'Congo');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (204, 3, 'Mark Noble', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (205, 3, 'Declan Rice', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (206, 3, 'Felipe Anderson', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (207, 3, 'Pablo Fornals', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (208, 4, 'Michail Antonio', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (209, 4, 'Sebastien Haller', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (210, 1, 'Rui Patricio', 'Wales');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (211, 2, 'Matt Doherty', 'Ireland');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (212, 2, 'Willy Boly', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (213, 2, 'Conor Coady', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (214, 2, 'Ryan Bennett', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (215, 3, 'Jonny Otto', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (216, 3, 'Ruben Neves', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (217, 3, 'Joao Moutinho', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (218, 3, 'Leander Dendoncker', 'Belgium');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (219, 4, 'Diogo Jota', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (220, 4, 'Raul Jimenez', 'Mexico');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1499, 2, 'Martin Aguirregabiria ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1500, 2, 'Alexis Ruano ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1501, 3, 'Alfonso ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1502, 3, 'Burgui ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1503, 1, 'Aritz Castro ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1504, 4, 'Ermedin Demirovic ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1505, 2, 'Adrian Dieguez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1506, 2, 'Ruben Duarte ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1507, 4, 'Munir El Haddadi ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1508, 2, 'Rodrigo Ely ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1509, 2, 'Einar Galilea ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1510, 3, 'Ibai Gomez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1511, 4, 'John Guidetti ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1512, 2, 'Hector ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1513, 3, 'Aleksandr Katai ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1514, 4, 'Bojan Krkic ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1515, 2, 'Victor Laguardia ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1516, 1, 'Ioritz Landeta ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1517, 3, 'Victor Lopez ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1518, 3, 'Manu Garcia ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1519, 2, 'Guillermo Maripan ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1520, 3, 'Alvaro Medran ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1521, 1, 'Fernando Pacheco ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1522, 4, 'Hernan Perez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1523, 3, 'Tomas Pina ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1524, 3, 'Oscar Romero ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1525, 4, 'Christian Santos ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1526, 1, 'Antonio Sivera ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1527, 4, 'Ruben Sobrino ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1528, 3, 'Daniel Torres ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1529, 2, 'Vigaray ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1530, 3, 'Mubarak Wakaso ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1531, 3, 'Enzo Zidane ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1532, 4, 'Aritz Aduriz ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1533, 3, 'Ager Aketxe ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1534, 2, 'Mikel Balenziaga ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1535, 3, 'Benat ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1536, 2, 'Eneko Boveda ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1537, 3, 'Inigo Cordoba ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1538, 2, 'Dani Vivian ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1539, 2, 'Oscar De Marcos ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1540, 2, 'Xabier Etxeita ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1541, 2, 'Gil ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1542, 1, 'Iago Herrerin ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1543, 2, 'Inigo Lekue ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1544, 3, 'Ander Iturraspe ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1545, 1, 'Kepa ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1546, 2, 'Aymeric Laporte ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1547, 2, 'Andoni Lopez Saratxo ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1548, 2, 'Inigo Martinez ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1549, 4, 'Iker Muniain ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1550, 4, 'Inigo Munoz ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1551, 2, 'Peru Nolaskoain ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1552, 2, 'Unai Nunez ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1553, 3, 'Raul Garcia ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1554, 3, 'Mikel Rico ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1555, 4, 'Sabin ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1556, 2, 'Enric Saborit ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1557, 3, 'Victor San Bartolome ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1558, 2, 'Mikel San Jose ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1559, 4, 'Enrique Sola ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1560, 4, 'Markel Susaeta ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1561, 1, 'Unai Simon ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1562, 3, 'Vesga ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1563, 4, 'Inaki Williams ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1564, 2, 'Yeray ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1565, 2, 'Aaron Martin ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1566, 1, 'Adrian Lopez ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1567, 4, 'Alvaro Vazquez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1568, 3, 'Sergi Darder ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1569, 2, 'Didac Vila ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1570, 3, 'Papakouly Diop ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1571, 2, 'Oscar Duarte ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1572, 1, 'Eduard Frias ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1573, 3, 'Javi Fuego ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1574, 4, 'Gerard Moreno ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1575, 3, 'Esteban Granero ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1576, 2, 'Mario Hermoso ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1577, 3, 'Jose Manuel Jurado ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1578, 4, 'Leo Baptistao ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1579, 2, 'Javier Lopez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1580, 1, 'Diego Lopez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1581, 2, 'David Lopez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1582, 2, 'Marc Navarro ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1583, 3, 'Oscar Melendo Jimenez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1584, 2, 'Naldo ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1585, 1, 'Pau ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1586, 4, 'Hernan Perez ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1587, 4, 'Pablo Piatti ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1588, 3, 'Marc Roca ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1589, 3, 'Carlos Sanchez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1590, 3, 'Victor Sanchez ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1591, 4, 'Sergio Garcia ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1592, 2, 'Sergio Sanchez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1593, 3, 'Juan Aguero ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1594, 1, 'Alex Dos Santos ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1595, 3, 'Keidi Bare ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1596, 2, 'Carlos Isaac ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1597, 3, 'Yannick Carrasco ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1598, 4, 'Angel Correa ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1599, 4, 'Diego Costa ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1600, 3, 'Gabi Fernandez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1601, 3, 'Augusto Fernandez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1602, 2, 'Filipe Luis ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1603, 3, 'Nicolas Gaitan ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1604, 4, 'Kevin Gameiro ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1605, 2, 'Jose Gimenez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1606, 4, 'Giovanni ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1607, 2, 'Diego Godin ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1608, 4, 'Antoine Griezmann ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1609, 2, 'Lucas Hernandez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1610, 2, 'Torres Juanfran ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1611, 3, 'Koke ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1612, 2, 'Antonio Montoro ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1613, 3, 'Juan Moreno ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1614, 1, 'Miguel Moya ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1615, 3, 'Antonio Moya ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1616, 3, 'Saul Niguez ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1617, 1, 'Jan Oblak ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1618, 3, 'Roberto Olabe ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1619, 3, 'Thomas Partey ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1620, 4, 'Alberto Rodenas ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1621, 1, 'Miguel San Roman ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1622, 3, 'Arona Sane ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1623, 2, 'Stefan Savic ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1624, 2, 'Sergi ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1625, 4, 'Fernando Torres ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1626, 4, 'Luciano Vietto ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1627, 3, 'Vitolo ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1628, 2, 'Sime Vrsaljko ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1629, 1, 'Axel Werner ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1630, 2, 'Jordi Alba ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1631, 4, 'Francisco Alcacer ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1632, 2, 'Aleix Vidal ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1633, 3, 'Carlos Alena ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1634, 3, 'Andre Gomes ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1635, 3, 'Oriol Busquets ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1636, 3, 'Sergi Busquets ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1637, 1, 'Jasper Cillessen ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1638, 2, 'David Costas ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1639, 3, 'Philippe Coutinho ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1640, 4, 'Ousmane Dembele ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1641, 4, 'Gerard Deulofeu ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1642, 2, 'Lucas Digne ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1643, 3, 'Andres Iniesta ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1644, 4, 'Jose Arnaiz ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1645, 3, 'Javier Mascherano ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1646, 4, 'Lionel Messi ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1647, 2, 'Yerry Mina ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1648, 2, 'Nelson Semedo ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1649, 1, 'Adrian Ortola ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1650, 3, 'Paulinho ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1651, 2, 'Gerard Pique ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1652, 3, 'Rafinha ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1653, 3, 'Ivan Rakitic ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1654, 3, 'Sergi Roberto ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1655, 3, 'Denis Suarez ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1656, 4, 'Luis Suarez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1657, 3, 'Arda Turan ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1658, 2, 'Samuel Umtiti ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1659, 2, 'Thomas Vermaelen ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1660, 1, 'Marc-Andre ter Stegen ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1661, 2, 'Alende ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1662, 1, 'Sergio Alvarez ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1663, 4, 'Iago Aspas ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1664, 4, 'Claudio Beauvue ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1665, 1, 'Ruben Blanco ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1666, 4, 'Lucas Boye ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1667, 2, 'Gustavo Cabral ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1668, 3, 'Dejan Drazic ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1669, 4, 'Dennis Eckert ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1670, 2, 'Andreu Fontas ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1671, 4, 'Maxi Gomez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1672, 4, 'John Guidetti ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1673, 3, 'Pablo Hernandez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1674, 3, 'Andrew Hjulsager ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1675, 2, 'Hugo Mallo ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1676, 2, 'Jonny ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1677, 3, 'Jozabed ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1678, 3, 'Stanislav Lobotka ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1679, 3, 'Brais Mendez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1680, 3, 'Daniel Molina ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1681, 4, 'Emre Mor ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1682, 2, 'Diego Pampin ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1683, 3, 'Victor Pastrana Carrasco ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1684, 3, 'Nemanja Radoja ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1685, 2, 'Robert Mazan ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1686, 2, 'Facundo Roncaglia ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1687, 2, 'Sergi Gomez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1688, 3, 'Pione Sisto ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1689, 1, 'Dani Sotres ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1690, 1, 'Francisco Vieites ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1691, 1, 'Ivan Villar ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1692, 3, 'Daniel Wass ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1693, 3, 'Ivan Alejo ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1694, 2, 'Anaitz Arbilla ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1695, 1, 'Markel Areitio ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1696, 3, 'Julen Azkue ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1697, 4, 'Bebe ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1698, 2, 'Ander Capa ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1699, 3, 'Dani Garcia ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1700, 4, 'Charles Dias de Oliveira ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1701, 3, 'Papakouly Diop ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1702, 1, 'Marko Dmitrovic ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1703, 4, 'Sergi Enrich ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1704, 3, 'Gonzalo Escalante ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1705, 2, 'Alejandro Galvez ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1706, 3, 'Takashi Inui ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1707, 3, 'Joan Jordan ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1708, 2, 'Jose Angel ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1709, 2, 'Vukasin Jovanovic ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1710, 2, 'David Junca ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1711, 4, 'Kike ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1712, 2, 'David Lomban ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1713, 2, 'Angel Lopez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1714, 2, 'Julen Lopez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1715, 4, 'Fabian Orellana ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1716, 2, 'Paulo Oliveira ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1717, 3, 'Pedro Leon ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1718, 3, 'Carlos Pena Jimenez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1719, 2, 'Ivan Ramis ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1720, 4, 'Francesc Regis ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1721, 1, 'Asier Riesgo ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1722, 3, 'Cristian Rivera ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1723, 3, 'Imanol Sarriegui ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1724, 1, 'Yoel ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1725, 3, 'David Alba ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1726, 3, 'Alvaro ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1727, 4, 'Angel ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1728, 2, 'Vitorino Antunes ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1729, 3, 'Mauro Arambarri ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1730, 3, 'Markel Bergara ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1731, 2, 'Leandro Cabrera ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1732, 2, 'Cala ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1733, 3, 'Carlos Calderon ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1734, 3, 'Amath Diedhiou ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1735, 2, 'Dakonam Djene ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1736, 4, 'Hugo Duro ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1737, 3, 'Faycal Fajr ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1738, 3, 'Mathieu Flamini ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1739, 2, 'Bruno Gonzalez Cabrera ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1740, 2, 'Nicolas Gorosito ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1741, 1, 'Vincente Guaita ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1742, 3, 'Diego Hernandez Barriuso ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1743, 3, 'Mehdi Lacen ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1744, 1, 'Filip Manojlovic ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1745, 1, 'Emiliano Martinez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1746, 3, 'Pape Mbodji ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1747, 4, 'Jorge Molina ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1748, 2, 'Francisco Molinero ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1749, 3, 'Jefferson Montero ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1750, 3, 'Sergio Mora ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1751, 3, 'Merveil Ndockyt ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1752, 2, 'Mathias Olivera ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1753, 3, 'Dani Pacheco ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1754, 3, 'Francisco Portillo ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1755, 3, 'Gustavo Quezada ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1756, 2, 'Alberto Redondo ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1757, 4, 'Loic Remy ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1758, 2, 'Miguel Angel Rubio ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1759, 3, 'Gaku Shibasaki ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1760, 2, 'Damian Suarez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1761, 4, 'Vazquez Florido ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1762, 2, 'Aly Abeid ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1763, 4, 'Fhad Al Muwallad ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1764, 4, 'Alexander Alegria Moreno ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1765, 3, 'Enis Bardhi ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1766, 4, 'Boateng ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1767, 2, 'Erick Cabaco ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1768, 2, 'Chema ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1769, 2, 'Coke ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1770, 3, 'Cheick Doukoure ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1771, 4, 'Enes Unal ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1772, 3, 'Jose Gomez Campana ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1773, 3, 'Hacen ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1774, 3, 'Ivi ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1775, 3, 'Jason ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1776, 1, 'Koke ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1777, 1, 'Mitchell Langerak ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1778, 3, 'Jefferson Lerma ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1779, 2, 'Pedro Lopez ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1780, 2, 'Ivan Lopez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1781, 3, 'Sasa Lukic ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1782, 2, 'Antonio Luna ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1783, 2, 'Shaquell Moore ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1784, 3, 'Jose Luis Morales ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1785, 4, 'Nano Mesa ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1786, 1, 'Oier ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1787, 4, 'Giampaolo Pazzini ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1788, 2, 'Sergio Postigo ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1789, 1, 'Raul Fernandez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1790, 2, 'Rober ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1791, 3, 'Ruben Rochina ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1792, 4, 'Roger ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1793, 4, 'Armando Sadiku ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1794, 3, 'Samuel ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1795, 2, 'Tono ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1796, 3, 'Verza ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1797, 1, 'Ivan Villar ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1798, 3, 'Youssouf Yalike ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1799, 1, 'Antonio Adan ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1800, 2, 'Jordi Amat ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1801, 2, 'Antonio Barragan ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1802, 2, 'Marc Bartra ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1803, 3, 'Ryad Boudebouz ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1804, 3, 'Victor Camarasa ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1805, 4, 'Joel Campbell ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1806, 4, 'Ruben Castro ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1807, 1, 'Dani Gimenez ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1808, 2, 'Riza Durmisi ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1809, 2, 'Francis ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1810, 3, 'Julio Gracia ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1811, 3, 'Andres Guardado ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1812, 3, 'Javi Garcia ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1813, 3, 'Joaquin ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1814, 4, 'Juanjo Narvaez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1815, 2, 'Junior Firpo ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1816, 3, 'Nahuel Leiva ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1817, 4, 'Sergio Leon ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1818, 1, 'Pedro Lopez ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1819, 4, 'Loren Moron ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1820, 2, 'Aissa Mandi ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1821, 2, 'Rafa Navarro ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1822, 1, 'Daniel Rebollo ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1823, 2, 'Redru ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1824, 4, 'Aitor Ruibal ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1825, 3, 'Fabian Ruiz Pena ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1826, 4, 'Antonio Sanabria ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1827, 4, 'Cristian Tello ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1828, 2, 'Alin Tosca ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1829, 2, 'Zou Feddal ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1830, 3, 'Marco Asensio ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1831, 4, 'Gareth Bale ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1832, 4, 'Karim Benzema ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1833, 4, 'Borja Mayoral ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1834, 2, 'Daniel Carvajal ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1835, 3, 'Casemiro ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1836, 1, 'Casilla ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1837, 3, 'Dani Ceballos ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1838, 4, 'Franchu ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1839, 4, 'Cristo Gonzalez ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1840, 2, 'Achraf Hakimi ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1841, 2, 'Theo Hernandez ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1842, 3, 'Isco ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1843, 3, 'Mateo Kovacic ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1844, 3, 'Toni Kroos ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1845, 3, 'Lucas Vazquez ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1846, 2, 'Manu ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1847, 2, 'Marcelo ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1848, 3, 'Marcos Llorente ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1849, 3, 'Luka Modric ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1850, 1, 'Moha Ramos ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1851, 2, 'Nacho Fernandez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1852, 1, 'Keylor Navas ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1853, 3, 'Oscar ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1854, 3, 'Luis Miguel Quezada ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1855, 2, 'Sergio Ramos ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1856, 4, 'Cristiano Ronaldo ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1857, 3, 'Jaime Seoane ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1858, 2, 'Tejero ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1859, 2, 'Jesus Vallejo ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1860, 2, 'Raphael Varane ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1861, 1, 'Luca Zidane ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1862, 3, 'Jose Alonso ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1863, 3, 'Ever Banega ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1864, 4, 'Wissam Ben Yedder ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1865, 3, 'Borja Lasso ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1866, 4, 'Carlos Fernandez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1867, 2, 'Lionel Carole ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1868, 2, 'Daniel Carrico ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1869, 2, 'Sebastien Corchia ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1870, 3, 'Joaquin Correa ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1871, 1, 'David Soria ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1872, 3, 'Paulo Ganso ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1873, 3, 'Johannes Geis ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1874, 2, 'Guilherme Arana ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1875, 2, 'Simon Kjaer ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1876, 3, 'Michael Krohn-Dehli ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1877, 2, 'Miguel Layun ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1878, 2, 'Clement Lenglet ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1879, 2, 'Gabriel Mercado ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1880, 3, 'Roque Mesa ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1881, 3, 'Walter Montoya ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1882, 4, 'Luis Muriel ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1883, 2, 'Jesus Navas ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1884, 4, 'Nolito ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1885, 3, 'Steven Nzonzi ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1886, 2, 'Nicolas Pareja ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1887, 3, 'Guido Pizarro ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1888, 3, 'Alejandro Pozo ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1889, 4, 'Sandro Ramirez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1890, 1, 'Sergio Rico ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1891, 3, 'Pablo Sarabia ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1892, 2, 'Sergio Escudero ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1893, 1, 'Juan Soriano ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1894, 3, 'Franco Vazquez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1895, 4, 'Imanol Agirretxe ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1896, 2, 'Alvaro Odriozola ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1897, 4, 'Jon Bautista ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1898, 3, 'Sergio Canales ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1899, 2, 'Alberto De la Bella ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1900, 2, 'Aritz Elustondo ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1901, 2, 'Gorosabel ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1902, 3, 'Ander Guevara ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1903, 3, 'Jon Guridi ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1904, 3, 'Asier Illarramendi ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1905, 3, 'Adnan Januzaj ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1906, 4, 'Juanmi ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1907, 2, 'Diego Llorente ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1908, 2, 'Carlos Martinez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1909, 2, 'Inigo Martinez ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1910, 2, 'Hector Moreno ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1911, 1, 'Miguel Moya ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1912, 4, 'Mikel Oyarzabal ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1913, 3, 'Ruben Pardo ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1914, 3, 'Xavi Prieto ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1915, 2, 'Raul Navas ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1916, 2, 'Kevin Rodrigues ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1917, 1, 'Geronimo Rulli ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1918, 1, 'Tono Ramirez ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1919, 4, 'Carlos Vela ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1920, 4, 'William Jose ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1921, 3, 'Igor Zubeldia ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1922, 1, 'Andoni Zubiaurre ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1923, 3, 'David Zurutuza ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1924, 3, 'Francis Coquelin ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1925, 2, 'Gabriel Paulista ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1926, 2, 'Ezequiel Garay ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1927, 2, 'Jose Luis Gaya ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1928, 3, 'Ignacio Gil de Pareja ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1929, 3, 'Goncalo Guedes ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1930, 3, 'Robert Ibanez ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1931, 1, 'Jaume ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1932, 2, 'Javier Jimenez Garcia ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1933, 2, 'Joao Cancelo ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1934, 3, 'Geoffrey Kondogbia ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1935, 3, 'Nemanja Maksimovic ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1936, 3, 'Alvaro Medran ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1937, 4, 'Santiago Mina ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1938, 2, 'Martin Montoya ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1939, 4, 'Rodrigo Moreno Machado ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1940, 2, 'Jeison Murillo ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1941, 1, 'Neto ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1942, 4, 'Fabian Orellana ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1943, 3, 'Daniel Parejo ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1944, 3, 'Andreas Pereira ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1945, 1, 'Cristian Rivero ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1946, 3, 'Carlos Soler ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1947, 2, 'Toni Lato ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1948, 4, 'Ferran Torres ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1949, 2, 'Ruben Vezo ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1950, 2, 'Nacho Vidal ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1951, 4, 'Luciano Vietto ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1952, 3, 'Gonzalo Villar ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1953, 4, 'Simone Zaza ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1954, 2, 'Adrian Gomez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1955, 4, 'Salem Al Dawsari ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1956, 2, 'A Alvaro Gonzalez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1957, 1, 'Andres ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1958, 1, 'Sergio Asenjo ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1959, 4, 'Carlos Bacca ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1960, 4, 'Cedric Bakambu ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1961, 1, 'Mariano Barbosa ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1962, 2, 'Daniele Bonera ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1963, 1, 'Ander Cantero ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1964, 3, 'Denis Cheryshev ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1965, 3, 'Chuca ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1966, 4, 'Enes Unal ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1967, 3, 'Pablo Fornals ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1968, 3, 'Javi Fuego ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1969, 3, 'Imanol Garcia ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1970, 4, 'Mario Gonzalez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1971, 3, 'Ramiro Guerra ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1972, 2, 'Jaume Costa ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1973, 3, 'Leo Suarez ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1974, 3, 'Sergio Lozano ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1975, 2, 'Mario ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1976, 3, 'Pedro Martinez ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1977, 2, 'Genis Montolio ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1978, 3, 'Manuel Morlanes ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1979, 3, 'Alfred N''Diaye ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1980, 3, 'Pepe Castano ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1981, 4, 'Dario Poveda ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1982, 4, 'Raba ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1983, 3, 'Rodri ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1984, 4, 'Roger Martinez ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1985, 2, 'Ruben Semedo ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1986, 2, 'Victor Ruiz ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1987, 2, 'Antonio Rukavina ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1988, 3, 'Samu Castillejo ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1989, 4, 'Nicola Sansone ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1990, 3, 'Roberto Soriano ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1991, 2, 'Pau Francisco Torres ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1992, 3, 'Manu Trigueros ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1993, 2, 'Aday ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1994, 2, 'Pedro Alcala ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1995, 2, 'Bernardo ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1996, 1, 'Bono ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1997, 3, 'Borja ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1998, 3, 'Farid Boulaya ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (1999, 2, 'Bambo Diaby ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2000, 3, 'Douglas Luiz ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2001, 3, 'Eloi ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2002, 3, 'Aleix Garcia ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2003, 3, 'Alex Granell ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2004, 1, 'Gorka Iraizoz ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2005, 2, 'Juanpe ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2006, 4, 'Olarenwaju Kayode ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2007, 1, 'Marcel Lizak ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2008, 4, 'Anthony Lozano ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2009, 2, 'Pablo Maffeo Becerra ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2010, 2, 'Johan Mojica ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2011, 4, 'Marlos Moreno ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2012, 2, 'Marc Muniesa ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2013, 4, 'Michael Olunga ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2014, 3, 'Pere ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2015, 2, 'Carles Planas ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2016, 2, 'Pedro Porro ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2017, 4, 'Portu ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2018, 2, 'Jonas Ramalho ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2019, 4, 'Kevin Soni ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2020, 4, 'Cristhian Stuani ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2021, 3, 'David Timor ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2022, 2, 'Maximiliano Villa ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2023, 4, 'Nordin Amrabat ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2024, 3, 'Gabriel Appelt Pires ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2025, 3, 'Sergio Arribas ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2026, 4, 'Claudio Beauvue ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2027, 3, 'Darko Brasanac ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2028, 2, 'Unai Bustinza ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2029, 1, 'Nereo Champagne ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2030, 1, 'Ivan Cuellar ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2031, 2, 'Mauro Dos Santos ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2032, 3, 'Nabil El Zhar ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2033, 3, 'Javier Eraso ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2034, 2, 'Daniel Gallardo ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2035, 3, 'Gerard ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2036, 4, 'Miguel Angel Guerrero ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2037, 1, 'Jon Serantes ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2038, 4, 'Mahamadou Kone ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2039, 2, 'Martin Mantovani ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2040, 4, 'Leonardo Miramar Rocha ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2041, 3, 'Erik Moran ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2042, 2, 'Ezequiel Munoz ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2043, 4, 'Jose Naranjo ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2044, 3, 'Omar Ramos ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2045, 2, 'Raul Garcia ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2046, 2, 'Diego Rico ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2047, 3, 'Alejandro Rodriguez Mozo ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2048, 3, 'Ruben Perez ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2049, 4, 'Gabriel Salazar ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2050, 3, 'Jaime Sierra ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2051, 2, 'Dimitrios Siovas ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2052, 3, 'Alexander Szymanowski ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2053, 2, 'Tito ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2054, 4, 'William De Camargo ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2055, 2, 'Zaldua ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2056, 4, 'Adrian ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2057, 2, 'Raul Albentosa ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2058, 4, 'Florin Andone ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2059, 2, 'Alejandro Arribas ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2060, 4, 'Zakaria Bakkali ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2061, 2, 'Blas Alonso ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2062, 3, 'Celso Borges ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2063, 3, 'Borja Valle ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2064, 2, 'Eneko Boveda ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2065, 3, 'Carles Gil ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2066, 3, 'Edu Exposito ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2067, 3, 'Emre Colak ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2068, 3, 'Fede Cartabia ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2069, 3, 'Bruno Gama ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2070, 2, 'Saul Garcia ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2071, 3, 'Guilherme ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2072, 2, 'Juanfran ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2073, 1, 'Maxim Koval ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2074, 3, 'Michael Krohn-Dehli ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2075, 4, 'Lucas Perez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2076, 2, 'Luisinho ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2077, 3, 'Sulley Ali Muntari ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2078, 2, 'Fernando Navarro ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2079, 2, 'Aldo One Esteve ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2080, 4, 'Oscar ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2081, 1, 'Costel Pantilimon ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2082, 3, 'Pedro Mosquera ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2083, 2, 'Quique Fornos ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2084, 1, 'Ruben ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2085, 2, 'Mujaid Sadick ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2086, 2, 'Fabian Schar ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2087, 2, 'Sidnei ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2088, 1, 'Przemyslaw Tyton ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2089, 1, 'Francis Uzoho ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2090, 2, 'Gerard Valentin ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2091, 3, 'Federico Valverde ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2092, 2, 'Matias Aguirregaray ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2093, 3, 'Alberto Aquilani ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2094, 4, 'Sergio Araujo ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2095, 2, 'Aythami ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2096, 2, 'Pedro Bigas ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2097, 4, 'Jonathan Calleri ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2098, 1, 'Leandro Chichizola ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2099, 2, 'Dani Castellano ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2100, 4, 'Erik Exposito ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2101, 4, 'Imoh Ezekiel ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2102, 2, 'Alejandro Galvez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2103, 2, 'David Garcia ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2104, 3, 'Ignacio Gil de Pareja ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2105, 3, 'Fabio Gonzalez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2106, 3, 'Alen Halilovic ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2107, 3, 'Hernan ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2108, 2, 'Borja Herrera ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2109, 3, 'Javi Castellano ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2110, 2, 'Mauricio Lemos ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2111, 2, 'Michel ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2112, 3, 'Figueroa Momo ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2113, 3, 'Gabriel Penalba ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2114, 3, 'Peter Etebo ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2115, 3, 'Benito Ramirez del Toro ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2116, 1, 'Raul ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2117, 4, 'Loic Remy ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2118, 3, 'Sergi Samper ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2119, 3, 'Jairo Samperio ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2120, 2, 'David Simon ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2121, 3, 'Tana ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2122, 3, 'Oussama Tannane ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2123, 4, 'Hernan Toledo ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2124, 3, 'Vicente Gomez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2125, 3, 'Jonathan Viera ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2126, 3, 'Vitolo ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2127, 2, 'Ximo Navarro ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2128, 2, 'Alberto Lopez ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2129, 3, 'Alex Mula ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2130, 1, 'Andres ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2131, 3, 'Juan Pablo Anor ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2132, 2, 'Paul Baysse ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2133, 4, 'Borja Baston ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2134, 4, 'Ideye Brown ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2135, 3, 'Alberto Bueno ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2136, 3, 'Gonzalo Castro ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2137, 3, 'Emanuel Cecchini ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2138, 2, 'Cifuentes ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2139, 3, 'Juan Cruz ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2140, 2, 'Diego Gonzalez ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2141, 4, 'Youssef En-Nesyri ', 'France');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2142, 1, 'Cenk Gonen ', 'Italy');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2143, 3, 'Adrian Gonzalez ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2144, 2, 'Luis Hernandez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2145, 4, 'Isaac Success ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2146, 3, 'Manuel Iturra ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2147, 2, 'Ivan Rodriguez ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2148, 4, 'Jony ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2149, 3, 'Jose Carlos ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2150, 2, 'Juan Carlos ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2151, 3, 'Keko ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2152, 3, 'Zdravko Kuzmanovic ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2153, 3, 'Mehdi Lacen ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2154, 3, 'Maxime Lestienne ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2155, 2, 'Ignasi Miquel ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2156, 3, 'Javier Ontiveros Parra ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2157, 4, 'Adalberto Penaranda ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2158, 2, 'Ian Pino ', 'Spain');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2159, 3, 'Recio ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2160, 2, 'Federico Ricca ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2161, 1, 'Roberto ', 'Brazil');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2162, 2, 'Alejandro Robles ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2163, 4, 'Diego Rolan ', 'Germany');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2164, 3, 'Esteban Rolon ', 'England');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2165, 2, 'Roberto Rosales ', 'Argentina');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2166, 3, 'Samuel ', 'Portugal');
+INSERT INTO football.player (idplayer, position_id, name, nationality) VALUES (2167, 2, 'Miguel Torres ', 'France');
 
-CREATE TABLE `player`
+create table club
 (
-    `idplayer`    int(11)     NOT NULL AUTO_INCREMENT,
-    `position_id` int(11)     NOT NULL,
-    `name`        varchar(45) NOT NULL,
-    `nationality` varchar(45) NOT NULL,
-    PRIMARY KEY (`idplayer`),
-    KEY `player_has_position` (`position_id`),
-    CONSTRAINT `player_has_position` FOREIGN KEY (`position_id`) REFERENCES `position` (`idposition`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idclub     int auto_increment
+        primary key,
+    league_id  int                    not null,
+    stadium_id int                    not null,
+    captain_id int                    not null,
+    name       varchar(45)            not null,
+    founded    int                    not null,
+    manager    varchar(45)            not null,
+    city       varchar(45)            not null,
+    points     int                    not null,
+    constraint club_has_captain
+        foreign key (captain_id) references player (idplayer),
+    constraint club_has_league
+        foreign key (league_id) references league (idleague),
+    constraint club_has_stadium
+        foreign key (stadium_id) references stadium (idstadium)
+)
+    charset = utf8;
 
-INSERT INTO `player`
-VALUES (1, 1, 'Wojciech Szczęsny', 'Poland'),
-       (2, 2, 'Bacary Sagna', 'France'),
-       (3, 2, 'Per Mertesacker', 'Germany'),
-       (4, 2, 'Laurent Koscielny', 'France'),
-       (5, 2, 'Thomas Vermaelen', 'Belgium'),
-       (6, 3, 'Alex Song', 'Cameroon'),
-       (7, 3, 'Mikel Arteta', 'Spain'),
-       (8, 3, 'Aaron Ramsey', 'Wales'),
-       (9, 4, 'Theo Walcott', 'England'),
-       (10, 4, 'Robin van Persie', 'Netherlands'),
-       (11, 4, 'Gervinho', 'Ivory Coast'),
-       (12, 1, 'Shay Given', 'Ireland'),
-       (13, 2, 'Alan Hutton', 'Scotland'),
-       (14, 2, 'James Collins', 'Wales'),
-       (15, 2, 'Richard Dunne', 'Ireland'),
-       (16, 2, 'Stephen Warnock', 'England'),
-       (17, 3, 'Stephen Ireland', 'Ireland'),
-       (18, 3, 'Stiliyan Petrov', 'Bulgaria'),
-       (19, 3, 'Ciaran Clark', 'Ireland'),
-       (20, 4, 'Gabriel Agbonlahor', 'England'),
-       (21, 4, 'Emile Heskey', 'England'),
-       (22, 4, 'Darren Bent', 'England'),
-       (23, 1, 'Paul Robinson', 'England'),
-       (24, 2, 'Jason Lowe', 'England'),
-       (25, 2, 'Scott Dann', 'England'),
-       (26, 2, 'Gaël Givet', 'France'),
-       (27, 2, 'Martin Olsson', 'Sweden'),
-       (28, 3, 'Morten Gamst Pedersen', 'Norway'),
-       (29, 3, 'Steven N`Zonzi', 'France'),
-       (30, 3, 'Radosav Petrović', 'Serbia'),
-       (31, 3, 'Junior Hoilett', 'Canada'),
-       (32, 3, 'David Dunn', 'England'),
-       (33, 4, 'Yakubu', 'Nigeria'),
-       (34, 1, 'Jussi Jääskeläinen', 'Finland'),
-       (35, 2, 'Tyrone Mears', 'England'),
-       (36, 2, 'David Wheater', 'England'),
-       (37, 2, 'Zat Knight', 'England'),
-       (38, 2, 'Sam Ricketts', 'Wales'),
-       (39, 3, 'Nigel Reo Coker', 'England'),
-       (40, 3, 'Fabrice Muamba', 'England'),
-       (41, 3, 'Chris Eagles', 'England'),
-       (42, 3, 'Martin Petrov', 'Bulgaria'),
-       (43, 3, 'Mark Davies', 'England'),
-       (44, 4, 'David N`Gog', 'France'),
-       (45, 1, 'Petr Čech', 'Czech Republic'),
-       (46, 2, 'Branislav Ivanović', 'Serbia'),
-       (47, 2, 'David Luiz', 'Brazil'),
-       (48, 2, 'John Terry', 'England'),
-       (49, 2, 'Ashley Cole', 'England'),
-       (50, 3, 'Michael Essien', 'Ghana'),
-       (51, 3, 'Raul Meireles', 'Portugal'),
-       (52, 3, 'Frank Lampard', 'England'),
-       (53, 4, 'Fernando Torres', 'Spain'),
-       (54, 4, 'Didier Drogba', 'Ivory Coast'),
-       (55, 4, 'Juan Mata', 'Spain'),
-       (56, 1, 'Tim Howard', 'United States'),
-       (57, 2, 'Tony Hibbert', 'England'),
-       (58, 2, 'Phil Jagielka', 'England'),
-       (59, 2, 'Sylvain Distin', 'France'),
-       (60, 2, 'Leighton Baines', 'England'),
-       (61, 3, 'Séamus Coleman', 'Ireland'),
-       (62, 3, 'Darron Gibson', 'Ireland'),
-       (63, 3, 'Marouane Fellaini', 'Belgium'),
-       (64, 3, 'Steven Pienaar', 'South Africa'),
-       (65, 3, 'Tim Cahill', 'Australia'),
-       (66, 4, 'Nikica Jelavić', 'Croatia'),
-       (67, 1, 'Mark Schwarzer', 'Australia'),
-       (68, 2, 'Stephen Kelly', 'Ireland'),
-       (69, 2, 'Phillipe Senderos', 'Switzerland'),
-       (70, 2, 'Brede Hangeland', 'Norway'),
-       (71, 2, 'John Arne Riise', 'Norway'),
-       (72, 3, 'Damien Duff', 'Ireland'),
-       (73, 3, 'Danny Murphy', 'England'),
-       (74, 3, 'Moussa Dembele', 'Belgium'),
-       (75, 3, 'Bryan Ruiz', 'Costa Rica'),
-       (76, 4, 'Clint Dempsey', 'United States'),
-       (77, 4, 'Pavel Pogrebnyak', 'Russia'),
-       (78, 1, 'Pepe Reina', 'Spain'),
-       (79, 2, 'Glen Johnson', 'England'),
-       (80, 2, 'Daniel Agger', 'Denmark'),
-       (81, 2, 'Martin Skrtel', 'Slovakia'),
-       (82, 2, 'José Enrique', 'Spain'),
-       (83, 3, 'Jay Spearing', 'England'),
-       (84, 3, 'Charlie Adam', 'Scotland'),
-       (85, 4, 'Jordan Henderson', 'England'),
-       (86, 4, 'Luis Suárez', 'Uruguay'),
-       (87, 4, 'Stewart Downing', 'England'),
-       (88, 4, 'Andy Carroll', 'England'),
-       (89, 1, 'Joe Hart', 'England'),
-       (90, 2, 'Micah Richards', 'England'),
-       (91, 2, 'Vincent Kompany', 'Belgium'),
-       (92, 2, 'Joleon Lescott', 'England'),
-       (93, 2, 'Gaël Clichy', 'France'),
-       (94, 3, 'Gareth Barry', 'Spain'),
-       (95, 3, 'Yaya Toure', 'France'),
-       (96, 3, 'Samir Nasri', 'England'),
-       (97, 3, 'David Silva', 'Uruguay'),
-       (98, 4, 'Carlos Tevez', 'Argentina'),
-       (99, 4, 'Sergio Agüero', 'Argentina'),
-       (100, 1, 'David de Gea', 'Spain'),
-       (101, 2, 'Patrice Evra', 'France'),
-       (102, 2, 'Rio Ferdinand', 'England'),
-       (103, 2, 'Nemanja Vidić', 'Serbia'),
-       (104, 2, 'Phil Jones', 'England'),
-       (105, 3, 'Ryan Giggs', 'England'),
-       (106, 3, 'Paul Scholes', 'England'),
-       (107, 3, 'Antonio Valencia', 'England'),
-       (108, 3, 'Nani', 'England'),
-       (109, 4, 'Javier Hernández', 'Mexico'),
-       (110, 4, 'Wayne Rooney', 'England'),
-       (111, 1, 'Tim Krul', 'France'),
-       (112, 2, 'Danny Simpson', 'England'),
-       (113, 2, 'Fabricio Coloccini', 'Argentina'),
-       (114, 2, 'Mike Williamson', 'England'),
-       (115, 2, 'Ryan Taylor', 'England'),
-       (116, 3, 'Gabriel Obertan', 'France'),
-       (117, 3, 'Yohan Cabaye', 'France'),
-       (118, 3, 'Cheick Tioté', 'Ivory Coast'),
-       (119, 3, 'Jonás Gutiérrez', 'Argentina'),
-       (120, 4, 'Papiss Cissé', 'Senegal'),
-       (121, 4, 'Demba Ba', 'Senegal'),
-       (122, 1, 'John Ruddy', 'France'),
-       (123, 2, 'Kyle Naughton', 'England'),
-       (124, 2, 'Russell Martin', 'Argentina'),
-       (125, 2, 'Bradley Johnson', 'England'),
-       (126, 2, 'Marc Tierney', 'England'),
-       (127, 3, 'David Fox', 'France'),
-       (128, 3, 'Anthony Pilkington', 'England'),
-       (129, 3, 'Wes Hoolahan', 'Ireland'),
-       (130, 3, 'Andrew Surman', 'England'),
-       (131, 4, 'Steve Morison', 'Wales'),
-       (132, 4, 'Grant Holt', 'England'),
-       (133, 1, 'Paddy Kenny', 'Ireland'),
-       (134, 2, 'Luke Young', 'England'),
-       (135, 2, 'Nedum Onuoha', 'England'),
-       (136, 2, 'Anton Ferdinand', 'England'),
-       (137, 2, 'Taye Taiwo', 'Nigeria'),
-       (138, 3, 'Shaun Wright Phillips', 'England'),
-       (139, 3, 'Shaun Derry', 'Mali'),
-       (140, 3, 'Joey Barton', 'England'),
-       (141, 3, 'Adel Taarabt', 'Scotland'),
-       (142, 4, 'Bobby Zamora', 'England'),
-       (143, 4, 'Djibril Cissé', 'Scotland'),
-       (144, 1, 'Thomas Sørensen', 'Bosnia'),
-       (145, 2, 'Andy Wilkinson', 'England'),
-       (146, 2, 'Ryan Shawcross', 'England'),
-       (147, 2, 'Robert Huth', 'Germany'),
-       (148, 2, 'Marc Wilson', 'Ireland'),
-       (149, 3, 'Jermaine Pennant', 'England'),
-       (150, 3, 'Tom Soares', 'Ireland'),
-       (151, 3, 'Rory Delap', 'England'),
-       (152, 3, 'Matthew Etherington', 'England'),
-       (153, 4, 'Jonathan Walters', 'Ireland'),
-       (154, 4, 'Peter Crouch', 'England'),
-       (155, 1, 'Simon Mignolet', 'Belgium'),
-       (156, 2, 'Phil Bardsley', 'Scotland'),
-       (157, 2, 'John O`Shea', 'Ireland'),
-       (158, 2, 'Michael Turner', 'England'),
-       (159, 2, 'Kieran Richardson', 'England'),
-       (160, 3, 'Sebastian Larsson', 'Sweden'),
-       (161, 3, 'Lee Cattermole', 'England'),
-       (162, 3, 'Craig Gardner', 'England'),
-       (163, 3, 'Jack Colback', 'England'),
-       (164, 4, 'Stéphane Sessègnon', 'Benin'),
-       (165, 4, 'Nicklas Bendtner', 'Denmark'),
-       (166, 1, 'Michel Vorm', 'Netherlands'),
-       (167, 2, 'Àngel Rangel', 'Spain'),
-       (168, 2, 'Ashley Williams', 'Wales'),
-       (169, 2, 'Steven Caulker', 'England'),
-       (170, 2, 'Neil Taylor', 'Wales'),
-       (171, 3, 'Leon Britton', 'England'),
-       (172, 3, 'Joe Allen', 'Wales'),
-       (173, 3, 'Nathan Dyer', 'England'),
-       (174, 3, 'Gylfi Sigurðsson', 'Iceland'),
-       (175, 4, 'Scott Sinclair', 'England'),
-       (176, 4, 'Danny Graham', 'England'),
-       (177, 1, 'Brad Friedel', 'United States'),
-       (178, 2, 'Kyle Walker', 'England'),
-       (179, 2, 'Younes Kaboul', 'France'),
-       (180, 2, 'Ledley King', 'England'),
-       (181, 2, 'Benoît Assou Ekotto', 'Cameroon'),
-       (182, 3, 'Aaron Lennon', 'England'),
-       (183, 3, 'Scott Parker', 'England'),
-       (184, 3, 'Luka Modrić', 'Croatia'),
-       (185, 3, 'Gareth Bale', 'Wales'),
-       (186, 4, 'Rafael van der Vaart', 'Netherlands'),
-       (187, 4, 'Emmanuel Adebayor', 'Togo'),
-       (188, 1, 'Ben Foster', 'England'),
-       (189, 2, 'Steven Reid', 'Ireland'),
-       (190, 2, 'Gareth McAuley', 'Ireland'),
-       (191, 2, 'Jonas Olsson', 'Sweden'),
-       (192, 2, 'Nicky Shorey', 'England'),
-       (193, 3, 'Jerome Thomas', 'England'),
-       (194, 3, 'James Morrison', 'Scotland'),
-       (195, 3, 'Youssuf Mulumbu', 'Congo'),
-       (196, 3, 'Graham Dorrans', 'Scotland'),
-       (197, 4, 'Shane Long', 'Ireland'),
-       (198, 4, 'Peter Odemwingie', 'Nigeria'),
-       (199, 1, 'Ali Al-Habsi', 'Oman'),
-       (200, 2, 'Ronnie Stam', 'Netherlands'),
-       (201, 2, 'Antolín Alcaraz', 'Paraguay'),
-       (202, 2, 'Gary Caldwell', 'Scotland'),
-       (203, 2, 'Maynor Figueroa', 'Honduras'),
-       (204, 3, 'Jean Beausejour', 'Chile'),
-       (205, 3, 'James McCarthy', 'Ireland'),
-       (206, 3, 'Mohamed Diamé', 'Senegal'),
-       (207, 3, 'Jordi Gómez', 'Spain'),
-       (208, 4, 'Victor Moses', 'Nigeria'),
-       (209, 4, 'Franco Di Santo', 'Argentina'),
-       (210, 1, 'Wayne Hennessey', 'Wales'),
-       (211, 2, 'Richard Stearman', 'England'),
-       (212, 2, 'Roger Johnson', 'England'),
-       (213, 2, 'Sébastien Bassong', 'Cameroon'),
-       (214, 2, 'Stephen Ward', 'Ireland'),
-       (215, 3, 'Michael Kightly', 'England'),
-       (216, 3, 'Karl Henry', 'England'),
-       (217, 3, 'Jamie O`Hara', 'England'),
-       (218, 3, 'Matt Jarvis', 'England'),
-       (219, 4, 'David Edwards', 'Wales'),
-       (220, 4, 'Steven Fletcher', 'Scotland'),
-       (221, 1, 'Gorka Iraizoz', 'Spain'),
-       (222, 2, 'Andoni Iraola', 'Spain'),
-       (223, 2, 'Javi Martinez', 'Spain'),
-       (224, 2, 'Fernando Amorebieta', 'Venezuela'),
-       (225, 2, 'Koikili', 'Spain'),
-       (226, 3, 'Ander Iturraspe', 'Spain'),
-       (227, 3, 'Ander Herrera', 'Spain'),
-       (228, 3, 'Óscar de Marcos', 'Spain'),
-       (229, 3, 'Markel Susaeta', 'Spain'),
-       (230, 4, 'Fernando Llorente', 'Spain'),
-       (231, 4, 'Iker Muniain', 'Spain'),
-       (232, 1, 'Thibaut Courtois', 'Belgium'),
-       (233, 2, 'Juanfran', 'Spain'),
-       (234, 2, 'Miranda', 'Brazil'),
-       (235, 2, 'Diego Godín', 'Uruguay'),
-       (236, 2, 'Filipe Luís', 'Brazil'),
-       (237, 3, 'Diego', 'Brazil'),
-       (238, 3, 'Gabi', 'Spain'),
-       (239, 3, 'Tiago', 'Portugal'),
-       (240, 3, 'Arda Turan', 'Turkey'),
-       (241, 4, 'Falcao', 'Colombia'),
-       (242, 4, 'Adrián', 'Spain'),
-       (243, 1, 'Víctor Valdés', 'Spain'),
-       (244, 2, 'Daniel Alves', 'Brazil'),
-       (245, 2, 'Carles Puyol', 'Spain'),
-       (246, 2, 'Gerard Piqué', 'Spain'),
-       (247, 2, 'Éric Abidal', 'France'),
-       (248, 3, 'Sergio Busquets', 'Spain'),
-       (249, 3, 'Xavi Hernández', 'Spain'),
-       (250, 3, 'Cesc Fàbregas', 'Spain'),
-       (251, 4, 'Andrés Iniesta', 'Spain'),
-       (252, 4, 'Lionel Messi', 'Argentina'),
-       (253, 4, 'Alexis Sánchez', 'Chile'),
-       (254, 1, 'Casto', 'Spain'),
-       (255, 2, 'Isidoro', 'Spain'),
-       (256, 2, 'Mario', 'Spain'),
-       (257, 2, 'Dorado', 'Spain'),
-       (258, 2, 'Nacho', 'Spain'),
-       (259, 3, 'Iriney', 'Brazil'),
-       (260, 3, 'Salva Sevilla', 'Spain'),
-       (261, 3, 'Beñat', 'Spain'),
-       (262, 4, 'Pozuelo', 'Spain'),
-       (263, 4, 'Roque Santa Cruz', 'Paraguay'),
-       (264, 4, 'Rubén Castro', 'Spain'),
-       (265, 1, 'Cristian Álvarez', 'Argentina'),
-       (266, 2, 'Ernesto Galán', 'Spain'),
-       (267, 2, 'Juan Forlín', 'Spain'),
-       (268, 2, 'Héctor Moreno', 'Mexico'),
-       (269, 2, 'Dídac Vilà', 'Spain'),
-       (270, 3, 'Vladimír Weiss', 'Slovakia'),
-       (271, 3, 'Raúl Baena', 'Spain'),
-       (272, 3, 'Romaric', 'Ivory Coast'),
-       (273, 3, 'Thievy Bifouma', 'France'),
-       (274, 4, 'Joan Verdú', 'Spain'),
-       (275, 4, 'Sergio García', 'Spain'),
-       (276, 1, 'Moyà', 'Spain'),
-       (277, 2, 'Valera', 'Spain'),
-       (278, 2, 'Daniel Díaz', 'Argentina'),
-       (279, 2, 'Rafa López', 'Spain'),
-       (280, 2, 'Tsepo Masilela', 'South Africa'),
-       (281, 3, 'Pedro Ríos', 'Spain'),
-       (282, 3, 'Míchel', 'Spain'),
-       (283, 3, 'Javier Casquero', 'Spain'),
-       (284, 3, 'Abdelaziz Barrada', 'Spain'),
-       (285, 4, 'Daniel Güiza', 'Spain'),
-       (286, 4, 'Miku', 'Venezuela'),
-       (287, 1, 'Júlio César', 'Brazil'),
-       (288, 2, 'Allan Nyom', 'Cameroon'),
-       (289, 2, 'Íñigo López', 'Spain'),
-       (290, 2, 'Yohan Mollo', 'France'),
-       (291, 2, 'Guilherme Siqueira', 'Brazil'),
-       (292, 3, 'Franco Jara', 'Argentina'),
-       (293, 3, 'Mikel Rico', 'Spain'),
-       (294, 3, 'Hassan Yebda', 'Algeria'),
-       (295, 3, 'Dani Benítez', 'Spain'),
-       (296, 4, 'Carlos Martins', 'Portugal'),
-       (297, 4, 'Odion Ighalo', 'Nigeria'),
-       (298, 1, 'Gustavo Munúa', 'Uruguay'),
-       (299, 2, 'Javi Venta', 'Spain'),
-       (300, 2, 'Sergio Ballesteros', 'Spain'),
-       (301, 2, 'Asier del Horno', 'Spain'),
-       (302, 2, 'Juanfran', 'Spain'),
-       (303, 3, 'Valdo', 'Cape Verde'),
-       (304, 3, 'Xavi Torres', 'Spain'),
-       (305, 3, 'Javier Farinós', 'Spain'),
-       (306, 3, 'José Barkero', 'Spain'),
-       (307, 3, 'Rubén Suárez', 'Spain'),
-       (308, 4, 'Arouna Koné', 'Ivory Coast'),
-       (309, 1, 'Dudu Aouate', 'Israel'),
-       (310, 2, 'Pau Cendrós', 'Spain'),
-       (311, 2, 'Chico', 'Spain'),
-       (312, 2, 'Iván Ramis', 'Spain'),
-       (313, 2, 'Pablo Cáceres', 'Uruguay'),
-       (314, 3, 'Michael Pereira', 'France'),
-       (315, 3, 'Fernando Tissone', 'Argentina'),
-       (316, 3, 'Tomás Pina', 'Spain'),
-       (317, 3, 'Chori Castro', 'Uruguay'),
-       (318, 4, 'Víctor Casadesús', 'Spain'),
-       (319, 4, 'Tomer Hemed', 'Israel'),
-       (320, 1, 'Willy Caballero', 'Argentina'),
-       (321, 2, 'Jesús Gámez ', 'Spain'),
-       (322, 2, 'Martín Demichelis', 'Argentina'),
-       (323, 2, 'Joris Mathijsen', 'Netherlands'),
-       (324, 2, 'Nacho Monreal', 'Spain'),
-       (325, 3, 'Joaquín Sánchez', 'Spain'),
-       (326, 3, 'Jérémy Toulalan', 'France'),
-       (327, 3, 'Santi Cazorla', 'Spain'),
-       (328, 3, 'Diego Buonanotte', 'Spain'),
-       (329, 4, 'Isco', 'Spain'),
-       (330, 4, 'Ruud van Nistelrooy', 'Netherlands'),
-       (331, 1, 'Andrés Fernández', 'Spain'),
-       (332, 2, 'Marc Bertrán', 'Spain'),
-       (333, 2, 'Miguel Flaño', 'Spain'),
-       (334, 2, 'Sergio', 'Spain'),
-       (335, 2, 'Eneko Satrústegui', 'Spain'),
-       (336, 3, 'Ibrahima Baldé', 'Senegal'),
-       (337, 3, 'Francisco Puñal', 'Spain'),
-       (338, 3, 'Raúl García', 'Spain'),
-       (339, 3, 'Roland Lamah', 'Belgium'),
-       (340, 4, 'Javad Nekounam', 'Iran'),
-       (341, 4, 'Nino', 'Spain'),
-       (342, 1, 'Toño', 'Spain'),
-       (343, 2, 'Álvaro', 'Spain'),
-       (344, 2, 'Marc Torrejón', 'Spain'),
-       (345, 2, 'Bernardo', 'Colombia'),
-       (346, 2, 'Domingo Cisma', 'Spain'),
-       (347, 3, 'Papakouli Diop', 'Spain'),
-       (348, 3, 'Gonzalo Colsa', 'Spain'),
-       (349, 3, 'Kennedy Bakircioglü', 'Sweden'),
-       (350, 3, 'Pedro Munitis', 'Spain'),
-       (351, 4, 'Adrián González', 'Spain'),
-       (352, 4, 'Christian Stuani', 'Spain'),
-       (353, 1, 'Dani Giménez', 'Spain'),
-       (354, 2, 'Tito', 'Spain'),
-       (355, 2, 'Alejandro Arribas', 'Spain'),
-       (356, 2, 'Antonio Amaya', 'Spain'),
-       (357, 2, 'José Manuel Casado', 'Spain'),
-       (358, 3, 'José Movilla', 'Spain'),
-       (359, 3, 'Javi Fuego', 'Spain'),
-       (360, 3, 'Lass', 'Ghana'),
-       (361, 3, 'Piti', 'Spain'),
-       (362, 4, 'Michu', 'Spain'),
-       (363, 4, 'Tamudo', 'Spain'),
-       (364, 1, 'Iker Casillas ', 'Spain'),
-       (365, 2, 'Álvaro Arbeloa', 'Spain'),
-       (366, 2, 'Pepe', 'Portugal'),
-       (367, 2, 'Sergio Ramos ', 'Spain'),
-       (368, 2, 'Marcelo', 'Spain'),
-       (369, 3, 'Sami Khedira', 'Germany'),
-       (370, 3, 'Xabi Alonso', 'Spain'),
-       (371, 3, 'Ángel di María', 'Argentina'),
-       (372, 3, 'Cristiano Ronaldo', 'Portugal'),
-       (373, 4, 'Mesut Özil', 'Germany'),
-       (374, 4, 'Karim Benzema', 'France'),
-       (375, 1, 'Claudio Bravo', 'Chile'),
-       (376, 2, 'Carlos Martínez', 'Spain'),
-       (377, 2, 'Vadim Demidov', 'Norway'),
-       (378, 2, 'Iñigo Martínez', 'Spain'),
-       (379, 2, 'Alberto de la Bella', 'Spain'),
-       (380, 3, 'Mikel Aranburu', 'Spain'),
-       (381, 3, 'Gorka Elustondo', 'Spain'),
-       (382, 3, 'David Zurutuza', 'France'),
-       (383, 3, 'Carlos Vela', 'Mexico'),
-       (384, 4, 'Imanol Agirretxe', 'Spain'),
-       (385, 4, 'Antoine Griezmann', 'France'),
-       (386, 1, 'Javi Varas', 'Spain'),
-       (387, 2, 'Coke', 'Spain'),
-       (388, 2, 'Emir Spahić', 'Bosnia'),
-       (389, 2, 'Federico Fazio', 'Argentina'),
-       (390, 2, 'Fernando Navarro', 'Spain'),
-       (391, 3, 'Jesús Navas', 'Spain'),
-       (392, 3, 'Gary Medel', 'Chile'),
-       (393, 3, 'Ivan Rakitić', 'Croatia'),
-       (394, 3, 'Manu del Moral', 'Spain'),
-       (395, 4, 'José Antonio Reyes', 'Spain'),
-       (396, 4, 'Álvaro Negredo', 'Spain'),
-       (397, 1, 'Juan Pablo', 'Spain'),
-       (398, 2, 'Alberto Lora', 'Spain'),
-       (399, 2, 'Grégory Arnolin', 'France'),
-       (400, 2, 'Alberto Botía', 'Spain'),
-       (401, 2, 'Roberto Canella', 'Spain'),
-       (402, 3, 'Óscar Trejo', 'Argentina'),
-       (403, 3, 'Alberto Rivera', 'Spain'),
-       (404, 3, 'Nacho Cases', 'Spain'),
-       (405, 3, 'Miguel de las Cuevas', 'Spain'),
-       (406, 4, 'André Castro', 'Portugal'),
-       (407, 4, 'David Barral', 'Spain'),
-       (408, 1, 'Diego Alves', 'Spain'),
-       (409, 2, 'Miguel Monteiro', 'Spain'),
-       (410, 2, 'Adil Rami', 'Spain'),
-       (411, 2, 'Víctor Ruiz', 'Spain'),
-       (412, 2, 'Jérémy Mathieu', 'France'),
-       (413, 3, 'Sofiane Feghouli', 'Algeria'),
-       (414, 3, 'David Albelda', 'Spain'),
-       (415, 3, 'Éver Banega', 'Argentina'),
-       (416, 3, 'Jordi Alba', 'Spain'),
-       (417, 4, 'Jonas', 'Brazil'),
-       (418, 4, 'Roberto Soldado', 'Spain'),
-       (419, 1, 'Diego López', 'Spain'),
-       (420, 2, 'Ángel López', 'Spain'),
-       (421, 2, 'Gonzalo Rodríguez', 'Argentina'),
-       (422, 2, 'Mateo Musacchio', 'Argentina'),
-       (423, 2, 'Joan Oriol', 'Spain'),
-       (424, 3, 'Cani', 'Spain'),
-       (425, 3, 'Marcos Senna', 'Spain'),
-       (426, 3, 'Bruno Soriano', 'Spain'),
-       (427, 3, 'Borja Valero', 'Spain'),
-       (428, 4, 'Marco Ruben', 'Argentina'),
-       (429, 4, 'Joselú', 'Spain'),
-       (430, 1, 'Roberto Jiménez', 'Spain'),
-       (431, 2, 'Maurizio Lanzaro', 'Italy'),
-       (432, 2, 'Paulo da Silva', 'Paraguay'),
-       (433, 2, 'Javier Paredes', 'Spain'),
-       (434, 2, 'Ivan Obradović', 'Serbia'),
-       (435, 3, 'Tomislav Dujmović', 'Croatia'),
-       (436, 3, 'Luis García', 'Spain'),
-       (437, 3, 'Rúben Micael', 'Protugal'),
-       (438, 3, 'Apoño', 'Spain'),
-       (439, 4, 'Ángel Lafita', 'Spain'),
-       (440, 4, 'Hélder Postiga', 'Portugal');
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (1, 1, 1, 6, 'Arsenal', 1886, 'Mikel Arteta', 'London', 3);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (2, 1, 2, 15, 'Aston Villa', 1874, 'Dean Smith', 'Birmingham', 9);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (3, 1, 3, 27, 'Bournemouth', 1899, 'Eddie Howe', 'Bournemouth', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (4, 1, 4, 36, 'Brighton & Hove Albions', 1901, 'Graham Potter', 'Brighton', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (5, 1, 5, 47, 'Burnley', 1882, 'Sean Dyche', 'Burnley', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (6, 1, 6, 57, 'Chelsea', 1905, 'Frank Lampard', 'London', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (7, 1, 7, 72, 'Crystal Palace', 1905, 'Roy Hodgson', 'London', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (8, 1, 8, 81, 'Everton', 1878, 'Carlo Ancelotti', 'Liverpool', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (9, 1, 9, 91, 'Leicester City', 1884, 'Brendan Rodgers', 'Leicester', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (10, 1, 10, 107, 'Liverpool', 1892, 'Jürgen Klopp', 'Liverpool', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (11, 1, 11, 119, 'Manchester City', 1892, 'Pep Guardiola', 'Manchester', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (12, 1, 12, 130, 'Manchester United', 1902, 'Ole Gunnar Solskjær', 'Old Trafford', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (13, 1, 13, 135, 'Newcastle United', 1882, 'Steve Bruce', 'Newcastle upon Tyne', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (14, 1, 14, 145, 'Norwich City', 1863, 'Daniel Farke', 'Norwich', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (15, 1, 15, 164, 'Sheffield United', 1879, 'Chris Wilder', 'Sheffield', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (16, 1, 16, 173, 'Southampton', 1912, 'Ralph Hasenhüttl', 'Southampton', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (17, 1, 17, 177, 'Tottenham Hotspur', 1882, 'José Mourinho', 'London', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (18, 1, 18, 198, 'Watford', 1878, 'Hayden Mullins', 'Watford', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (19, 1, 19, 204, 'West Ham United', 1932, 'David Moyes', 'London', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (20, 1, 20, 213, 'Wolverhampton Wanderers', 1877, 'Nuno Espírito Santo', 'Wolverhampton', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (21, 2, 39, 1560, 'Athletic Bilbao', 1898, 'José Ángel Ziganda', 'Bilbao', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (22, 2, 40, 1600, 'Atlético Madrid', 1903, 'Diego Simeone', 'Madrid', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (23, 2, 41, 1643, 'Barcelona', 1899, 'Ernesto Valverde', 'Barcelona', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (24, 2, 52, 1813, 'Real Betis', 1907, 'Quique Setién', 'Seville', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (25, 2, 45, 1579, 'Espanyol', 1900, 'David Gallego', 'Cornellà de Llobregat', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (26, 2, 46, 1747, 'Getafe', 1983, 'José Bordalás', 'Madrid', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (28, 2, 50, 1779, 'Levante', 1909, 'Asier Garitano', 'Valencia', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (30, 2, 51, 2159, 'Málaga', 1948, 'José González', 'Málaga', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (34, 2, 53, 1855, 'Real Madrid', 1902, 'Zinedine Zidane', 'Madrid', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (35, 2, 54, 1, 'Real Sociedad', 1909, 'Imanol Alguacil', 'San Sebastián', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (36, 2, 55, 1886, 'Sevilla', 1905, 'Joaquín Caparrós', 'Seville', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (38, 2, 56, 1943, 'Valencia', 1919, 'Marcelino', 'Valencia', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (39, 2, 57, 1739, 'Villarreal', 1923, 'Javier Calleja', 'Villarreal', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (43, 2, 38, 1518, 'Alavés', 1921, 'Abelardo Fernández', 'Vitoria-Gasteiz', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (44, 2, 42, 1675, 'Celta Vigo', 1923, 'Juan Carlos Unzué', 'Vigo', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (45, 2, 43, 2082, 'Deportivo La Coruña', 1906, 'Clarence Seedorf', 'A Coruña', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (46, 2, 44, 1699, 'Eibar', 1940, 'José Luis Mendilibar', 'Eibar', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (47, 2, 47, 2001, 'Girona', 1930, 'Pablo Machín', 'Girona', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (48, 2, 48, 2103, 'Las Palmas	', 1949, 'Paco Jémez', 'Las Palmas', 0);
+INSERT INTO football.club (idclub, league_id, stadium_id, captain_id, name, founded, manager, city, points) VALUES (49, 2, 49, 2039, 'Leganés', 1928, 'Asier Garitano	', 'Leganés', 0);
 
-CREATE TABLE `squad`
+create table squad
 (
-    `idsquad`   int(11)    NOT NULL AUTO_INCREMENT,
-    `player_id` int(11)    NOT NULL,
-    `club_id`   int(11)    NOT NULL,
-    `season_id` int(11)    NOT NULL,
-    `loan`      tinyint(1) NOT NULL,
-    PRIMARY KEY (`idsquad`),
-    KEY `squad_has_club` (`club_id`),
-    KEY `squad_has_player` (`player_id`),
-    KEY `squad_has_season` (`season_id`),
-    CONSTRAINT `squad_has_club` FOREIGN KEY (`club_id`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `squad_has_player` FOREIGN KEY (`player_id`) REFERENCES `player` (`idplayer`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `squad_has_season` FOREIGN KEY (`season_id`) REFERENCES `season` (`idseason`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idsquad   int auto_increment
+        primary key,
+    player_id int not null,
+    club_id   int not null,
+    season_id int not null,
+    constraint squad_has_club
+        foreign key (club_id) references club (idclub),
+    constraint squad_has_player
+        foreign key (player_id) references player (idplayer),
+    constraint squad_has_season
+        foreign key (season_id) references season (idseason)
+)
+    charset = utf8;
 
-INSERT INTO `squad`
-VALUES (1, 1, 1, 1, 0),
-       (2, 2, 1, 1, 0),
-       (3, 3, 1, 1, 1),
-       (4, 4, 1, 1, 0),
-       (5, 5, 1, 1, 0),
-       (6, 6, 1, 1, 0),
-       (7, 7, 1, 1, 0),
-       (8, 8, 1, 1, 0),
-       (9, 9, 1, 1, 1),
-       (10, 10, 1, 1, 0),
-       (11, 11, 1, 1, 0),
-       (12, 12, 2, 1, 0),
-       (13, 13, 2, 1, 0),
-       (14, 14, 2, 1, 0),
-       (15, 15, 2, 1, 0),
-       (16, 16, 2, 1, 0),
-       (17, 17, 2, 1, 1),
-       (18, 18, 2, 1, 0),
-       (19, 19, 2, 1, 0),
-       (20, 20, 2, 1, 0),
-       (21, 21, 2, 1, 0),
-       (22, 22, 2, 1, 0),
-       (23, 23, 3, 1, 0),
-       (24, 24, 3, 1, 0),
-       (25, 25, 3, 1, 0),
-       (26, 26, 3, 1, 0),
-       (27, 27, 3, 1, 0),
-       (28, 28, 3, 1, 1),
-       (29, 29, 3, 1, 0),
-       (30, 30, 3, 1, 0),
-       (31, 31, 3, 1, 0),
-       (32, 32, 3, 1, 0),
-       (33, 33, 3, 1, 0),
-       (34, 34, 4, 1, 0),
-       (35, 35, 4, 1, 0),
-       (36, 36, 4, 1, 1),
-       (37, 37, 4, 1, 0),
-       (38, 38, 4, 1, 0),
-       (39, 39, 4, 1, 0),
-       (40, 40, 4, 1, 0),
-       (41, 41, 4, 1, 0),
-       (42, 42, 4, 1, 0),
-       (43, 43, 4, 1, 0),
-       (44, 44, 4, 1, 0),
-       (45, 45, 5, 1, 0),
-       (46, 46, 5, 1, 1),
-       (47, 47, 5, 1, 0),
-       (48, 48, 5, 1, 0),
-       (49, 49, 5, 1, 0),
-       (50, 50, 5, 1, 0),
-       (51, 51, 5, 1, 0),
-       (52, 52, 5, 1, 0),
-       (53, 53, 5, 1, 0),
-       (54, 54, 5, 1, 0),
-       (55, 55, 5, 1, 0),
-       (56, 56, 6, 1, 0),
-       (57, 57, 6, 1, 0),
-       (58, 58, 6, 1, 0),
-       (59, 59, 6, 1, 0),
-       (60, 60, 6, 1, 0),
-       (61, 61, 6, 1, 1),
-       (62, 62, 6, 1, 0),
-       (63, 63, 6, 1, 0),
-       (64, 64, 6, 1, 0),
-       (65, 65, 6, 1, 0),
-       (66, 66, 6, 1, 0),
-       (67, 67, 7, 1, 0),
-       (68, 68, 7, 1, 0),
-       (69, 69, 7, 1, 0),
-       (70, 70, 7, 1, 0),
-       (71, 71, 7, 1, 0),
-       (72, 72, 7, 1, 0),
-       (73, 73, 7, 1, 0),
-       (74, 74, 7, 1, 0),
-       (75, 75, 7, 1, 0),
-       (76, 76, 7, 1, 1),
-       (77, 77, 7, 1, 0),
-       (78, 78, 8, 1, 0),
-       (79, 79, 8, 1, 0),
-       (80, 80, 8, 1, 0),
-       (81, 81, 8, 1, 0),
-       (82, 82, 8, 1, 0),
-       (83, 83, 8, 1, 0),
-       (84, 84, 8, 1, 0),
-       (85, 85, 8, 1, 0),
-       (86, 86, 8, 1, 0),
-       (87, 87, 8, 1, 1),
-       (88, 88, 8, 1, 0),
-       (89, 89, 9, 1, 0),
-       (90, 90, 9, 1, 0),
-       (91, 91, 9, 1, 0),
-       (92, 92, 9, 1, 0),
-       (93, 93, 9, 1, 0),
-       (94, 94, 9, 1, 0),
-       (95, 95, 9, 1, 0),
-       (96, 96, 9, 1, 1),
-       (97, 97, 9, 1, 0),
-       (98, 98, 9, 1, 0),
-       (99, 99, 9, 1, 0),
-       (100, 100, 10, 1, 0),
-       (101, 101, 10, 1, 0),
-       (102, 102, 10, 1, 0),
-       (103, 103, 10, 1, 0),
-       (104, 104, 10, 1, 0),
-       (105, 105, 10, 1, 0),
-       (106, 106, 10, 1, 0),
-       (107, 107, 10, 1, 0),
-       (108, 108, 10, 1, 1),
-       (109, 109, 10, 1, 0),
-       (110, 110, 10, 1, 0),
-       (111, 111, 11, 1, 0),
-       (112, 112, 11, 1, 0),
-       (113, 113, 11, 1, 0),
-       (114, 114, 11, 1, 0),
-       (115, 115, 11, 1, 0),
-       (116, 116, 11, 1, 0),
-       (117, 117, 11, 1, 0),
-       (118, 118, 11, 1, 0),
-       (119, 119, 11, 1, 0),
-       (120, 120, 11, 1, 1),
-       (121, 121, 11, 1, 0),
-       (122, 122, 12, 1, 0),
-       (123, 123, 12, 1, 0),
-       (124, 124, 12, 1, 0),
-       (125, 125, 12, 1, 0),
-       (126, 126, 12, 1, 0),
-       (127, 127, 12, 1, 0),
-       (128, 128, 12, 1, 0),
-       (129, 129, 12, 1, 0),
-       (130, 130, 12, 1, 0),
-       (131, 131, 12, 1, 1),
-       (132, 132, 12, 1, 0),
-       (133, 133, 13, 1, 0),
-       (134, 134, 13, 1, 0),
-       (135, 135, 13, 1, 0),
-       (136, 136, 13, 1, 0),
-       (137, 137, 13, 1, 0),
-       (138, 138, 13, 1, 0),
-       (139, 139, 13, 1, 1),
-       (140, 140, 13, 1, 0),
-       (141, 141, 13, 1, 0),
-       (142, 142, 13, 1, 0),
-       (143, 143, 13, 1, 0),
-       (144, 144, 14, 1, 0),
-       (145, 145, 14, 1, 0),
-       (146, 146, 14, 1, 0),
-       (147, 147, 14, 1, 0),
-       (148, 148, 14, 1, 1),
-       (149, 149, 14, 1, 0),
-       (150, 150, 14, 1, 0),
-       (151, 151, 14, 1, 0),
-       (152, 152, 14, 1, 0),
-       (153, 153, 14, 1, 0),
-       (154, 154, 14, 1, 0),
-       (155, 155, 15, 1, 0),
-       (156, 156, 15, 1, 1),
-       (157, 157, 15, 1, 0),
-       (158, 158, 15, 1, 0),
-       (159, 159, 15, 1, 0),
-       (160, 160, 15, 1, 0),
-       (161, 161, 15, 1, 0),
-       (162, 162, 15, 1, 0),
-       (163, 163, 15, 1, 0),
-       (164, 164, 15, 1, 0),
-       (165, 165, 15, 1, 0),
-       (166, 166, 16, 1, 1),
-       (167, 167, 16, 1, 0),
-       (168, 168, 16, 1, 0),
-       (169, 169, 16, 1, 0),
-       (170, 170, 16, 1, 0),
-       (171, 171, 16, 1, 0),
-       (172, 172, 16, 1, 0),
-       (173, 173, 16, 1, 0),
-       (174, 174, 16, 1, 0),
-       (175, 175, 16, 1, 0),
-       (176, 176, 16, 1, 0),
-       (177, 177, 17, 1, 0),
-       (178, 178, 17, 1, 0),
-       (179, 179, 17, 1, 0),
-       (180, 180, 17, 1, 0),
-       (181, 181, 17, 1, 1),
-       (182, 182, 17, 1, 0),
-       (183, 183, 17, 1, 0),
-       (184, 184, 17, 1, 0),
-       (185, 185, 17, 1, 0),
-       (186, 186, 17, 1, 0),
-       (187, 187, 17, 1, 0),
-       (188, 188, 18, 1, 0),
-       (189, 189, 18, 1, 0),
-       (190, 190, 18, 1, 0),
-       (191, 191, 18, 1, 0),
-       (192, 192, 18, 1, 0),
-       (193, 193, 18, 1, 1),
-       (194, 194, 18, 1, 0),
-       (195, 195, 18, 1, 0),
-       (196, 196, 18, 1, 0),
-       (197, 197, 18, 1, 0),
-       (198, 198, 18, 1, 0),
-       (199, 199, 19, 1, 0),
-       (200, 200, 19, 1, 0),
-       (201, 201, 19, 1, 0),
-       (202, 202, 19, 1, 0),
-       (203, 203, 19, 1, 1),
-       (204, 204, 19, 1, 0),
-       (205, 205, 19, 1, 0),
-       (206, 206, 19, 1, 0),
-       (207, 207, 19, 1, 0),
-       (208, 208, 19, 1, 0),
-       (209, 209, 19, 1, 0),
-       (210, 210, 20, 1, 0),
-       (211, 211, 20, 1, 0),
-       (212, 212, 20, 1, 0),
-       (213, 213, 20, 1, 0),
-       (214, 214, 20, 1, 0),
-       (215, 215, 20, 1, 1),
-       (216, 216, 20, 1, 0),
-       (217, 217, 20, 1, 0),
-       (218, 218, 20, 1, 0),
-       (219, 219, 20, 1, 0),
-       (220, 220, 20, 1, 0),
-       (221, 221, 21, 1, 0),
-       (222, 222, 21, 1, 1),
-       (223, 223, 21, 1, 0),
-       (224, 224, 21, 1, 0),
-       (225, 225, 21, 1, 0),
-       (226, 226, 21, 1, 0),
-       (227, 227, 21, 1, 0),
-       (228, 228, 21, 1, 0),
-       (229, 229, 21, 1, 0),
-       (230, 230, 21, 1, 0),
-       (231, 231, 21, 1, 0),
-       (232, 232, 22, 1, 0),
-       (233, 233, 22, 1, 0),
-       (234, 234, 22, 1, 0),
-       (235, 235, 22, 1, 1),
-       (236, 236, 22, 1, 0),
-       (237, 237, 22, 1, 0),
-       (238, 238, 22, 1, 0),
-       (239, 239, 22, 1, 0),
-       (240, 240, 22, 1, 0),
-       (241, 241, 22, 1, 0),
-       (242, 242, 22, 1, 0),
-       (243, 243, 23, 1, 0),
-       (244, 244, 23, 1, 0),
-       (245, 245, 23, 1, 0),
-       (246, 246, 23, 1, 0),
-       (247, 247, 23, 1, 0),
-       (248, 248, 23, 1, 1),
-       (249, 249, 23, 1, 0),
-       (250, 250, 23, 1, 0),
-       (251, 251, 23, 1, 0),
-       (252, 252, 23, 1, 0),
-       (253, 253, 23, 1, 0),
-       (254, 254, 24, 1, 0),
-       (255, 255, 24, 1, 0),
-       (256, 256, 24, 1, 0),
-       (257, 257, 24, 1, 0),
-       (258, 258, 24, 1, 1),
-       (259, 259, 24, 1, 0),
-       (260, 260, 24, 1, 0),
-       (261, 261, 24, 1, 0),
-       (262, 262, 24, 1, 0),
-       (263, 263, 24, 1, 0),
-       (264, 264, 24, 1, 0),
-       (265, 265, 25, 1, 0),
-       (266, 266, 25, 1, 0),
-       (267, 267, 25, 1, 0),
-       (268, 268, 25, 1, 0),
-       (269, 269, 25, 1, 0),
-       (270, 270, 25, 1, 0),
-       (271, 271, 25, 1, 1),
-       (272, 272, 25, 1, 0),
-       (273, 273, 25, 1, 0),
-       (274, 274, 25, 1, 0),
-       (275, 275, 25, 1, 0),
-       (276, 276, 26, 1, 0),
-       (277, 277, 26, 1, 0),
-       (278, 278, 26, 1, 0),
-       (279, 279, 26, 1, 0),
-       (280, 280, 26, 1, 0),
-       (281, 281, 26, 1, 0),
-       (282, 282, 26, 1, 0),
-       (283, 283, 26, 1, 1),
-       (284, 284, 26, 1, 0),
-       (285, 285, 26, 1, 0),
-       (286, 286, 26, 1, 0),
-       (287, 287, 27, 1, 0),
-       (288, 288, 27, 1, 0),
-       (289, 289, 27, 1, 0),
-       (290, 290, 27, 1, 0),
-       (291, 291, 27, 1, 0),
-       (292, 292, 27, 1, 0),
-       (293, 293, 27, 1, 0),
-       (294, 294, 27, 1, 0),
-       (295, 295, 27, 1, 0),
-       (296, 296, 27, 1, 1),
-       (297, 297, 27, 1, 0),
-       (298, 298, 28, 1, 0),
-       (299, 299, 28, 1, 0),
-       (300, 300, 28, 1, 0),
-       (301, 301, 28, 1, 0),
-       (302, 302, 28, 1, 0),
-       (303, 303, 28, 1, 0),
-       (304, 304, 28, 1, 0),
-       (305, 305, 28, 1, 1),
-       (306, 306, 28, 1, 0),
-       (307, 307, 28, 1, 0),
-       (308, 308, 28, 1, 0),
-       (309, 309, 29, 1, 0),
-       (310, 310, 29, 1, 0),
-       (311, 311, 29, 1, 0),
-       (312, 312, 29, 1, 0),
-       (313, 313, 29, 1, 0),
-       (314, 314, 29, 1, 0),
-       (315, 315, 29, 1, 0),
-       (316, 316, 29, 1, 1),
-       (317, 317, 29, 1, 0),
-       (318, 318, 29, 1, 0),
-       (319, 319, 29, 1, 0),
-       (320, 320, 30, 1, 0),
-       (321, 321, 30, 1, 0),
-       (322, 322, 30, 1, 0),
-       (323, 323, 30, 1, 0),
-       (324, 324, 30, 1, 0),
-       (325, 325, 30, 1, 0),
-       (326, 326, 30, 1, 0),
-       (327, 327, 30, 1, 0),
-       (328, 328, 30, 1, 0),
-       (329, 329, 30, 1, 0),
-       (330, 330, 30, 1, 1),
-       (331, 331, 31, 1, 0),
-       (332, 332, 31, 1, 0),
-       (333, 333, 31, 1, 0),
-       (334, 334, 31, 1, 0),
-       (335, 335, 31, 1, 0),
-       (336, 336, 31, 1, 0),
-       (337, 337, 31, 1, 0),
-       (338, 338, 31, 1, 0),
-       (339, 339, 31, 1, 0),
-       (340, 340, 31, 1, 0),
-       (341, 341, 31, 1, 1),
-       (342, 342, 32, 1, 0),
-       (343, 343, 32, 1, 0),
-       (344, 344, 32, 1, 0),
-       (345, 345, 32, 1, 0),
-       (346, 346, 32, 1, 0),
-       (347, 347, 32, 1, 0),
-       (348, 348, 32, 1, 0),
-       (349, 349, 32, 1, 0),
-       (350, 350, 32, 1, 0),
-       (351, 351, 32, 1, 0),
-       (352, 352, 32, 1, 1),
-       (353, 353, 33, 1, 0),
-       (354, 354, 33, 1, 0),
-       (355, 355, 33, 1, 0),
-       (356, 356, 33, 1, 0),
-       (357, 357, 33, 1, 0),
-       (358, 358, 33, 1, 0),
-       (359, 359, 33, 1, 0),
-       (360, 360, 33, 1, 0),
-       (361, 361, 33, 1, 0),
-       (362, 362, 33, 1, 0),
-       (363, 363, 33, 1, 1),
-       (364, 364, 34, 1, 0),
-       (365, 365, 34, 1, 0),
-       (366, 366, 34, 1, 0),
-       (367, 367, 34, 1, 0),
-       (368, 368, 34, 1, 0),
-       (369, 369, 34, 1, 0),
-       (370, 370, 34, 1, 0),
-       (371, 371, 34, 1, 0),
-       (372, 372, 34, 1, 0),
-       (373, 373, 34, 1, 0),
-       (374, 374, 34, 1, 1),
-       (375, 375, 35, 1, 0),
-       (376, 376, 35, 1, 0),
-       (377, 377, 35, 1, 0),
-       (378, 378, 35, 1, 0),
-       (379, 379, 35, 1, 0),
-       (380, 380, 35, 1, 0),
-       (381, 381, 35, 1, 0),
-       (382, 382, 35, 1, 0),
-       (383, 383, 35, 1, 1),
-       (384, 384, 35, 1, 0),
-       (385, 385, 35, 1, 0),
-       (386, 386, 36, 1, 0),
-       (387, 387, 36, 1, 0),
-       (388, 388, 36, 1, 0),
-       (389, 389, 36, 1, 1),
-       (390, 390, 36, 1, 0),
-       (391, 391, 36, 1, 0),
-       (392, 392, 36, 1, 0),
-       (393, 393, 36, 1, 0),
-       (394, 394, 36, 1, 0),
-       (395, 395, 36, 1, 0),
-       (396, 396, 36, 1, 0),
-       (397, 397, 37, 1, 0),
-       (398, 398, 37, 1, 0),
-       (399, 399, 37, 1, 0),
-       (400, 400, 37, 1, 1),
-       (401, 401, 37, 1, 0),
-       (402, 402, 37, 1, 0),
-       (403, 403, 37, 1, 0),
-       (404, 404, 37, 1, 0),
-       (405, 405, 37, 1, 0),
-       (406, 406, 37, 1, 0),
-       (407, 407, 37, 1, 0),
-       (408, 408, 38, 1, 0),
-       (409, 409, 38, 1, 0),
-       (410, 410, 38, 1, 1),
-       (411, 411, 38, 1, 0),
-       (412, 412, 38, 1, 0),
-       (413, 413, 38, 1, 0),
-       (414, 414, 38, 1, 0),
-       (415, 415, 38, 1, 0),
-       (416, 416, 38, 1, 0),
-       (417, 417, 38, 1, 0),
-       (418, 418, 38, 1, 1),
-       (419, 419, 39, 1, 0),
-       (420, 420, 39, 1, 0),
-       (421, 421, 39, 1, 0),
-       (422, 422, 39, 1, 0),
-       (423, 423, 39, 1, 0),
-       (424, 424, 39, 1, 0),
-       (425, 425, 39, 1, 0),
-       (426, 426, 39, 1, 1),
-       (427, 427, 39, 1, 0),
-       (428, 428, 39, 1, 0),
-       (429, 429, 39, 1, 0),
-       (430, 430, 40, 1, 0),
-       (431, 431, 40, 1, 0),
-       (432, 432, 40, 1, 0),
-       (433, 433, 40, 1, 0),
-       (434, 434, 40, 1, 0),
-       (435, 435, 40, 1, 1),
-       (436, 436, 40, 1, 0),
-       (437, 437, 40, 1, 0),
-       (438, 438, 40, 1, 0),
-       (439, 439, 40, 1, 0),
-       (440, 440, 40, 1, 0),
-       (441, 1, 1, 2, 0),
-       (442, 2, 1, 2, 0),
-       (443, 3, 1, 2, 0),
-       (444, 4, 1, 2, 1),
-       (445, 5, 1, 2, 0),
-       (446, 6, 1, 2, 0),
-       (447, 7, 1, 2, 0),
-       (448, 8, 1, 2, 0),
-       (449, 9, 1, 2, 0),
-       (450, 10, 1, 2, 0),
-       (451, 11, 1, 2, 0),
-       (452, 12, 2, 2, 0),
-       (453, 13, 2, 2, 0),
-       (454, 14, 2, 2, 0),
-       (455, 15, 2, 2, 0),
-       (456, 16, 2, 2, 0),
-       (457, 17, 2, 2, 0),
-       (458, 18, 2, 2, 1),
-       (459, 19, 2, 2, 0),
-       (460, 20, 2, 2, 0),
-       (461, 21, 2, 2, 0),
-       (462, 22, 2, 2, 0),
-       (463, 23, 3, 2, 0),
-       (464, 24, 3, 2, 0),
-       (465, 25, 3, 2, 0),
-       (466, 26, 3, 2, 0),
-       (467, 27, 3, 2, 1),
-       (468, 28, 3, 2, 0),
-       (469, 29, 3, 2, 0),
-       (470, 30, 3, 2, 0),
-       (471, 31, 3, 2, 0),
-       (472, 32, 3, 2, 0),
-       (473, 33, 3, 2, 0),
-       (474, 34, 4, 2, 0),
-       (475, 35, 4, 2, 0),
-       (476, 36, 4, 2, 0),
-       (477, 37, 4, 2, 0),
-       (478, 38, 4, 2, 0),
-       (479, 39, 4, 2, 1),
-       (480, 40, 4, 2, 0),
-       (481, 41, 4, 2, 0),
-       (482, 42, 4, 2, 0),
-       (483, 43, 4, 2, 0),
-       (484, 44, 4, 2, 0),
-       (485, 45, 5, 2, 1),
-       (486, 46, 5, 2, 0),
-       (487, 47, 5, 2, 0),
-       (488, 48, 5, 2, 0),
-       (489, 49, 5, 2, 0),
-       (490, 50, 5, 2, 0),
-       (491, 51, 17, 2, 0),
-       (492, 52, 5, 2, 0),
-       (493, 53, 5, 2, 0),
-       (494, 54, 5, 2, 0),
-       (495, 55, 5, 2, 0),
-       (496, 56, 6, 2, 0),
-       (497, 57, 6, 2, 0),
-       (498, 58, 6, 2, 1),
-       (499, 59, 6, 2, 0),
-       (500, 60, 6, 2, 0),
-       (501, 61, 6, 2, 0),
-       (502, 62, 6, 2, 0),
-       (503, 63, 6, 2, 0),
-       (504, 64, 6, 2, 0),
-       (505, 65, 6, 2, 0),
-       (506, 66, 6, 2, 0),
-       (507, 67, 7, 2, 0),
-       (508, 68, 7, 2, 0),
-       (509, 69, 7, 2, 0),
-       (510, 70, 7, 2, 1),
-       (511, 71, 7, 2, 0),
-       (512, 72, 7, 2, 0),
-       (513, 73, 7, 2, 0),
-       (514, 74, 7, 2, 0),
-       (515, 75, 7, 2, 0),
-       (516, 76, 7, 2, 0),
-       (517, 77, 7, 2, 0),
-       (518, 78, 8, 2, 0),
-       (519, 79, 8, 2, 1),
-       (520, 80, 8, 2, 0),
-       (521, 81, 8, 2, 0),
-       (522, 82, 8, 2, 0),
-       (523, 83, 8, 2, 0),
-       (524, 84, 8, 2, 0),
-       (525, 85, 8, 2, 0),
-       (526, 86, 8, 2, 0),
-       (527, 87, 8, 2, 0),
-       (528, 88, 8, 2, 0),
-       (529, 89, 9, 2, 0),
-       (530, 90, 9, 2, 0),
-       (531, 91, 9, 2, 0),
-       (532, 92, 9, 2, 0),
-       (533, 93, 9, 2, 0),
-       (534, 94, 9, 2, 1),
-       (535, 95, 9, 2, 0),
-       (536, 96, 9, 2, 0),
-       (537, 97, 9, 2, 0),
-       (538, 98, 34, 2, 0),
-       (539, 99, 9, 2, 0),
-       (540, 100, 10, 2, 0),
-       (541, 101, 10, 2, 0),
-       (542, 102, 10, 2, 0),
-       (543, 103, 10, 2, 0),
-       (544, 104, 10, 2, 0),
-       (545, 105, 10, 2, 0),
-       (546, 106, 10, 2, 0),
-       (547, 107, 10, 2, 0),
-       (548, 108, 10, 2, 1),
-       (549, 109, 10, 2, 0),
-       (550, 110, 10, 2, 0),
-       (551, 111, 11, 2, 0),
-       (552, 112, 11, 2, 0),
-       (553, 113, 11, 2, 0),
-       (554, 114, 11, 2, 0),
-       (555, 115, 11, 2, 0),
-       (556, 116, 11, 2, 0),
-       (557, 117, 11, 2, 0),
-       (558, 118, 11, 2, 0),
-       (559, 119, 11, 2, 0),
-       (560, 120, 11, 2, 1),
-       (561, 121, 11, 2, 0),
-       (562, 122, 12, 2, 0),
-       (563, 123, 12, 2, 0),
-       (564, 124, 12, 2, 0),
-       (565, 125, 12, 2, 0),
-       (566, 126, 12, 2, 0),
-       (567, 127, 12, 2, 0),
-       (568, 128, 12, 2, 0),
-       (569, 129, 12, 2, 0),
-       (570, 130, 12, 2, 0),
-       (571, 131, 12, 2, 0),
-       (572, 132, 12, 2, 0),
-       (573, 133, 13, 2, 0),
-       (574, 134, 13, 2, 0),
-       (575, 135, 13, 2, 0),
-       (576, 136, 13, 2, 0),
-       (577, 137, 13, 2, 0),
-       (578, 138, 13, 2, 0),
-       (579, 139, 13, 2, 0),
-       (580, 140, 13, 2, 0),
-       (581, 141, 13, 2, 0),
-       (582, 142, 13, 2, 1),
-       (583, 143, 13, 2, 1),
-       (584, 144, 14, 2, 0),
-       (585, 145, 14, 2, 0),
-       (586, 146, 14, 2, 0),
-       (587, 147, 14, 2, 0),
-       (588, 148, 14, 2, 0),
-       (589, 149, 14, 2, 0),
-       (590, 150, 14, 2, 0),
-       (591, 151, 14, 2, 0),
-       (592, 152, 14, 2, 0),
-       (593, 153, 14, 2, 0),
-       (594, 154, 14, 2, 0),
-       (595, 155, 15, 2, 0),
-       (596, 156, 15, 2, 0),
-       (597, 157, 15, 2, 1),
-       (598, 158, 15, 2, 0),
-       (599, 159, 15, 2, 0),
-       (600, 160, 15, 2, 0),
-       (601, 161, 15, 2, 0),
-       (602, 162, 15, 2, 0),
-       (603, 163, 15, 2, 0),
-       (604, 164, 15, 2, 0),
-       (605, 165, 15, 2, 0),
-       (606, 166, 16, 2, 0),
-       (607, 167, 16, 2, 0),
-       (608, 168, 16, 2, 0),
-       (609, 169, 16, 2, 1),
-       (610, 170, 16, 2, 0),
-       (611, 171, 16, 2, 0),
-       (612, 172, 16, 2, 0),
-       (613, 173, 16, 2, 0),
-       (614, 174, 16, 2, 0),
-       (615, 175, 16, 2, 0),
-       (616, 176, 16, 2, 0),
-       (617, 177, 17, 2, 0),
-       (618, 178, 17, 2, 0),
-       (619, 179, 17, 2, 0),
-       (620, 180, 17, 2, 1),
-       (621, 181, 17, 2, 0),
-       (622, 182, 17, 2, 0),
-       (623, 183, 17, 2, 0),
-       (624, 184, 5, 2, 0),
-       (625, 185, 23, 2, 0),
-       (626, 186, 17, 2, 0),
-       (627, 187, 17, 2, 0),
-       (628, 188, 18, 2, 0),
-       (629, 189, 18, 2, 0),
-       (630, 190, 18, 2, 0),
-       (631, 191, 18, 2, 1),
-       (632, 192, 18, 2, 0),
-       (633, 193, 18, 2, 0),
-       (634, 194, 18, 2, 0),
-       (635, 195, 18, 2, 0),
-       (636, 196, 18, 2, 0),
-       (637, 197, 18, 2, 0),
-       (638, 198, 18, 2, 0),
-       (639, 199, 19, 2, 0),
-       (640, 200, 19, 2, 0),
-       (641, 201, 19, 2, 0),
-       (642, 202, 19, 2, 1),
-       (643, 203, 19, 2, 0),
-       (644, 204, 19, 2, 0),
-       (645, 205, 19, 2, 0),
-       (646, 206, 19, 2, 0),
-       (647, 207, 19, 2, 0),
-       (648, 208, 19, 2, 0),
-       (649, 209, 19, 2, 0),
-       (650, 210, 20, 2, 0),
-       (651, 211, 20, 2, 0),
-       (652, 212, 20, 2, 1),
-       (653, 213, 20, 2, 0),
-       (654, 214, 20, 2, 0),
-       (655, 215, 20, 2, 0),
-       (656, 216, 20, 2, 0),
-       (657, 217, 20, 2, 0),
-       (658, 218, 20, 2, 0),
-       (659, 219, 20, 2, 0),
-       (660, 220, 20, 2, 0),
-       (661, 221, 21, 2, 1),
-       (662, 222, 21, 2, 0),
-       (663, 223, 21, 2, 0),
-       (664, 224, 21, 2, 0),
-       (665, 225, 21, 2, 0),
-       (666, 226, 21, 2, 0),
-       (667, 227, 21, 2, 0),
-       (668, 228, 21, 2, 0),
-       (669, 229, 21, 2, 0),
-       (670, 230, 21, 2, 0),
-       (671, 231, 21, 2, 0),
-       (672, 232, 22, 2, 0),
-       (673, 233, 22, 2, 0),
-       (674, 234, 22, 2, 0),
-       (675, 235, 22, 2, 1),
-       (676, 236, 22, 2, 0),
-       (677, 237, 22, 2, 0),
-       (678, 238, 22, 2, 0),
-       (679, 239, 22, 2, 0),
-       (680, 240, 22, 2, 0),
-       (681, 241, 22, 2, 0),
-       (682, 242, 22, 2, 0),
-       (683, 243, 23, 2, 0),
-       (684, 244, 23, 2, 0),
-       (685, 245, 23, 2, 0),
-       (686, 246, 23, 2, 1),
-       (687, 247, 17, 2, 0),
-       (688, 248, 23, 2, 0),
-       (689, 249, 23, 2, 0),
-       (690, 250, 23, 2, 0),
-       (691, 251, 23, 2, 0),
-       (692, 252, 23, 2, 0),
-       (693, 253, 23, 2, 0),
-       (694, 254, 24, 2, 0),
-       (695, 255, 24, 2, 0),
-       (696, 256, 24, 2, 0),
-       (697, 257, 24, 2, 0),
-       (698, 258, 24, 2, 1),
-       (699, 259, 24, 2, 0),
-       (700, 260, 24, 2, 0),
-       (701, 261, 24, 2, 0),
-       (702, 262, 24, 2, 0),
-       (703, 263, 24, 2, 0),
-       (704, 264, 24, 2, 0),
-       (705, 265, 25, 2, 0),
-       (706, 266, 25, 2, 1),
-       (707, 267, 25, 2, 0),
-       (708, 268, 25, 2, 0),
-       (709, 269, 25, 2, 0),
-       (710, 270, 25, 2, 0),
-       (711, 271, 25, 2, 0),
-       (712, 272, 25, 2, 0),
-       (713, 273, 25, 2, 0),
-       (714, 274, 25, 2, 0),
-       (715, 275, 25, 2, 0),
-       (716, 276, 26, 2, 0),
-       (717, 277, 26, 2, 0),
-       (718, 278, 26, 2, 1),
-       (719, 279, 26, 2, 0),
-       (720, 280, 26, 2, 0),
-       (721, 281, 26, 2, 0),
-       (722, 282, 26, 2, 0),
-       (723, 283, 26, 2, 0),
-       (724, 284, 26, 2, 0),
-       (725, 285, 26, 2, 0),
-       (726, 286, 26, 2, 0),
-       (727, 287, 27, 2, 0),
-       (728, 288, 27, 2, 0),
-       (729, 289, 27, 2, 0),
-       (730, 290, 27, 2, 0),
-       (731, 291, 27, 2, 0),
-       (732, 292, 27, 2, 1),
-       (733, 293, 27, 2, 0),
-       (734, 294, 27, 2, 0),
-       (735, 295, 27, 2, 0),
-       (736, 296, 27, 2, 0),
-       (737, 297, 27, 2, 0),
-       (738, 298, 28, 2, 0),
-       (739, 299, 28, 2, 0),
-       (740, 300, 28, 2, 0),
-       (741, 301, 28, 2, 0),
-       (742, 302, 28, 2, 0),
-       (743, 303, 28, 2, 0),
-       (744, 304, 28, 2, 0),
-       (745, 305, 28, 2, 0),
-       (746, 306, 28, 2, 0),
-       (747, 307, 28, 2, 0),
-       (748, 308, 28, 2, 0),
-       (749, 309, 29, 2, 0),
-       (750, 310, 29, 2, 0),
-       (751, 311, 29, 2, 1),
-       (752, 312, 29, 2, 0),
-       (753, 313, 29, 2, 0),
-       (754, 314, 29, 2, 0),
-       (755, 315, 29, 2, 0),
-       (756, 316, 29, 2, 0),
-       (757, 317, 29, 2, 0),
-       (758, 318, 29, 2, 0),
-       (759, 319, 29, 2, 0),
-       (760, 320, 30, 2, 0),
-       (761, 321, 30, 2, 0),
-       (762, 322, 30, 2, 0),
-       (763, 323, 30, 2, 0),
-       (764, 324, 30, 2, 0),
-       (765, 325, 30, 2, 1),
-       (766, 326, 30, 2, 0),
-       (767, 327, 30, 2, 0),
-       (768, 328, 30, 2, 0),
-       (769, 329, 30, 2, 0),
-       (770, 330, 30, 2, 0),
-       (771, 331, 31, 2, 0),
-       (772, 332, 31, 2, 0),
-       (773, 333, 31, 2, 0),
-       (774, 334, 31, 2, 0),
-       (775, 335, 31, 2, 0),
-       (776, 336, 31, 2, 0),
-       (777, 337, 31, 2, 0),
-       (778, 338, 31, 2, 1),
-       (779, 339, 31, 2, 0),
-       (780, 340, 31, 2, 0),
-       (781, 341, 31, 2, 0),
-       (782, 342, 32, 2, 0),
-       (783, 343, 32, 2, 0),
-       (784, 344, 32, 2, 0),
-       (785, 345, 32, 2, 0),
-       (786, 346, 32, 2, 0),
-       (787, 347, 32, 2, 0),
-       (788, 348, 32, 2, 0),
-       (789, 349, 32, 2, 0),
-       (790, 350, 32, 2, 0),
-       (791, 351, 32, 2, 0),
-       (792, 352, 32, 2, 0),
-       (793, 353, 33, 2, 0),
-       (794, 354, 33, 2, 0),
-       (795, 355, 33, 2, 0),
-       (796, 356, 33, 2, 0),
-       (797, 357, 33, 2, 0),
-       (798, 358, 33, 2, 0),
-       (799, 359, 33, 2, 0),
-       (800, 360, 33, 2, 0),
-       (801, 361, 33, 2, 0),
-       (802, 362, 33, 2, 1),
-       (803, 363, 33, 2, 0),
-       (804, 364, 34, 2, 0),
-       (805, 365, 34, 2, 0),
-       (806, 366, 34, 2, 0),
-       (807, 367, 34, 2, 0),
-       (808, 368, 34, 2, 0),
-       (809, 369, 34, 2, 0),
-       (810, 370, 34, 2, 0),
-       (811, 371, 34, 2, 0),
-       (812, 372, 9, 2, 0),
-       (813, 373, 34, 2, 0),
-       (814, 374, 34, 2, 0),
-       (815, 375, 35, 2, 1),
-       (816, 376, 35, 2, 0),
-       (817, 377, 35, 2, 0),
-       (818, 378, 35, 2, 0),
-       (819, 379, 35, 2, 0),
-       (820, 380, 35, 2, 0),
-       (821, 381, 35, 2, 0),
-       (822, 382, 35, 2, 0),
-       (823, 383, 35, 2, 0),
-       (824, 384, 35, 2, 1),
-       (825, 385, 35, 2, 0),
-       (826, 386, 36, 2, 0),
-       (827, 387, 36, 2, 0),
-       (828, 388, 36, 2, 0),
-       (829, 389, 36, 2, 0),
-       (830, 390, 36, 2, 0),
-       (831, 391, 36, 2, 0),
-       (832, 392, 36, 2, 0),
-       (833, 393, 36, 2, 1),
-       (834, 394, 36, 2, 0),
-       (835, 395, 36, 2, 0),
-       (836, 396, 36, 2, 0),
-       (837, 397, 37, 2, 0),
-       (838, 398, 37, 2, 0),
-       (839, 399, 37, 2, 0),
-       (840, 400, 37, 2, 0),
-       (841, 401, 37, 2, 0),
-       (842, 402, 37, 2, 0),
-       (843, 403, 37, 2, 0),
-       (844, 404, 37, 2, 0),
-       (845, 405, 37, 2, 0),
-       (846, 406, 37, 2, 1),
-       (847, 407, 37, 2, 0),
-       (848, 408, 38, 2, 0),
-       (849, 409, 38, 2, 0),
-       (850, 410, 38, 2, 0),
-       (851, 411, 38, 2, 0),
-       (852, 412, 38, 2, 0),
-       (853, 413, 38, 2, 0),
-       (854, 414, 38, 2, 0),
-       (855, 415, 38, 2, 0),
-       (856, 416, 38, 2, 0),
-       (857, 417, 38, 2, 1),
-       (858, 418, 38, 2, 0),
-       (859, 419, 39, 2, 0),
-       (860, 420, 39, 2, 0),
-       (861, 421, 39, 2, 0),
-       (862, 422, 39, 2, 0),
-       (863, 423, 39, 2, 0),
-       (864, 424, 39, 2, 0),
-       (865, 425, 39, 2, 0),
-       (866, 426, 39, 2, 1),
-       (867, 427, 39, 2, 0),
-       (868, 428, 39, 2, 0),
-       (869, 429, 39, 2, 0),
-       (870, 430, 40, 2, 0),
-       (871, 431, 40, 2, 0),
-       (872, 432, 40, 2, 0),
-       (873, 433, 40, 2, 0),
-       (874, 434, 40, 2, 0),
-       (875, 435, 40, 2, 1),
-       (876, 436, 40, 2, 0),
-       (877, 437, 40, 2, 0),
-       (878, 438, 40, 2, 0),
-       (879, 439, 40, 2, 0),
-       (880, 440, 40, 2, 0);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (1, 1, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (2, 2, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (3, 3, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (4, 4, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (5, 5, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (6, 6, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (7, 7, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (8, 8, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (9, 9, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (10, 10, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (11, 11, 1, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (12, 12, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (13, 13, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (14, 14, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (15, 15, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (16, 16, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (17, 17, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (18, 18, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (19, 19, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (20, 20, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (21, 21, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (22, 22, 2, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (23, 23, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (24, 24, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (25, 25, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (26, 26, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (27, 27, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (28, 28, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (29, 29, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (30, 30, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (31, 31, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (32, 32, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (33, 33, 3, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (34, 34, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (35, 35, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (36, 36, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (37, 37, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (38, 38, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (39, 39, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (40, 40, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (41, 41, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (42, 42, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (43, 43, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (44, 44, 4, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (45, 45, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (46, 46, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (47, 47, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (48, 48, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (49, 49, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (50, 50, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (51, 51, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (52, 52, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (53, 53, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (54, 54, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (55, 55, 5, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (56, 56, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (57, 57, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (58, 58, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (59, 59, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (60, 60, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (61, 61, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (62, 62, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (63, 63, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (64, 64, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (65, 65, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (66, 66, 6, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (67, 67, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (68, 68, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (69, 69, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (70, 70, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (71, 71, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (72, 72, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (73, 73, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (74, 74, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (75, 75, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (76, 76, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (77, 77, 7, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (78, 78, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (79, 79, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (80, 80, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (81, 81, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (82, 82, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (83, 83, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (84, 84, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (85, 85, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (86, 86, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (87, 87, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (88, 88, 8, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (89, 89, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (90, 90, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (91, 91, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (92, 92, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (93, 93, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (94, 94, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (95, 95, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (96, 96, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (97, 97, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (98, 98, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (99, 99, 9, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (100, 100, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (101, 101, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (102, 102, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (103, 103, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (104, 104, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (105, 105, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (106, 106, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (107, 107, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (108, 108, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (109, 109, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (110, 110, 10, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (111, 111, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (112, 112, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (113, 113, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (114, 114, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (115, 115, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (116, 116, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (117, 117, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (118, 118, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (119, 119, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (120, 120, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (121, 121, 11, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (122, 122, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (123, 123, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (124, 124, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (125, 125, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (126, 126, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (127, 127, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (128, 128, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (129, 129, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (130, 130, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (131, 131, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (132, 132, 12, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (133, 133, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (134, 134, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (135, 135, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (136, 136, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (137, 137, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (138, 138, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (139, 139, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (140, 140, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (141, 141, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (142, 142, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (143, 143, 13, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (144, 144, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (145, 145, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (146, 146, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (147, 147, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (148, 148, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (149, 149, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (150, 150, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (151, 151, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (152, 152, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (153, 153, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (154, 154, 14, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (155, 155, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (156, 156, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (157, 157, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (158, 158, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (159, 159, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (160, 160, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (161, 161, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (162, 162, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (163, 163, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (164, 164, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (165, 165, 15, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (166, 166, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (167, 167, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (168, 168, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (169, 169, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (170, 170, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (171, 171, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (172, 172, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (173, 173, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (174, 174, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (175, 175, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (176, 176, 16, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (177, 177, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (178, 178, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (179, 179, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (180, 180, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (181, 181, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (182, 182, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (183, 183, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (184, 184, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (185, 185, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (186, 186, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (187, 187, 17, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (188, 188, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (189, 189, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (190, 190, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (191, 191, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (192, 192, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (193, 193, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (194, 194, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (195, 195, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (196, 196, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (197, 197, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (198, 198, 18, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (199, 199, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (200, 200, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (201, 201, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (202, 202, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (203, 203, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (204, 204, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (205, 205, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (206, 206, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (207, 207, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (208, 208, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (209, 209, 19, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (210, 210, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (211, 211, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (212, 212, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (213, 213, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (214, 214, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (215, 215, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (216, 216, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (217, 217, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (218, 218, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (219, 219, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (220, 220, 20, 1);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (221, 1499, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (222, 1500, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (223, 1501, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (224, 1502, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (225, 1503, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (226, 1504, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (227, 1505, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (228, 1506, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (229, 1507, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (230, 1508, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (231, 1509, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (232, 1510, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (233, 1511, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (234, 1512, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (235, 1513, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (236, 1514, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (237, 1515, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (238, 1516, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (239, 1517, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (240, 1518, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (241, 1519, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (242, 1520, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (243, 1521, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (244, 1522, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (245, 1523, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (246, 1524, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (247, 1525, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (248, 1526, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (249, 1527, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (250, 1528, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (251, 1529, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (252, 1530, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (253, 1531, 43, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (254, 1532, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (255, 1533, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (256, 1534, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (257, 1535, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (258, 1536, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (259, 1537, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (260, 1538, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (261, 1539, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (262, 1540, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (263, 1541, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (264, 1542, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (265, 1543, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (266, 1544, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (267, 1545, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (268, 1546, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (269, 1547, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (270, 1548, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (271, 1549, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (272, 1550, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (273, 1551, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (274, 1552, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (275, 1553, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (276, 1554, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (277, 1555, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (278, 1556, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (279, 1557, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (280, 1558, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (281, 1559, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (282, 1560, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (283, 1561, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (284, 1562, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (285, 1563, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (286, 1564, 21, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (287, 1565, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (288, 1566, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (289, 1567, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (290, 1568, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (291, 1569, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (292, 1570, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (293, 1571, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (294, 1572, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (295, 1573, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (296, 1574, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (297, 1575, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (298, 1576, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (299, 1577, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (300, 1578, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (301, 1579, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (302, 1580, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (303, 1581, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (304, 1582, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (305, 1583, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (306, 1584, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (307, 1585, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (308, 1586, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (309, 1587, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (310, 1588, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (311, 1589, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (312, 1590, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (313, 1591, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (314, 1592, 25, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (315, 1593, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (316, 1594, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (317, 1595, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (318, 1596, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (319, 1597, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (320, 1598, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (321, 1599, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (322, 1600, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (323, 1601, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (324, 1602, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (325, 1603, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (326, 1604, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (327, 1605, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (328, 1606, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (329, 1607, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (330, 1608, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (331, 1609, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (332, 1610, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (333, 1611, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (334, 1612, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (335, 1613, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (336, 1614, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (337, 1615, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (338, 1616, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (339, 1617, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (340, 1618, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (341, 1619, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (342, 1620, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (343, 1621, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (344, 1622, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (345, 1623, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (346, 1624, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (347, 1625, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (348, 1626, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (349, 1627, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (350, 1628, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (351, 1629, 22, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (352, 1630, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (353, 1631, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (354, 1632, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (355, 1633, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (356, 1634, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (357, 1635, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (358, 1636, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (359, 1637, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (360, 1638, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (361, 1639, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (362, 1640, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (363, 1641, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (364, 1642, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (365, 1643, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (366, 1644, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (367, 1645, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (368, 1646, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (369, 1647, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (370, 1648, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (371, 1649, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (372, 1650, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (373, 1651, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (374, 1652, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (375, 1653, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (376, 1654, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (377, 1655, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (378, 1656, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (379, 1657, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (380, 1658, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (381, 1659, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (382, 1660, 23, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (383, 1661, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (384, 1662, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (385, 1663, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (386, 1664, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (387, 1665, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (388, 1666, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (389, 1667, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (390, 1668, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (391, 1669, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (392, 1670, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (393, 1671, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (394, 1672, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (395, 1673, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (396, 1674, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (397, 1675, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (398, 1676, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (399, 1677, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (400, 1678, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (401, 1679, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (402, 1680, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (403, 1681, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (404, 1682, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (405, 1683, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (406, 1684, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (407, 1685, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (408, 1686, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (409, 1687, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (410, 1688, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (411, 1689, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (412, 1690, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (413, 1691, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (414, 1692, 44, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (415, 1693, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (416, 1694, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (417, 1695, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (418, 1696, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (419, 1697, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (420, 1698, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (421, 1699, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (422, 1700, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (423, 1701, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (424, 1702, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (425, 1703, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (426, 1704, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (427, 1705, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (428, 1706, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (429, 1707, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (430, 1708, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (431, 1709, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (432, 1710, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (433, 1711, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (434, 1712, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (435, 1713, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (436, 1714, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (437, 1715, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (438, 1716, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (439, 1717, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (440, 1718, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (441, 1719, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (442, 1720, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (443, 1721, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (444, 1722, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (445, 1723, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (446, 1724, 46, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (447, 1725, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (448, 1726, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (449, 1727, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (450, 1728, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (451, 1729, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (452, 1730, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (453, 1731, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (454, 1732, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (455, 1733, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (456, 1734, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (457, 1735, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (458, 1736, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (459, 1737, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (460, 1738, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (461, 1739, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (462, 1740, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (463, 1741, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (464, 1742, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (465, 1743, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (466, 1744, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (467, 1745, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (468, 1746, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (469, 1747, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (470, 1748, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (471, 1749, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (472, 1750, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (473, 1751, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (474, 1752, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (475, 1753, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (476, 1754, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (477, 1755, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (478, 1756, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (479, 1757, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (480, 1758, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (481, 1759, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (482, 1760, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (483, 1761, 26, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (484, 1762, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (485, 1763, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (486, 1764, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (487, 1765, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (488, 1766, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (489, 1767, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (490, 1768, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (491, 1769, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (492, 1770, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (493, 1771, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (494, 1772, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (495, 1773, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (496, 1774, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (497, 1775, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (498, 1776, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (499, 1777, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (500, 1778, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (501, 1779, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (502, 1780, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (503, 1781, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (504, 1782, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (505, 1783, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (506, 1784, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (507, 1785, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (508, 1786, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (509, 1787, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (510, 1788, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (511, 1789, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (512, 1790, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (513, 1791, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (514, 1792, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (515, 1793, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (516, 1794, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (517, 1795, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (518, 1796, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (519, 1797, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (520, 1798, 28, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (521, 1799, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (522, 1800, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (523, 1801, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (524, 1802, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (525, 1803, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (526, 1804, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (527, 1805, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (528, 1806, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (529, 1807, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (530, 1808, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (531, 1809, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (532, 1810, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (533, 1811, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (534, 1812, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (535, 1813, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (536, 1814, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (537, 1815, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (538, 1816, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (539, 1817, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (540, 1818, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (541, 1819, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (542, 1820, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (543, 1821, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (544, 1822, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (545, 1823, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (546, 1824, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (547, 1825, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (548, 1826, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (549, 1827, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (550, 1828, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (551, 1829, 24, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (552, 1830, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (553, 1831, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (554, 1832, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (555, 1833, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (556, 1834, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (557, 1835, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (558, 1836, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (559, 1837, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (560, 1838, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (561, 1839, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (562, 1840, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (563, 1841, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (564, 1842, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (565, 1843, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (566, 1844, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (567, 1845, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (568, 1846, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (569, 1847, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (570, 1848, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (571, 1849, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (572, 1850, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (573, 1851, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (574, 1852, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (575, 1853, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (576, 1854, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (577, 1855, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (578, 1856, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (579, 1857, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (580, 1858, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (581, 1859, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (582, 1860, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (583, 1861, 34, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (584, 1862, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (585, 1863, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (586, 1864, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (587, 1865, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (588, 1866, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (589, 1867, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (590, 1868, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (591, 1869, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (592, 1870, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (593, 1871, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (594, 1872, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (595, 1873, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (596, 1874, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (597, 1875, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (598, 1876, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (599, 1877, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (600, 1878, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (601, 1879, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (602, 1880, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (603, 1881, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (604, 1882, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (605, 1883, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (606, 1884, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (607, 1885, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (608, 1886, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (609, 1887, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (610, 1888, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (611, 1889, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (612, 1890, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (613, 1891, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (614, 1892, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (615, 1893, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (616, 1894, 36, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (617, 1895, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (618, 1896, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (619, 1897, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (620, 1898, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (621, 1899, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (622, 1900, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (623, 1901, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (624, 1902, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (625, 1903, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (626, 1904, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (627, 1905, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (628, 1906, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (629, 1907, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (630, 1908, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (631, 1909, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (632, 1910, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (633, 1911, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (634, 1912, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (635, 1913, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (636, 1914, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (637, 1915, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (638, 1916, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (639, 1917, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (640, 1918, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (641, 1919, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (642, 1920, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (643, 1921, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (644, 1922, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (645, 1923, 35, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (646, 1924, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (647, 1925, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (648, 1926, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (649, 1927, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (650, 1928, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (651, 1929, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (652, 1930, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (653, 1931, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (654, 1932, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (655, 1933, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (656, 1934, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (657, 1935, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (658, 1936, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (659, 1937, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (660, 1938, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (661, 1939, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (662, 1940, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (663, 1941, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (664, 1942, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (665, 1943, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (666, 1944, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (667, 1945, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (668, 1946, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (669, 1947, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (670, 1948, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (671, 1949, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (672, 1950, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (673, 1951, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (674, 1952, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (675, 1953, 38, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (676, 1954, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (677, 1955, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (678, 1956, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (679, 1957, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (680, 1958, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (681, 1959, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (682, 1960, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (683, 1961, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (684, 1962, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (685, 1963, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (686, 1964, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (687, 1965, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (688, 1966, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (689, 1967, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (690, 1968, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (691, 1969, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (692, 1970, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (693, 1971, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (694, 1972, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (695, 1973, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (696, 1974, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (697, 1975, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (698, 1976, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (699, 1977, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (700, 1978, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (701, 1979, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (702, 1980, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (703, 1981, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (704, 1982, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (705, 1983, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (706, 1984, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (707, 1985, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (708, 1986, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (709, 1987, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (710, 1988, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (711, 1989, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (712, 1990, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (713, 1991, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (714, 1992, 39, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (715, 1993, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (716, 1994, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (717, 1995, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (718, 1996, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (719, 1997, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (720, 1998, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (721, 1999, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (722, 2000, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (723, 2001, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (724, 2002, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (725, 2003, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (726, 2004, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (727, 2005, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (728, 2006, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (729, 2007, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (730, 2008, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (731, 2009, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (732, 2010, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (733, 2011, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (734, 2012, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (735, 2013, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (736, 2014, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (737, 2015, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (738, 2016, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (739, 2017, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (740, 2018, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (741, 2019, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (742, 2020, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (743, 2021, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (744, 2022, 47, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (745, 2023, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (746, 2024, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (747, 2025, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (748, 2026, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (749, 2027, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (750, 2028, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (751, 2029, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (752, 2030, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (753, 2031, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (754, 2032, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (755, 2033, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (756, 2034, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (757, 2035, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (758, 2036, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (759, 2037, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (760, 2038, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (761, 2039, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (762, 2040, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (763, 2041, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (764, 2042, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (765, 2043, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (766, 2044, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (767, 2045, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (768, 2046, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (769, 2047, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (770, 2048, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (771, 2049, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (772, 2050, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (773, 2051, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (774, 2052, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (775, 2053, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (776, 2054, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (777, 2055, 49, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (778, 2056, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (779, 2057, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (780, 2058, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (781, 2059, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (782, 2060, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (783, 2061, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (784, 2062, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (785, 2063, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (786, 2064, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (787, 2065, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (788, 2066, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (789, 2067, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (790, 2068, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (791, 2069, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (792, 2070, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (793, 2071, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (794, 2072, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (795, 2073, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (796, 2074, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (797, 2075, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (798, 2076, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (799, 2077, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (800, 2078, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (801, 2079, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (802, 2080, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (803, 2081, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (804, 2082, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (805, 2083, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (806, 2084, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (807, 2085, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (808, 2086, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (809, 2087, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (810, 2088, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (811, 2089, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (812, 2090, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (813, 2091, 45, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (814, 2092, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (815, 2093, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (816, 2094, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (817, 2095, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (818, 2096, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (819, 2097, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (820, 2098, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (821, 2099, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (822, 2100, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (823, 2101, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (824, 2102, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (825, 2103, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (826, 2104, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (827, 2105, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (828, 2106, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (829, 2107, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (830, 2108, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (831, 2109, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (832, 2110, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (833, 2111, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (834, 2112, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (835, 2113, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (836, 2114, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (837, 2115, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (838, 2116, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (839, 2117, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (840, 2118, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (841, 2119, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (842, 2120, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (843, 2121, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (844, 2122, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (845, 2123, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (846, 2124, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (847, 2125, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (848, 2126, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (849, 2127, 48, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (850, 2128, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (851, 2129, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (852, 2130, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (853, 2131, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (854, 2132, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (855, 2133, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (856, 2134, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (857, 2135, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (858, 2136, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (859, 2137, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (860, 2138, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (861, 2139, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (862, 2140, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (863, 2141, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (864, 2142, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (865, 2143, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (866, 2144, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (867, 2145, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (868, 2146, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (869, 2147, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (870, 2148, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (871, 2149, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (872, 2150, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (873, 2151, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (874, 2152, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (875, 2153, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (876, 2154, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (877, 2155, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (878, 2156, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (879, 2157, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (880, 2158, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (881, 2159, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (882, 2160, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (883, 2161, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (884, 2162, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (885, 2163, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (886, 2164, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (887, 2165, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (888, 2166, 30, 2);
+INSERT INTO football.squad (idsquad, player_id, club_id, season_id) VALUES (889, 2167, 30, 2);
 
-CREATE TABLE `game`
+create table game
 (
-    `idgame`     int(11) NOT NULL AUTO_INCREMENT,
-    `referee_id` int(11) NOT NULL,
-    `home`       int(11) NOT NULL,
-    `away`       int(11) NOT NULL,
-    `score_home` int(11) NOT NULL,
-    `score_away` int(11) NOT NULL,
-    `score`      int(11) NOT NULL,
-    PRIMARY KEY (`idgame`),
-    KEY `game_has_referee` (`referee_id`),
-    KEY `game_away_has_club` (`away`),
-    KEY `game_home_has_club` (`home`),
-    CONSTRAINT `game_away_has_club` FOREIGN KEY (`away`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `game_home_has_club` FOREIGN KEY (`home`) REFERENCES `club` (`idclub`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `game_has_referee` FOREIGN KEY (`referee_id`) REFERENCES `referee` (`idreferee`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+    idgame     int auto_increment
+        primary key,
+    home       int not null,
+    away       int not null,
+    season_id  int not null,
+    referee_id int not null,
+    score_home int not null,
+    score_away int not null,
+    score      int not null,
+    constraint game_away_has_club
+        foreign key (away) references club (idclub),
+    constraint game_has_referee
+        foreign key (referee_id) references referee (idreferee),
+    constraint game_has_season
+        foreign key (season_id) references season (idseason),
+    constraint game_home_has_club
+        foreign key (home) references club (idclub)
+)
+    charset = utf8;
 
-INSERT INTO `game`
-VALUES (1, 1, 1, 2, 0, 0, 0),
-       (2, 2, 1, 3, 2, 1, 1),
-       (3, 3, 1, 4, 0, 1, 2),
-       (4, 4, 1, 5, 1, 1, 0),
-       (5, 5, 1, 6, 2, 0, 1),
-       (6, 6, 1, 7, 1, 2, 2),
-       (7, 7, 1, 8, 2, 2, 0),
-       (8, 8, 1, 9, 3, 2, 1),
-       (9, 9, 1, 10, 2, 3, 2),
-       (10, 10, 1, 11, 3, 3, 0),
-       (11, 11, 1, 12, 0, 0, 1),
-       (12, 12, 1, 13, 0, 1, 2),
-       (13, 13, 1, 14, 4, 4, 0),
-       (14, 14, 1, 15, 2, 0, 1),
-       (15, 15, 1, 16, 1, 2, 2),
-       (16, 16, 1, 17, 0, 0, 0),
-       (17, 17, 1, 18, 3, 2, 1),
-       (18, 18, 1, 19, 2, 3, 2),
-       (19, 19, 1, 20, 1, 1, 0),
-       (20, 20, 2, 1, 2, 1, 1),
-       (21, 1, 2, 3, 1, 2, 2),
-       (22, 2, 2, 4, 2, 2, 0),
-       (23, 3, 2, 5, 3, 1, 1),
-       (24, 4, 2, 6, 1, 3, 2),
-       (25, 5, 2, 7, 3, 3, 0),
-       (26, 6, 2, 8, 2, 1, 1),
-       (27, 7, 2, 9, 0, 1, 2),
-       (28, 8, 2, 10, 4, 4, 0),
-       (29, 9, 2, 11, 3, 1, 1),
-       (30, 10, 2, 12, 1, 2, 2),
-       (31, 11, 2, 13, 1, 1, 0),
-       (32, 12, 2, 14, 1, 0, 1),
-       (33, 13, 2, 15, 2, 3, 2),
-       (34, 14, 2, 16, 2, 2, 0),
-       (35, 15, 2, 17, 2, 0, 1),
-       (36, 16, 2, 18, 0, 1, 2),
-       (37, 17, 2, 19, 3, 3, 0),
-       (38, 18, 2, 20, 3, 1, 1),
-       (39, 19, 3, 1, 0, 2, 2),
-       (40, 20, 3, 2, 4, 4, 0),
-       (41, 1, 3, 4, 1, 0, 1),
-       (42, 2, 3, 5, 0, 3, 2),
-       (43, 3, 3, 6, 0, 0, 0),
-       (44, 4, 3, 7, 2, 1, 1),
-       (45, 5, 3, 8, 0, 1, 2),
-       (46, 6, 3, 9, 1, 1, 0),
-       (47, 7, 3, 10, 3, 2, 1),
-       (48, 8, 3, 11, 0, 2, 2),
-       (49, 9, 3, 12, 2, 2, 0),
-       (50, 10, 3, 13, 1, 0, 1),
-       (51, 11, 3, 14, 2, 3, 2),
-       (52, 12, 3, 15, 3, 3, 0),
-       (53, 13, 3, 16, 2, 1, 1),
-       (54, 14, 3, 17, 0, 1, 2),
-       (55, 15, 3, 18, 4, 4, 0),
-       (56, 16, 3, 19, 3, 2, 1),
-       (57, 17, 3, 20, 0, 2, 2),
-       (58, 18, 4, 1, 0, 0, 0),
-       (59, 19, 4, 2, 1, 0, 1),
-       (60, 20, 4, 3, 1, 3, 2),
-       (61, 1, 4, 5, 1, 1, 0),
-       (62, 2, 4, 6, 2, 1, 1),
-       (63, 3, 4, 7, 0, 1, 2),
-       (64, 4, 4, 8, 2, 2, 0),
-       (65, 5, 4, 9, 3, 1, 1),
-       (66, 6, 4, 10, 0, 2, 2),
-       (67, 7, 4, 11, 3, 3, 0),
-       (68, 8, 4, 12, 1, 0, 1),
-       (69, 9, 4, 13, 2, 3, 2),
-       (70, 10, 4, 14, 4, 4, 0),
-       (71, 11, 4, 15, 2, 1, 1),
-       (72, 12, 4, 16, 0, 1, 2),
-       (73, 13, 4, 17, 0, 0, 0),
-       (74, 14, 4, 18, 3, 1, 1),
-       (75, 15, 4, 19, 0, 2, 2),
-       (76, 16, 4, 20, 1, 1, 0),
-       (77, 17, 5, 1, 1, 0, 1),
-       (78, 18, 5, 2, 0, 3, 2),
-       (79, 19, 5, 3, 2, 2, 0),
-       (80, 20, 5, 4, 2, 1, 1),
-       (81, 1, 5, 6, 0, 1, 2),
-       (82, 2, 5, 7, 3, 3, 0),
-       (83, 3, 5, 8, 3, 1, 1),
-       (84, 4, 5, 9, 4, 4, 0),
-       (85, 5, 5, 10, 1, 0, 1),
-       (86, 6, 5, 11, 1, 2, 2),
-       (87, 7, 5, 12, 0, 0, 0),
-       (88, 8, 5, 13, 2, 1, 1),
-       (89, 9, 5, 14, 0, 3, 2),
-       (90, 10, 5, 15, 1, 1, 0),
-       (91, 11, 5, 16, 3, 1, 1),
-       (92, 12, 5, 17, 0, 1, 2),
-       (93, 13, 5, 18, 2, 2, 0),
-       (94, 14, 5, 19, 4, 0, 1),
-       (95, 15, 5, 20, 1, 2, 2),
-       (96, 16, 6, 1, 3, 3, 0),
-       (97, 17, 6, 2, 2, 1, 1),
-       (98, 18, 6, 3, 1, 3, 2),
-       (99, 19, 6, 4, 4, 4, 0),
-       (100, 20, 6, 5, 3, 2, 1),
-       (101, 1, 6, 7, 0, 1, 2),
-       (102, 2, 6, 8, 0, 0, 0),
-       (103, 3, 6, 9, 1, 0, 1),
-       (104, 4, 6, 10, 0, 2, 2),
-       (105, 5, 6, 11, 1, 1, 0),
-       (106, 6, 6, 12, 2, 1, 1),
-       (107, 7, 6, 13, 2, 3, 2),
-       (108, 8, 6, 14, 2, 2, 0),
-       (109, 9, 6, 15, 3, 2, 1),
-       (110, 10, 6, 16, 0, 1, 2),
-       (111, 11, 6, 17, 3, 3, 0),
-       (112, 12, 6, 18, 1, 0, 1),
-       (113, 13, 6, 19, 1, 2, 2),
-       (114, 14, 6, 20, 4, 4, 0),
-       (115, 15, 7, 1, 2, 1, 1),
-       (116, 16, 7, 2, 1, 3, 2),
-       (117, 17, 7, 3, 0, 0, 0),
-       (118, 18, 7, 4, 3, 1, 1),
-       (119, 19, 7, 5, 0, 1, 2),
-       (120, 20, 7, 6, 1, 1, 0),
-       (121, 1, 7, 8, 1, 0, 1),
-       (122, 2, 7, 9, 0, 2, 2),
-       (123, 3, 7, 10, 2, 2, 0),
-       (124, 4, 7, 11, 2, 1, 1),
-       (125, 5, 7, 12, 2, 3, 2),
-       (126, 6, 7, 13, 3, 3, 0),
-       (127, 7, 7, 14, 3, 0, 1),
-       (128, 8, 7, 15, 0, 1, 2),
-       (129, 9, 7, 16, 4, 4, 0),
-       (130, 10, 7, 17, 1, 0, 1),
-       (131, 11, 7, 18, 0, 2, 2),
-       (132, 12, 7, 19, 0, 0, 0),
-       (133, 13, 7, 20, 2, 1, 1),
-       (134, 14, 8, 1, 1, 3, 2),
-       (135, 15, 8, 2, 1, 1, 0),
-       (136, 16, 8, 3, 3, 1, 1),
-       (137, 17, 8, 4, 0, 1, 2),
-       (138, 18, 8, 5, 2, 2, 0),
-       (139, 19, 8, 6, 1, 0, 1),
-       (140, 20, 8, 7, 0, 2, 2),
-       (141, 1, 8, 9, 3, 3, 0),
-       (142, 2, 8, 10, 2, 0, 1),
-       (143, 3, 8, 11, 1, 3, 2),
-       (144, 4, 8, 12, 4, 4, 0),
-       (145, 5, 8, 13, 3, 1, 1),
-       (146, 6, 8, 14, 0, 1, 2),
-       (147, 7, 8, 15, 0, 0, 0),
-       (148, 8, 8, 16, 1, 0, 1),
-       (149, 9, 8, 17, 1, 2, 2),
-       (150, 10, 8, 18, 1, 1, 0),
-       (151, 11, 8, 19, 2, 0, 1),
-       (152, 12, 8, 20, 0, 3, 2),
-       (153, 13, 9, 1, 2, 2, 0),
-       (154, 14, 9, 2, 3, 1, 1),
-       (155, 15, 9, 3, 0, 1, 2),
-       (156, 16, 9, 4, 3, 3, 0),
-       (157, 17, 9, 5, 1, 0, 1),
-       (158, 18, 9, 6, 1, 2, 2),
-       (159, 19, 9, 7, 4, 4, 0),
-       (160, 20, 9, 8, 2, 1, 1),
-       (161, 1, 9, 10, 2, 3, 2),
-       (162, 2, 9, 11, 0, 0, 0),
-       (163, 3, 9, 12, 3, 1, 1),
-       (164, 4, 9, 13, 0, 1, 2),
-       (165, 5, 9, 14, 1, 1, 0),
-       (166, 6, 9, 15, 1, 0, 1),
-       (167, 7, 9, 16, 1, 2, 2),
-       (168, 8, 9, 17, 2, 2, 0),
-       (169, 9, 9, 18, 2, 0, 1),
-       (170, 10, 9, 19, 2, 3, 2),
-       (171, 11, 9, 20, 3, 3, 0),
-       (172, 12, 10, 1, 3, 2, 1),
-       (173, 13, 10, 2, 1, 1, 2),
-       (174, 14, 10, 3, 0, 2, 2),
-       (175, 15, 10, 4, 1, 3, 2),
-       (176, 16, 10, 5, 1, 1, 1),
-       (177, 17, 10, 6, 2, 0, 1),
-       (178, 18, 10, 7, 3, 2, 1),
-       (179, 19, 10, 8, 2, 2, 0),
-       (180, 20, 10, 9, 3, 3, 0),
-       (181, 1, 10, 11, 1, 1, 0),
-       (182, 2, 10, 12, 2, 1, 2),
-       (183, 3, 10, 13, 3, 2, 2),
-       (184, 4, 10, 14, 0, 3, 2),
-       (185, 5, 10, 15, 2, 2, 0),
-       (186, 6, 10, 16, 3, 3, 0),
-       (187, 7, 10, 17, 1, 1, 0),
-       (188, 8, 10, 18, 1, 0, 1),
-       (189, 9, 10, 19, 2, 1, 1),
-       (190, 10, 10, 20, 3, 2, 1),
-       (191, 11, 11, 1, 0, 4, 2),
-       (192, 12, 11, 2, 2, 2, 0),
-       (193, 13, 11, 3, 3, 1, 1),
-       (194, 14, 11, 4, 2, 3, 2),
-       (195, 15, 11, 5, 2, 1, 1),
-       (196, 16, 11, 6, 3, 3, 0),
-       (197, 17, 11, 7, 2, 1, 2),
-       (198, 18, 11, 8, 1, 0, 1),
-       (199, 19, 11, 9, 1, 1, 0),
-       (200, 20, 11, 10, 3, 2, 1),
-       (201, 1, 11, 12, 0, 2, 2),
-       (202, 2, 11, 13, 2, 2, 0),
-       (203, 3, 11, 14, 1, 0, 1),
-       (204, 4, 11, 15, 2, 4, 2),
-       (205, 5, 11, 16, 2, 1, 1),
-       (206, 6, 11, 17, 3, 3, 0),
-       (207, 7, 11, 18, 1, 3, 2),
-       (208, 8, 11, 19, 3, 1, 1),
-       (209, 9, 11, 20, 1, 1, 0),
-       (210, 10, 12, 1, 0, 2, 2),
-       (211, 11, 12, 2, 1, 0, 1),
-       (212, 12, 12, 3, 2, 2, 0),
-       (213, 13, 12, 4, 2, 4, 2),
-       (214, 14, 12, 5, 2, 1, 1),
-       (215, 15, 12, 6, 3, 3, 0),
-       (216, 16, 12, 7, 1, 2, 2),
-       (217, 17, 12, 8, 3, 1, 1),
-       (218, 18, 12, 9, 1, 1, 0),
-       (219, 19, 12, 10, 0, 2, 2),
-       (220, 20, 12, 11, 1, 0, 1),
-       (221, 1, 12, 13, 2, 2, 0),
-       (222, 2, 12, 14, 2, 3, 2),
-       (223, 3, 12, 15, 2, 1, 1),
-       (224, 4, 12, 16, 3, 3, 0),
-       (225, 5, 12, 17, 0, 2, 2),
-       (226, 6, 12, 18, 3, 1, 1),
-       (227, 7, 12, 19, 1, 1, 0),
-       (228, 8, 12, 20, 1, 3, 2),
-       (229, 9, 13, 1, 1, 0, 1),
-       (230, 10, 13, 2, 2, 2, 0),
-       (231, 11, 13, 3, 2, 3, 2),
-       (232, 12, 13, 4, 2, 0, 1),
-       (233, 13, 13, 5, 3, 3, 0),
-       (234, 14, 13, 6, 0, 1, 2),
-       (235, 15, 13, 7, 3, 2, 1),
-       (236, 16, 13, 8, 1, 1, 0),
-       (237, 17, 13, 9, 1, 2, 2),
-       (238, 18, 13, 10, 1, 0, 1),
-       (239, 19, 13, 11, 2, 2, 0),
-       (240, 20, 13, 12, 2, 3, 2),
-       (241, 1, 13, 14, 2, 1, 1),
-       (242, 2, 13, 15, 3, 3, 0),
-       (243, 3, 13, 16, 0, 2, 2),
-       (244, 4, 13, 17, 3, 2, 1),
-       (245, 5, 13, 18, 1, 1, 0),
-       (246, 6, 13, 19, 1, 3, 2),
-       (247, 7, 13, 20, 1, 0, 1),
-       (248, 8, 14, 1, 2, 2, 0),
-       (249, 9, 14, 2, 0, 1, 2),
-       (250, 10, 14, 3, 2, 1, 1),
-       (251, 11, 14, 4, 3, 3, 0),
-       (252, 12, 14, 5, 1, 2, 2),
-       (253, 13, 14, 6, 3, 2, 1),
-       (254, 14, 14, 7, 4, 4, 0),
-       (255, 15, 14, 8, 2, 3, 2),
-       (256, 16, 14, 9, 4, 3, 1),
-       (257, 17, 14, 10, 0, 0, 0),
-       (258, 18, 14, 11, 3, 4, 2),
-       (259, 19, 14, 12, 1, 0, 1),
-       (260, 20, 14, 13, 1, 1, 0),
-       (261, 1, 14, 15, 0, 1, 2),
-       (262, 2, 14, 16, 2, 1, 1),
-       (263, 3, 14, 17, 2, 2, 0),
-       (264, 4, 14, 18, 1, 2, 2),
-       (265, 5, 14, 19, 3, 2, 1),
-       (266, 6, 14, 20, 3, 3, 0),
-       (267, 7, 15, 1, 2, 3, 2),
-       (268, 8, 15, 2, 4, 3, 1),
-       (269, 9, 15, 3, 4, 4, 0),
-       (270, 10, 15, 4, 3, 4, 2),
-       (271, 11, 15, 5, 1, 0, 1),
-       (272, 12, 15, 6, 0, 0, 0),
-       (273, 13, 15, 7, 0, 1, 2),
-       (274, 14, 15, 8, 2, 1, 1),
-       (275, 15, 15, 9, 1, 1, 0),
-       (276, 16, 15, 10, 1, 2, 2),
-       (277, 17, 15, 11, 3, 2, 1),
-       (278, 18, 15, 12, 2, 2, 0),
-       (279, 19, 15, 13, 2, 3, 2),
-       (280, 20, 15, 14, 4, 3, 1),
-       (281, 1, 15, 16, 3, 3, 0),
-       (282, 2, 15, 17, 3, 4, 2),
-       (283, 3, 15, 18, 1, 0, 1),
-       (284, 4, 15, 19, 4, 4, 0),
-       (285, 5, 15, 20, 0, 1, 2),
-       (286, 6, 16, 1, 2, 1, 1),
-       (287, 7, 16, 2, 0, 0, 0),
-       (288, 8, 16, 3, 1, 2, 2),
-       (289, 9, 16, 4, 3, 2, 1),
-       (290, 10, 16, 5, 1, 1, 0),
-       (291, 11, 16, 6, 2, 3, 2),
-       (292, 12, 16, 7, 4, 3, 1),
-       (293, 13, 16, 8, 2, 2, 0),
-       (294, 14, 16, 9, 3, 4, 2),
-       (295, 15, 16, 10, 1, 0, 1),
-       (296, 16, 16, 11, 3, 3, 0),
-       (297, 17, 16, 12, 0, 1, 2),
-       (298, 18, 16, 13, 2, 1, 1),
-       (299, 19, 16, 14, 4, 4, 0),
-       (300, 20, 16, 15, 1, 2, 2),
-       (301, 1, 16, 17, 3, 2, 1),
-       (302, 2, 16, 18, 0, 0, 0),
-       (303, 3, 16, 19, 2, 3, 2),
-       (304, 4, 16, 20, 4, 3, 1),
-       (305, 5, 17, 1, 1, 1, 0),
-       (306, 6, 17, 2, 3, 4, 2),
-       (307, 7, 17, 3, 1, 0, 1),
-       (308, 8, 17, 4, 2, 2, 0),
-       (309, 9, 17, 5, 0, 1, 2),
-       (310, 10, 17, 6, 2, 1, 1),
-       (311, 11, 17, 7, 3, 3, 0),
-       (312, 12, 17, 8, 1, 2, 2),
-       (313, 13, 17, 9, 3, 2, 1),
-       (314, 14, 17, 10, 4, 4, 0),
-       (315, 15, 17, 11, 2, 3, 2),
-       (316, 16, 17, 12, 4, 3, 1),
-       (317, 17, 17, 13, 0, 0, 0),
-       (318, 18, 17, 14, 3, 4, 2),
-       (319, 19, 17, 15, 1, 0, 1),
-       (320, 20, 17, 16, 1, 1, 0),
-       (321, 1, 17, 18, 0, 1, 2),
-       (322, 2, 17, 19, 2, 1, 1),
-       (323, 3, 17, 20, 2, 2, 0),
-       (324, 4, 18, 1, 1, 2, 2),
-       (325, 5, 18, 2, 3, 2, 1),
-       (326, 6, 18, 3, 3, 3, 0),
-       (327, 7, 18, 4, 2, 3, 2),
-       (328, 8, 18, 5, 4, 3, 1),
-       (329, 9, 18, 6, 4, 4, 0),
-       (330, 10, 18, 7, 3, 4, 2),
-       (331, 11, 18, 8, 1, 0, 1),
-       (332, 12, 18, 9, 0, 0, 0),
-       (333, 13, 18, 10, 0, 1, 2),
-       (334, 14, 18, 11, 2, 1, 1),
-       (335, 15, 18, 12, 1, 1, 0),
-       (336, 16, 18, 13, 1, 2, 2),
-       (337, 17, 18, 14, 3, 2, 1),
-       (338, 18, 18, 15, 2, 2, 0),
-       (339, 19, 18, 16, 2, 3, 2),
-       (340, 20, 18, 17, 4, 3, 1),
-       (341, 1, 18, 19, 3, 3, 0),
-       (342, 2, 18, 20, 3, 4, 2),
-       (343, 3, 19, 1, 1, 0, 1),
-       (344, 4, 19, 2, 4, 4, 0),
-       (345, 5, 19, 3, 0, 1, 2),
-       (346, 6, 19, 4, 2, 1, 1),
-       (347, 7, 19, 5, 0, 0, 0),
-       (348, 8, 19, 6, 1, 2, 2),
-       (349, 9, 19, 7, 3, 2, 1),
-       (350, 10, 19, 8, 1, 1, 0),
-       (351, 11, 19, 9, 2, 3, 2),
-       (352, 13, 19, 10, 1, 3, 1),
-       (353, 14, 19, 11, 2, 2, 0),
-       (354, 15, 19, 12, 3, 4, 2),
-       (355, 16, 19, 13, 4, 0, 1),
-       (356, 17, 19, 14, 3, 3, 0),
-       (357, 18, 19, 15, 0, 1, 2),
-       (358, 19, 19, 16, 1, 1, 1),
-       (359, 20, 19, 17, 4, 4, 0),
-       (360, 1, 19, 18, 1, 2, 2),
-       (361, 2, 19, 20, 2, 1, 1),
-       (362, 3, 20, 1, 0, 0, 0),
-       (363, 4, 20, 2, 2, 3, 2),
-       (364, 5, 20, 3, 3, 2, 1),
-       (365, 6, 20, 4, 1, 1, 0),
-       (366, 7, 20, 5, 3, 4, 2),
-       (367, 8, 20, 6, 4, 3, 1),
-       (368, 9, 20, 7, 2, 2, 0),
-       (369, 10, 20, 8, 0, 1, 2),
-       (370, 11, 20, 9, 1, 0, 1),
-       (371, 12, 20, 10, 3, 3, 0),
-       (372, 13, 20, 11, 1, 2, 2),
-       (373, 14, 20, 12, 2, 1, 1),
-       (374, 15, 20, 13, 4, 4, 0),
-       (375, 16, 20, 14, 2, 3, 2),
-       (376, 17, 20, 15, 3, 2, 1),
-       (377, 18, 20, 16, 0, 0, 0),
-       (378, 19, 20, 17, 3, 4, 2),
-       (379, 20, 20, 18, 4, 1, 1),
-       (380, 1, 20, 19, 1, 1, 0),
-       (381, 2, 21, 22, 1, 0, 1),
-       (382, 3, 21, 23, 0, 1, 2),
-       (383, 4, 21, 24, 2, 2, 0),
-       (384, 5, 21, 25, 2, 1, 1),
-       (385, 6, 21, 26, 1, 2, 2),
-       (386, 7, 21, 27, 3, 3, 0),
-       (387, 8, 21, 28, 3, 2, 1),
-       (388, 9, 21, 29, 2, 3, 2),
-       (389, 10, 21, 30, 4, 4, 0),
-       (390, 11, 21, 31, 4, 3, 1),
-       (391, 12, 21, 32, 3, 4, 2),
-       (392, 13, 21, 33, 0, 0, 0),
-       (393, 14, 21, 34, 1, 0, 1),
-       (394, 15, 21, 35, 0, 1, 2),
-       (395, 16, 21, 36, 1, 1, 0),
-       (396, 17, 21, 37, 2, 1, 1),
-       (397, 18, 21, 38, 1, 2, 2),
-       (398, 19, 21, 39, 2, 2, 0),
-       (399, 20, 21, 40, 3, 2, 1),
-       (400, 1, 22, 21, 2, 3, 2),
-       (401, 2, 22, 23, 3, 3, 0),
-       (402, 3, 22, 24, 4, 3, 1),
-       (403, 4, 22, 25, 3, 4, 2),
-       (404, 5, 22, 26, 4, 4, 0),
-       (405, 6, 22, 27, 1, 0, 1),
-       (406, 7, 22, 28, 0, 1, 2),
-       (407, 8, 22, 29, 0, 0, 0),
-       (408, 9, 22, 30, 2, 1, 1),
-       (409, 10, 22, 31, 1, 2, 2),
-       (410, 11, 22, 32, 1, 1, 0),
-       (411, 12, 22, 33, 3, 2, 1),
-       (412, 13, 22, 34, 2, 3, 2),
-       (413, 14, 22, 35, 2, 2, 0),
-       (414, 15, 22, 36, 4, 3, 1),
-       (415, 16, 22, 37, 3, 4, 2),
-       (416, 17, 22, 38, 3, 3, 0),
-       (417, 18, 22, 39, 1, 0, 1),
-       (418, 19, 22, 40, 0, 1, 2),
-       (419, 20, 23, 21, 4, 4, 0),
-       (420, 1, 23, 22, 2, 1, 1),
-       (421, 2, 23, 24, 1, 2, 2),
-       (422, 3, 23, 25, 0, 0, 0),
-       (423, 4, 23, 26, 3, 2, 1),
-       (424, 5, 23, 27, 2, 3, 2),
-       (425, 6, 23, 28, 1, 1, 0),
-       (426, 7, 23, 29, 4, 3, 1),
-       (427, 8, 23, 30, 3, 4, 2),
-       (428, 9, 23, 31, 2, 2, 0),
-       (429, 10, 23, 32, 1, 0, 1),
-       (430, 11, 23, 33, 0, 1, 2),
-       (431, 12, 23, 34, 3, 3, 0),
-       (432, 13, 23, 35, 2, 1, 1),
-       (433, 14, 23, 36, 1, 2, 2),
-       (434, 15, 23, 37, 4, 4, 0),
-       (435, 16, 23, 38, 3, 2, 1),
-       (436, 17, 23, 39, 2, 3, 2),
-       (437, 18, 23, 40, 0, 0, 0),
-       (438, 19, 24, 21, 4, 3, 1),
-       (439, 20, 24, 22, 3, 4, 2),
-       (440, 1, 24, 23, 1, 1, 0),
-       (441, 2, 24, 25, 1, 0, 1),
-       (442, 3, 24, 26, 0, 1, 2),
-       (443, 4, 24, 27, 2, 2, 0),
-       (444, 5, 24, 28, 2, 1, 1),
-       (445, 6, 24, 29, 1, 2, 2),
-       (446, 7, 24, 30, 3, 3, 0),
-       (447, 8, 24, 31, 3, 2, 1),
-       (448, 9, 24, 32, 2, 3, 2),
-       (449, 10, 24, 33, 4, 4, 0),
-       (450, 11, 24, 34, 4, 3, 1),
-       (451, 12, 24, 35, 3, 4, 2),
-       (452, 13, 24, 36, 0, 0, 0),
-       (453, 14, 24, 37, 1, 0, 1),
-       (454, 15, 24, 38, 0, 1, 2),
-       (455, 16, 24, 39, 1, 1, 0),
-       (456, 17, 24, 40, 2, 1, 1),
-       (457, 18, 25, 21, 1, 2, 2),
-       (458, 19, 25, 22, 2, 2, 0),
-       (459, 20, 25, 23, 3, 2, 1),
-       (460, 1, 25, 24, 2, 3, 2),
-       (461, 2, 25, 26, 3, 3, 0),
-       (462, 3, 25, 27, 4, 3, 1),
-       (463, 4, 25, 28, 3, 4, 2),
-       (464, 5, 25, 29, 4, 4, 0),
-       (465, 6, 25, 30, 1, 0, 1),
-       (466, 7, 25, 31, 0, 1, 2),
-       (467, 8, 25, 32, 0, 0, 0),
-       (468, 9, 25, 33, 2, 1, 1),
-       (469, 10, 25, 34, 1, 2, 2),
-       (470, 11, 25, 35, 1, 1, 0),
-       (471, 12, 25, 36, 3, 2, 1),
-       (472, 13, 25, 37, 2, 3, 2),
-       (473, 14, 25, 38, 2, 2, 0),
-       (474, 15, 25, 39, 4, 3, 1),
-       (475, 16, 25, 40, 3, 4, 2),
-       (476, 17, 26, 21, 3, 3, 0),
-       (477, 18, 26, 22, 1, 0, 1),
-       (478, 19, 26, 23, 0, 1, 2),
-       (479, 20, 26, 24, 4, 4, 0),
-       (480, 1, 26, 25, 2, 1, 1),
-       (481, 2, 26, 27, 1, 2, 2),
-       (482, 3, 26, 28, 0, 0, 0),
-       (483, 4, 26, 29, 3, 2, 1),
-       (484, 5, 26, 30, 2, 3, 2),
-       (485, 6, 26, 31, 1, 1, 0),
-       (486, 7, 26, 32, 4, 3, 1),
-       (487, 8, 26, 33, 3, 4, 2),
-       (488, 9, 26, 34, 2, 2, 0),
-       (489, 10, 26, 35, 1, 0, 1),
-       (490, 11, 26, 36, 0, 1, 2),
-       (491, 12, 26, 37, 3, 3, 0),
-       (492, 13, 26, 38, 2, 1, 1),
-       (493, 14, 26, 39, 1, 2, 2),
-       (494, 15, 26, 40, 4, 4, 0),
-       (495, 16, 27, 21, 3, 2, 1),
-       (496, 17, 27, 22, 2, 3, 2),
-       (497, 18, 27, 23, 0, 0, 0),
-       (498, 19, 27, 24, 4, 3, 1),
-       (499, 20, 27, 25, 3, 4, 2),
-       (500, 1, 27, 26, 1, 1, 0),
-       (501, 2, 27, 28, 1, 0, 1),
-       (502, 3, 27, 29, 0, 1, 2),
-       (503, 4, 27, 30, 2, 2, 0),
-       (504, 5, 27, 31, 2, 1, 1),
-       (505, 6, 27, 32, 1, 2, 2),
-       (506, 7, 27, 33, 3, 3, 0),
-       (507, 8, 27, 34, 3, 2, 1),
-       (508, 9, 27, 35, 2, 3, 2),
-       (509, 10, 27, 36, 4, 4, 0),
-       (510, 11, 27, 37, 4, 3, 1),
-       (511, 12, 27, 38, 0, 0, 0),
-       (512, 13, 27, 39, 3, 4, 2),
-       (513, 14, 27, 40, 1, 1, 0),
-       (514, 15, 28, 21, 0, 1, 2),
-       (515, 16, 28, 22, 1, 0, 1),
-       (516, 17, 28, 23, 3, 2, 2),
-       (517, 18, 28, 24, 1, 3, 2),
-       (518, 19, 28, 25, 2, 2, 0),
-       (519, 20, 28, 26, 2, 1, 1),
-       (520, 1, 28, 27, 2, 4, 2),
-       (521, 2, 28, 29, 3, 3, 0),
-       (522, 3, 28, 30, 3, 2, 1),
-       (523, 4, 28, 31, 3, 1, 2),
-       (524, 5, 28, 32, 4, 4, 0),
-       (525, 6, 28, 33, 4, 3, 1),
-       (526, 7, 28, 34, 1, 2, 2),
-       (527, 8, 28, 35, 0, 0, 0),
-       (528, 9, 28, 36, 1, 0, 1),
-       (529, 10, 28, 37, 2, 3, 2),
-       (530, 11, 28, 38, 1, 1, 0),
-       (531, 12, 28, 39, 2, 1, 1),
-       (532, 13, 28, 40, 3, 4, 2),
-       (533, 14, 29, 21, 2, 2, 0),
-       (534, 15, 29, 22, 3, 2, 1),
-       (535, 16, 29, 23, 0, 1, 2),
-       (536, 17, 29, 24, 3, 3, 0),
-       (537, 18, 29, 25, 4, 3, 1),
-       (538, 19, 29, 26, 1, 2, 2),
-       (539, 20, 29, 27, 4, 4, 0),
-       (540, 1, 29, 28, 1, 0, 1),
-       (541, 2, 29, 30, 2, 3, 2),
-       (542, 3, 29, 31, 0, 0, 0),
-       (543, 4, 29, 32, 2, 1, 1),
-       (544, 5, 29, 33, 3, 4, 2),
-       (545, 6, 29, 34, 1, 1, 0),
-       (546, 7, 29, 35, 3, 2, 1),
-       (547, 8, 29, 36, 0, 1, 2),
-       (548, 9, 29, 37, 2, 2, 0),
-       (549, 10, 29, 38, 4, 3, 1),
-       (550, 11, 29, 39, 1, 2, 2),
-       (551, 12, 29, 40, 3, 3, 0),
-       (552, 13, 30, 21, 1, 0, 1),
-       (553, 14, 30, 22, 2, 3, 2),
-       (554, 15, 30, 23, 4, 4, 0),
-       (555, 16, 30, 24, 2, 1, 1),
-       (556, 17, 30, 25, 3, 4, 2),
-       (557, 18, 30, 26, 0, 0, 0),
-       (558, 19, 30, 27, 3, 2, 1),
-       (559, 20, 30, 28, 0, 1, 2),
-       (560, 1, 30, 29, 1, 1, 0),
-       (561, 2, 30, 31, 4, 3, 1),
-       (562, 3, 30, 32, 1, 2, 2),
-       (563, 4, 30, 33, 2, 2, 0),
-       (564, 5, 30, 34, 1, 0, 1),
-       (565, 6, 30, 35, 2, 3, 2),
-       (566, 7, 30, 36, 3, 3, 0),
-       (567, 8, 30, 37, 2, 1, 1),
-       (568, 9, 30, 38, 3, 4, 2),
-       (569, 10, 30, 39, 4, 4, 0),
-       (570, 11, 30, 40, 3, 2, 1),
-       (571, 12, 31, 21, 0, 1, 2),
-       (572, 13, 31, 22, 0, 0, 0),
-       (573, 14, 31, 23, 4, 3, 1),
-       (574, 15, 31, 24, 1, 2, 2),
-       (575, 16, 31, 25, 1, 1, 0),
-       (576, 17, 31, 26, 1, 0, 1),
-       (577, 18, 31, 27, 2, 3, 2),
-       (578, 19, 31, 28, 2, 2, 0),
-       (579, 20, 31, 29, 2, 1, 1),
-       (580, 1, 31, 30, 3, 4, 2),
-       (581, 2, 31, 32, 3, 3, 0),
-       (582, 3, 31, 33, 3, 2, 1),
-       (583, 4, 31, 34, 1, 1, 2),
-       (584, 5, 31, 35, 4, 4, 0),
-       (585, 6, 31, 36, 4, 3, 1),
-       (586, 7, 31, 37, 0, 2, 2),
-       (587, 8, 31, 38, 0, 0, 0),
-       (588, 9, 31, 39, 1, 0, 1),
-       (589, 10, 31, 40, 2, 3, 2),
-       (590, 11, 32, 21, 1, 1, 0),
-       (591, 12, 32, 22, 2, 1, 1),
-       (592, 13, 32, 23, 3, 4, 2),
-       (593, 14, 32, 24, 2, 2, 0),
-       (594, 15, 32, 25, 3, 2, 1),
-       (595, 16, 32, 26, 0, 1, 2),
-       (596, 17, 32, 27, 3, 3, 0),
-       (597, 18, 32, 28, 4, 3, 1),
-       (598, 19, 32, 29, 1, 2, 2),
-       (599, 20, 32, 30, 4, 4, 0),
-       (600, 1, 32, 31, 1, 0, 1),
-       (601, 2, 32, 33, 2, 3, 2),
-       (602, 3, 32, 34, 0, 0, 0),
-       (603, 4, 32, 35, 2, 1, 1),
-       (604, 5, 32, 36, 3, 4, 2),
-       (605, 6, 32, 37, 1, 1, 0),
-       (606, 7, 32, 38, 3, 2, 1),
-       (607, 8, 32, 39, 0, 1, 2),
-       (608, 9, 32, 40, 2, 2, 0),
-       (609, 10, 33, 21, 4, 3, 1),
-       (610, 11, 33, 22, 1, 2, 2),
-       (611, 12, 33, 23, 3, 3, 0),
-       (612, 13, 33, 24, 1, 0, 1),
-       (613, 14, 33, 25, 2, 3, 2),
-       (614, 15, 33, 26, 4, 4, 0),
-       (615, 16, 33, 27, 2, 1, 1),
-       (616, 17, 33, 28, 3, 4, 2),
-       (617, 18, 33, 29, 0, 0, 0),
-       (618, 19, 33, 30, 3, 2, 1),
-       (619, 20, 33, 31, 0, 1, 2),
-       (620, 1, 33, 32, 1, 1, 0),
-       (621, 2, 33, 34, 4, 3, 1),
-       (622, 3, 33, 35, 1, 2, 2),
-       (623, 4, 33, 36, 2, 2, 0),
-       (624, 5, 33, 37, 1, 0, 1),
-       (625, 6, 33, 38, 2, 3, 2),
-       (626, 7, 33, 39, 3, 3, 0),
-       (627, 8, 33, 40, 2, 1, 1),
-       (628, 9, 34, 21, 3, 4, 2),
-       (629, 10, 34, 22, 4, 4, 0),
-       (630, 11, 34, 23, 3, 2, 1),
-       (631, 12, 34, 24, 0, 1, 2),
-       (632, 13, 34, 25, 0, 0, 0),
-       (633, 14, 34, 26, 4, 3, 1),
-       (634, 15, 34, 27, 1, 2, 2),
-       (635, 16, 34, 28, 1, 1, 0),
-       (636, 17, 34, 29, 1, 0, 1),
-       (637, 18, 34, 30, 2, 3, 2),
-       (638, 19, 34, 31, 2, 2, 0),
-       (639, 20, 34, 32, 2, 1, 1),
-       (640, 1, 34, 33, 3, 4, 2),
-       (641, 2, 34, 35, 3, 3, 0),
-       (642, 3, 34, 36, 3, 2, 1),
-       (643, 4, 34, 37, 0, 1, 2),
-       (644, 5, 34, 38, 4, 4, 0),
-       (645, 7, 34, 39, 4, 3, 1),
-       (646, 8, 34, 40, 1, 2, 2),
-       (647, 9, 35, 21, 0, 0, 0),
-       (648, 10, 35, 22, 1, 0, 1),
-       (649, 11, 35, 23, 2, 3, 2),
-       (650, 12, 35, 24, 1, 1, 0),
-       (651, 13, 35, 25, 2, 1, 1),
-       (652, 14, 35, 26, 3, 4, 2),
-       (653, 15, 35, 27, 2, 2, 0),
-       (654, 16, 35, 28, 3, 2, 1),
-       (655, 17, 35, 29, 0, 1, 2),
-       (656, 18, 35, 30, 3, 3, 0),
-       (657, 19, 35, 31, 4, 3, 1),
-       (658, 20, 35, 32, 1, 2, 2),
-       (659, 1, 35, 33, 4, 4, 0),
-       (660, 2, 35, 34, 1, 0, 1),
-       (661, 3, 35, 36, 2, 3, 2),
-       (662, 4, 35, 37, 0, 0, 0),
-       (663, 5, 35, 38, 2, 1, 1),
-       (664, 6, 35, 39, 3, 4, 2),
-       (665, 7, 35, 40, 1, 1, 0),
-       (666, 8, 36, 21, 3, 2, 1),
-       (667, 9, 36, 22, 0, 1, 2),
-       (668, 10, 36, 23, 2, 2, 0),
-       (669, 11, 36, 24, 4, 3, 1),
-       (670, 12, 36, 25, 1, 2, 2),
-       (671, 13, 36, 26, 3, 3, 0),
-       (672, 14, 36, 27, 1, 0, 1),
-       (673, 15, 36, 28, 2, 3, 2),
-       (674, 16, 36, 29, 4, 4, 0),
-       (675, 17, 36, 30, 2, 1, 1),
-       (676, 18, 36, 31, 3, 4, 2),
-       (677, 19, 36, 32, 0, 0, 0),
-       (678, 20, 36, 33, 3, 2, 1),
-       (679, 1, 36, 34, 0, 1, 2),
-       (680, 2, 36, 35, 1, 1, 0),
-       (681, 3, 36, 37, 4, 3, 1),
-       (682, 4, 36, 38, 1, 2, 2),
-       (683, 5, 36, 39, 2, 2, 0),
-       (684, 6, 36, 40, 1, 0, 1),
-       (685, 7, 37, 21, 2, 3, 2),
-       (686, 8, 37, 22, 3, 3, 0),
-       (687, 9, 37, 23, 2, 1, 1),
-       (688, 10, 37, 24, 3, 4, 2),
-       (689, 11, 37, 25, 4, 4, 0),
-       (690, 12, 37, 26, 3, 2, 1),
-       (691, 13, 37, 27, 0, 1, 2),
-       (692, 14, 37, 28, 0, 0, 0),
-       (693, 15, 37, 29, 4, 3, 1),
-       (694, 16, 37, 30, 1, 2, 2),
-       (695, 17, 37, 31, 1, 1, 0),
-       (696, 18, 37, 32, 1, 0, 1),
-       (697, 19, 37, 33, 2, 3, 2),
-       (698, 20, 37, 34, 2, 2, 0),
-       (699, 1, 37, 35, 2, 1, 1),
-       (700, 2, 37, 36, 3, 4, 2),
-       (701, 3, 37, 38, 3, 3, 0),
-       (702, 4, 37, 39, 3, 2, 1),
-       (703, 5, 37, 40, 0, 1, 2),
-       (704, 6, 38, 21, 4, 4, 0),
-       (705, 7, 38, 22, 4, 3, 1),
-       (706, 8, 38, 23, 1, 2, 2),
-       (707, 9, 38, 24, 0, 0, 0),
-       (708, 10, 38, 25, 1, 0, 1),
-       (709, 11, 38, 26, 2, 3, 2),
-       (710, 12, 38, 27, 1, 1, 0),
-       (711, 13, 38, 28, 2, 1, 1),
-       (712, 14, 38, 29, 3, 4, 2),
-       (713, 15, 38, 30, 2, 2, 0),
-       (714, 16, 38, 31, 0, 1, 2),
-       (715, 17, 38, 32, 3, 3, 0),
-       (716, 18, 38, 33, 3, 2, 1),
-       (717, 19, 38, 34, 1, 2, 2),
-       (718, 20, 38, 35, 4, 4, 0),
-       (719, 1, 38, 36, 4, 3, 1),
-       (720, 2, 38, 37, 2, 3, 2),
-       (721, 3, 38, 39, 0, 0, 0),
-       (722, 4, 38, 40, 1, 0, 1),
-       (723, 5, 39, 21, 3, 4, 2),
-       (724, 6, 39, 22, 1, 1, 0),
-       (725, 7, 39, 23, 2, 1, 1),
-       (726, 8, 39, 24, 0, 1, 2),
-       (727, 9, 39, 25, 2, 2, 0),
-       (728, 10, 39, 26, 3, 2, 1),
-       (729, 11, 39, 27, 4, 3, 1),
-       (730, 12, 39, 28, 3, 3, 0),
-       (731, 13, 39, 29, 1, 2, 2),
-       (732, 14, 39, 30, 1, 0, 1),
-       (733, 15, 39, 31, 4, 4, 0),
-       (734, 16, 39, 32, 2, 3, 2),
-       (735, 17, 39, 33, 2, 1, 1),
-       (736, 18, 39, 34, 3, 4, 2),
-       (737, 19, 39, 35, 0, 0, 0),
-       (738, 20, 39, 36, 3, 2, 1),
-       (739, 1, 39, 37, 0, 1, 2),
-       (740, 2, 39, 38, 1, 1, 0),
-       (741, 3, 39, 40, 4, 3, 1),
-       (742, 4, 40, 21, 1, 2, 2),
-       (743, 5, 40, 22, 2, 2, 0),
-       (744, 6, 40, 23, 1, 0, 1),
-       (745, 7, 40, 24, 2, 3, 2),
-       (746, 8, 40, 25, 3, 3, 0),
-       (747, 9, 40, 26, 2, 1, 1),
-       (748, 10, 40, 27, 3, 4, 2),
-       (749, 11, 40, 28, 4, 4, 0),
-       (750, 12, 40, 29, 3, 2, 1),
-       (751, 13, 40, 30, 0, 1, 2),
-       (752, 14, 40, 31, 0, 0, 0),
-       (753, 15, 40, 32, 4, 3, 1),
-       (754, 16, 40, 33, 1, 2, 2),
-       (755, 17, 40, 34, 1, 1, 0),
-       (756, 18, 40, 35, 1, 0, 1),
-       (757, 18, 40, 36, 2, 3, 2),
-       (758, 19, 40, 37, 2, 2, 0),
-       (759, 20, 40, 38, 2, 1, 1),
-       (760, 1, 40, 39, 3, 4, 2),
-       (761, 2, 1, 2, 3, 3, 0),
-       (762, 3, 1, 3, 1, 0, 1),
-       (763, 4, 1, 4, 0, 1, 2),
-       (764, 5, 1, 5, 4, 4, 0),
-       (765, 6, 1, 6, 2, 1, 1),
-       (766, 7, 1, 7, 1, 2, 2),
-       (767, 8, 1, 8, 0, 0, 0),
-       (768, 9, 1, 9, 3, 1, 1),
-       (769, 10, 1, 10, 2, 3, 2),
-       (770, 11, 1, 11, 1, 1, 0),
-       (771, 12, 1, 12, 4, 1, 1),
-       (772, 13, 1, 13, 3, 4, 2),
-       (773, 14, 1, 14, 2, 2, 0),
-       (774, 15, 1, 15, 1, 0, 1),
-       (775, 16, 1, 16, 0, 1, 2),
-       (776, 17, 1, 17, 3, 3, 0),
-       (777, 18, 1, 18, 2, 1, 1),
-       (778, 19, 1, 19, 1, 2, 2),
-       (779, 20, 1, 20, 4, 4, 0),
-       (780, 1, 2, 1, 3, 2, 1),
-       (781, 2, 2, 3, 2, 3, 2),
-       (782, 3, 2, 4, 0, 0, 0),
-       (783, 4, 2, 5, 4, 2, 1),
-       (784, 5, 2, 6, 3, 4, 2),
-       (785, 6, 2, 7, 1, 1, 0),
-       (786, 7, 2, 8, 1, 0, 1),
-       (787, 8, 2, 9, 0, 1, 2),
-       (788, 9, 2, 10, 2, 2, 0),
-       (789, 10, 2, 11, 2, 1, 1),
-       (790, 11, 2, 12, 1, 2, 2),
-       (791, 12, 2, 13, 3, 3, 0),
-       (792, 13, 2, 14, 3, 1, 1),
-       (793, 14, 2, 15, 2, 3, 2),
-       (794, 15, 2, 16, 4, 4, 0),
-       (795, 16, 2, 17, 4, 3, 1),
-       (796, 17, 2, 18, 3, 4, 2),
-       (797, 18, 2, 19, 0, 0, 0),
-       (798, 19, 2, 20, 1, 0, 1),
-       (799, 20, 3, 1, 0, 1, 2),
-       (800, 1, 3, 2, 1, 1, 0),
-       (801, 2, 3, 4, 2, 1, 1),
-       (802, 3, 3, 5, 1, 2, 2),
-       (803, 4, 3, 6, 2, 2, 0),
-       (804, 5, 3, 7, 3, 2, 1),
-       (805, 6, 3, 8, 2, 3, 2),
-       (806, 7, 3, 9, 3, 3, 0),
-       (807, 8, 3, 10, 4, 3, 1),
-       (808, 9, 3, 11, 3, 4, 2),
-       (809, 10, 3, 12, 4, 4, 0),
-       (810, 11, 3, 13, 1, 0, 1),
-       (811, 12, 3, 14, 0, 1, 2),
-       (812, 13, 3, 15, 0, 0, 0),
-       (813, 14, 3, 16, 2, 0, 1),
-       (814, 15, 3, 17, 1, 2, 2),
-       (815, 16, 3, 18, 1, 1, 0),
-       (816, 17, 3, 19, 3, 2, 1),
-       (817, 18, 3, 20, 2, 3, 2),
-       (818, 19, 4, 1, 2, 2, 0),
-       (819, 20, 4, 2, 4, 2, 1),
-       (820, 1, 4, 3, 3, 4, 2),
-       (821, 2, 4, 5, 3, 3, 0),
-       (822, 3, 4, 6, 1, 0, 1),
-       (823, 4, 4, 7, 0, 1, 2),
-       (824, 5, 4, 8, 4, 4, 0),
-       (825, 6, 4, 9, 2, 1, 1),
-       (826, 7, 4, 10, 1, 2, 2),
-       (827, 8, 4, 11, 0, 0, 0),
-       (828, 9, 4, 12, 3, 2, 1),
-       (829, 10, 4, 13, 2, 3, 2),
-       (830, 11, 4, 14, 1, 1, 0),
-       (831, 12, 4, 15, 4, 2, 1),
-       (832, 13, 4, 16, 3, 4, 2),
-       (833, 14, 4, 17, 2, 2, 0),
-       (834, 15, 4, 18, 1, 0, 1),
-       (835, 16, 4, 19, 0, 1, 2),
-       (836, 17, 4, 20, 3, 3, 0),
-       (837, 18, 5, 1, 2, 1, 1),
-       (838, 19, 5, 2, 1, 2, 2),
-       (839, 20, 5, 3, 0, 0, 0),
-       (840, 1, 5, 4, 3, 2, 1),
-       (841, 2, 5, 6, 2, 3, 2),
-       (842, 3, 5, 7, 1, 1, 0),
-       (843, 4, 5, 8, 4, 2, 1),
-       (844, 5, 5, 9, 3, 4, 2),
-       (845, 6, 5, 10, 2, 2, 0),
-       (846, 7, 5, 11, 1, 0, 1),
-       (847, 8, 5, 12, 0, 1, 2),
-       (848, 9, 5, 13, 3, 3, 0),
-       (849, 10, 5, 14, 3, 2, 1),
-       (850, 11, 5, 15, 1, 2, 2),
-       (851, 12, 5, 16, 0, 0, 0),
-       (852, 13, 5, 17, 1, 0, 1),
-       (853, 14, 5, 18, 2, 3, 2),
-       (854, 15, 5, 19, 1, 1, 0),
-       (855, 16, 5, 20, 2, 1, 1),
-       (856, 17, 6, 1, 3, 4, 2),
-       (857, 18, 6, 2, 2, 2, 0),
-       (858, 19, 6, 3, 0, 1, 2),
-       (859, 20, 6, 4, 3, 3, 0),
-       (860, 1, 6, 5, 3, 2, 1),
-       (861, 2, 6, 7, 1, 2, 2),
-       (862, 3, 6, 8, 0, 0, 0),
-       (863, 4, 6, 9, 4, 3, 1),
-       (864, 5, 6, 10, 2, 3, 2),
-       (865, 6, 6, 11, 1, 1, 0),
-       (866, 7, 6, 12, 1, 0, 1),
-       (867, 8, 6, 13, 3, 4, 2),
-       (868, 9, 6, 14, 2, 2, 0),
-       (869, 10, 6, 15, 2, 1, 1),
-       (870, 11, 6, 16, 0, 1, 2),
-       (871, 12, 6, 17, 3, 3, 0),
-       (872, 13, 6, 18, 3, 2, 1),
-       (873, 14, 6, 19, 1, 2, 2),
-       (874, 15, 6, 20, 0, 0, 0),
-       (875, 16, 7, 1, 4, 3, 1),
-       (876, 17, 7, 2, 2, 3, 2),
-       (877, 18, 7, 3, 1, 1, 0),
-       (878, 19, 7, 4, 1, 0, 1),
-       (879, 20, 7, 5, 3, 4, 2),
-       (880, 1, 7, 6, 2, 2, 0),
-       (881, 2, 7, 8, 2, 1, 1),
-       (882, 3, 7, 9, 0, 1, 2),
-       (883, 4, 7, 10, 3, 3, 0),
-       (884, 5, 7, 11, 3, 2, 1),
-       (885, 6, 7, 12, 1, 2, 2),
-       (886, 7, 7, 13, 0, 0, 0),
-       (887, 8, 7, 14, 4, 1, 1),
-       (888, 9, 7, 15, 2, 3, 2),
-       (889, 10, 7, 16, 1, 1, 0),
-       (890, 11, 7, 17, 1, 0, 1),
-       (891, 12, 7, 18, 3, 4, 2),
-       (892, 13, 7, 19, 2, 2, 0),
-       (893, 14, 7, 20, 3, 2, 1),
-       (894, 15, 8, 1, 0, 1, 2),
-       (895, 16, 8, 2, 3, 3, 0),
-       (896, 17, 8, 3, 1, 0, 1),
-       (897, 18, 8, 4, 1, 2, 2),
-       (898, 19, 8, 5, 0, 0, 0),
-       (899, 20, 8, 6, 2, 0, 1),
-       (900, 1, 8, 7, 2, 3, 2),
-       (901, 2, 8, 9, 1, 1, 0),
-       (902, 3, 8, 10, 3, 1, 1),
-       (903, 4, 8, 11, 3, 4, 2),
-       (904, 5, 8, 12, 2, 2, 0),
-       (905, 6, 8, 13, 4, 1, 1),
-       (906, 7, 8, 14, 0, 1, 2),
-       (907, 8, 8, 15, 3, 3, 0),
-       (908, 9, 8, 16, 1, 0, 1),
-       (909, 10, 8, 17, 1, 2, 2),
-       (910, 11, 8, 18, 0, 0, 0),
-       (911, 12, 8, 19, 2, 1, 1),
-       (912, 13, 8, 20, 2, 3, 2),
-       (913, 14, 9, 1, 1, 1, 0),
-       (914, 15, 9, 2, 3, 0, 1),
-       (915, 16, 9, 3, 3, 4, 2),
-       (916, 17, 9, 4, 2, 2, 0),
-       (917, 18, 9, 5, 4, 0, 1),
-       (918, 19, 9, 6, 0, 1, 2),
-       (919, 20, 9, 7, 3, 3, 0),
-       (920, 1, 9, 8, 1, 0, 1),
-       (921, 2, 9, 10, 1, 2, 2),
-       (922, 3, 9, 11, 0, 0, 0),
-       (923, 4, 9, 12, 2, 1, 1),
-       (924, 5, 9, 13, 2, 3, 2),
-       (925, 6, 9, 14, 1, 1, 0),
-       (926, 7, 9, 15, 3, 2, 1),
-       (927, 8, 9, 16, 3, 4, 2),
-       (928, 9, 9, 17, 2, 2, 0),
-       (929, 10, 9, 18, 4, 1, 1),
-       (930, 11, 9, 19, 0, 1, 2),
-       (931, 12, 9, 20, 3, 3, 0),
-       (932, 13, 10, 1, 1, 0, 1),
-       (933, 14, 10, 2, 1, 2, 2),
-       (934, 15, 10, 3, 0, 0, 0),
-       (935, 16, 10, 4, 2, 1, 1),
-       (936, 17, 10, 5, 2, 3, 2),
-       (937, 18, 10, 6, 1, 1, 0),
-       (938, 19, 10, 7, 3, 2, 1),
-       (939, 20, 10, 8, 3, 4, 2),
-       (940, 1, 10, 9, 2, 2, 0),
-       (941, 2, 10, 11, 4, 1, 1),
-       (942, 3, 10, 12, 0, 1, 2),
-       (943, 4, 10, 13, 3, 3, 0),
-       (944, 5, 10, 14, 1, 0, 1),
-       (945, 6, 10, 15, 1, 2, 2),
-       (946, 7, 10, 16, 0, 0, 0),
-       (947, 8, 10, 17, 2, 0, 1),
-       (948, 9, 10, 18, 2, 3, 2),
-       (949, 10, 10, 19, 1, 1, 0),
-       (950, 11, 10, 20, 3, 2, 1),
-       (951, 12, 11, 1, 3, 4, 2),
-       (952, 13, 11, 2, 2, 2, 0),
-       (953, 14, 11, 3, 4, 3, 1),
-       (954, 15, 11, 4, 0, 1, 2),
-       (955, 16, 11, 5, 3, 3, 0),
-       (956, 17, 11, 6, 1, 0, 1),
-       (957, 18, 11, 7, 1, 2, 2),
-       (958, 19, 11, 8, 0, 0, 0),
-       (959, 20, 11, 9, 3, 2, 1),
-       (960, 1, 11, 10, 2, 3, 2),
-       (961, 2, 11, 12, 1, 1, 0),
-       (962, 3, 11, 13, 1, 0, 1),
-       (963, 4, 11, 14, 3, 4, 2),
-       (964, 5, 11, 15, 2, 2, 0),
-       (965, 6, 11, 16, 2, 1, 1),
-       (966, 7, 11, 17, 0, 1, 2),
-       (967, 8, 11, 18, 3, 3, 0),
-       (968, 9, 11, 19, 3, 2, 1),
-       (969, 10, 11, 20, 1, 2, 2),
-       (970, 11, 12, 1, 0, 0, 0),
-       (971, 12, 12, 2, 4, 3, 1),
-       (972, 13, 12, 3, 2, 3, 2),
-       (973, 14, 12, 4, 1, 1, 0),
-       (974, 15, 12, 5, 1, 0, 1),
-       (975, 16, 12, 6, 3, 4, 2),
-       (976, 17, 12, 7, 2, 2, 0),
-       (977, 18, 12, 8, 2, 1, 1),
-       (978, 19, 12, 9, 0, 1, 2),
-       (979, 20, 12, 10, 3, 3, 0),
-       (980, 1, 12, 11, 3, 2, 1),
-       (981, 2, 12, 13, 1, 2, 2),
-       (982, 3, 12, 14, 0, 0, 0),
-       (983, 4, 12, 15, 4, 3, 1),
-       (984, 5, 12, 16, 2, 3, 2),
-       (985, 6, 12, 17, 1, 1, 0),
-       (986, 7, 12, 18, 1, 0, 1),
-       (987, 8, 12, 19, 3, 4, 2),
-       (988, 9, 12, 20, 2, 2, 0),
-       (989, 10, 13, 1, 2, 1, 1),
-       (990, 11, 13, 2, 0, 1, 2),
-       (991, 12, 13, 3, 3, 3, 0),
-       (992, 13, 13, 4, 3, 2, 1),
-       (993, 14, 13, 5, 1, 2, 2),
-       (994, 15, 13, 6, 0, 0, 0),
-       (995, 16, 13, 7, 4, 3, 1),
-       (996, 17, 13, 8, 2, 3, 2),
-       (997, 18, 13, 9, 1, 1, 0),
-       (998, 19, 13, 10, 1, 0, 1),
-       (999, 20, 13, 11, 3, 4, 2),
-       (1000, 1, 13, 12, 2, 2, 0),
-       (1001, 2, 13, 14, 1, 1, 1),
-       (1002, 3, 13, 15, 0, 1, 2),
-       (1003, 4, 13, 16, 3, 3, 0),
-       (1004, 5, 13, 17, 2, 2, 1),
-       (1005, 6, 13, 18, 1, 2, 2),
-       (1006, 7, 13, 19, 0, 0, 0),
-       (1007, 8, 13, 20, 4, 3, 1),
-       (1008, 9, 14, 1, 2, 3, 2),
-       (1009, 10, 14, 2, 1, 1, 0),
-       (1010, 11, 14, 3, 1, 0, 1),
-       (1011, 12, 14, 4, 3, 4, 2),
-       (1012, 13, 14, 5, 2, 2, 0),
-       (1013, 14, 14, 6, 2, 1, 1),
-       (1014, 15, 14, 7, 0, 1, 2),
-       (1015, 16, 14, 8, 3, 3, 0),
-       (1016, 17, 14, 9, 3, 2, 1),
-       (1017, 18, 14, 10, 1, 2, 2),
-       (1018, 19, 14, 11, 0, 0, 0),
-       (1019, 20, 14, 12, 4, 3, 1),
-       (1020, 1, 14, 13, 2, 3, 2),
-       (1021, 2, 14, 15, 1, 1, 0),
-       (1022, 3, 14, 16, 1, 0, 1),
-       (1023, 4, 14, 17, 3, 4, 2),
-       (1024, 5, 14, 18, 3, 3, 0),
-       (1025, 6, 14, 19, 2, 1, 1),
-       (1026, 7, 14, 20, 0, 1, 2),
-       (1027, 8, 15, 1, 0, 0, 0),
-       (1028, 9, 15, 2, 3, 2, 1),
-       (1029, 10, 15, 3, 1, 2, 2),
-       (1030, 11, 15, 4, 0, 0, 0),
-       (1031, 12, 15, 5, 4, 3, 1),
-       (1032, 13, 15, 6, 2, 3, 2),
-       (1033, 14, 15, 7, 1, 1, 0),
-       (1034, 15, 15, 8, 2, 1, 1),
-       (1035, 16, 15, 9, 3, 4, 2),
-       (1036, 17, 15, 10, 2, 2, 0),
-       (1037, 18, 15, 11, 3, 2, 1),
-       (1038, 19, 15, 12, 0, 1, 2),
-       (1039, 20, 15, 13, 1, 2, 2),
-       (1040, 1, 15, 14, 3, 3, 0),
-       (1041, 2, 15, 16, 1, 0, 1),
-       (1042, 3, 15, 17, 2, 3, 2),
-       (1043, 4, 15, 18, 0, 0, 0),
-       (1044, 5, 15, 19, 4, 3, 1),
-       (1045, 6, 15, 20, 1, 1, 0),
-       (1046, 7, 16, 1, 3, 4, 2),
-       (1047, 8, 16, 2, 2, 2, 0),
-       (1048, 9, 16, 3, 2, 1, 1),
-       (1049, 10, 16, 4, 0, 1, 2),
-       (1050, 11, 16, 5, 3, 3, 0),
-       (1051, 12, 16, 6, 3, 2, 1),
-       (1052, 13, 16, 7, 1, 2, 2),
-       (1053, 14, 16, 8, 0, 0, 0),
-       (1054, 15, 16, 9, 2, 1, 1),
-       (1055, 16, 16, 10, 2, 3, 2),
-       (1056, 17, 16, 11, 3, 4, 2),
-       (1057, 18, 16, 12, 1, 1, 0),
-       (1058, 19, 16, 13, 3, 2, 1),
-       (1059, 20, 16, 14, 0, 1, 2),
-       (1060, 1, 16, 15, 2, 2, 0),
-       (1061, 2, 16, 17, 2, 1, 1),
-       (1062, 3, 16, 18, 1, 2, 2),
-       (1063, 4, 16, 19, 2, 3, 2),
-       (1064, 5, 16, 20, 3, 3, 0),
-       (1065, 6, 17, 1, 4, 3, 1),
-       (1066, 7, 17, 2, 3, 4, 2),
-       (1067, 8, 17, 3, 0, 0, 0),
-       (1068, 9, 17, 4, 1, 1, 0),
-       (1069, 10, 17, 5, 1, 0, 1),
-       (1070, 11, 17, 6, 0, 1, 2),
-       (1071, 12, 17, 7, 2, 2, 0),
-       (1072, 13, 17, 8, 2, 1, 1),
-       (1073, 14, 17, 9, 1, 2, 2),
-       (1074, 15, 17, 10, 3, 3, 0),
-       (1075, 16, 17, 11, 3, 2, 1),
-       (1076, 17, 17, 12, 2, 3, 2),
-       (1077, 18, 17, 13, 0, 0, 0),
-       (1078, 19, 17, 14, 4, 3, 1),
-       (1079, 20, 17, 15, 3, 4, 2),
-       (1080, 1, 17, 16, 1, 1, 0),
-       (1081, 2, 17, 18, 1, 0, 1),
-       (1082, 3, 17, 19, 0, 1, 2),
-       (1083, 4, 17, 20, 0, 0, 0),
-       (1084, 5, 18, 1, 2, 1, 1),
-       (1085, 6, 18, 2, 1, 2, 2),
-       (1086, 7, 18, 3, 0, 0, 0),
-       (1087, 8, 18, 4, 3, 2, 1),
-       (1088, 9, 18, 5, 2, 3, 2),
-       (1089, 10, 18, 6, 1, 1, 0),
-       (1090, 11, 18, 7, 4, 3, 1),
-       (1091, 12, 18, 8, 3, 4, 2),
-       (1092, 13, 18, 9, 2, 2, 0),
-       (1093, 14, 18, 10, 1, 0, 1),
-       (1094, 15, 18, 11, 0, 1, 2),
-       (1095, 16, 18, 12, 0, 0, 0),
-       (1096, 17, 18, 13, 2, 1, 1),
-       (1097, 18, 18, 14, 1, 2, 2),
-       (1098, 19, 18, 15, 1, 1, 0),
-       (1099, 20, 18, 16, 3, 2, 1),
-       (1100, 1, 18, 17, 2, 3, 2),
-       (1101, 2, 18, 19, 2, 2, 0),
-       (1102, 3, 18, 20, 4, 3, 1),
-       (1103, 4, 19, 1, 3, 4, 2),
-       (1104, 5, 19, 2, 3, 3, 0),
-       (1105, 6, 19, 3, 1, 0, 1),
-       (1106, 7, 19, 4, 0, 1, 2),
-       (1107, 8, 19, 5, 0, 0, 0),
-       (1108, 9, 19, 6, 2, 1, 1),
-       (1109, 10, 19, 7, 1, 2, 2),
-       (1110, 11, 19, 8, 1, 1, 0),
-       (1111, 12, 19, 9, 3, 2, 1),
-       (1112, 13, 19, 10, 2, 3, 2),
-       (1113, 14, 19, 11, 2, 2, 0),
-       (1114, 15, 19, 12, 4, 3, 1),
-       (1115, 16, 19, 13, 3, 4, 2),
-       (1116, 17, 19, 14, 3, 3, 0),
-       (1117, 18, 19, 15, 1, 0, 1),
-       (1118, 19, 19, 16, 0, 1, 2),
-       (1119, 20, 19, 17, 1, 2, 2),
-       (1120, 1, 19, 18, 0, 0, 0),
-       (1121, 2, 19, 20, 2, 1, 1),
-       (1122, 3, 20, 1, 2, 3, 2),
-       (1123, 4, 20, 2, 1, 1, 0),
-       (1124, 5, 20, 3, 3, 2, 1),
-       (1125, 6, 20, 4, 3, 4, 2),
-       (1126, 7, 20, 5, 2, 2, 0),
-       (1127, 8, 20, 6, 3, 3, 0),
-       (1128, 9, 20, 7, 4, 3, 1),
-       (1129, 10, 20, 8, 0, 1, 2),
-       (1130, 11, 20, 9, 0, 0, 0),
-       (1131, 12, 20, 10, 1, 1, 0),
-       (1132, 13, 20, 11, 1, 2, 2),
-       (1133, 14, 20, 12, 2, 2, 0),
-       (1134, 15, 20, 13, 1, 0, 1),
-       (1135, 16, 20, 14, 2, 3, 2),
-       (1136, 17, 20, 15, 3, 3, 0),
-       (1137, 18, 20, 16, 2, 1, 1),
-       (1138, 19, 20, 17, 3, 4, 2),
-       (1139, 20, 20, 18, 0, 0, 0),
-       (1140, 1, 20, 19, 3, 2, 1),
-       (1141, 2, 21, 22, 0, 1, 2),
-       (1142, 3, 21, 23, 1, 1, 0),
-       (1143, 4, 21, 24, 1, 0, 1),
-       (1144, 5, 21, 25, 1, 2, 2),
-       (1145, 6, 21, 26, 2, 2, 0),
-       (1146, 7, 21, 27, 2, 1, 1),
-       (1147, 8, 21, 28, 2, 3, 2),
-       (1148, 9, 21, 29, 3, 3, 0),
-       (1149, 10, 21, 30, 3, 2, 1),
-       (1150, 11, 21, 31, 3, 4, 2),
-       (1151, 12, 21, 32, 4, 4, 0),
-       (1152, 13, 21, 33, 4, 3, 1),
-       (1153, 14, 21, 34, 0, 1, 2),
-       (1154, 15, 21, 35, 1, 1, 0),
-       (1155, 16, 21, 36, 1, 0, 1),
-       (1156, 17, 21, 37, 1, 2, 2),
-       (1157, 18, 21, 38, 2, 2, 0),
-       (1158, 19, 21, 39, 2, 1, 1),
-       (1159, 20, 21, 40, 2, 3, 2),
-       (1160, 1, 22, 21, 3, 3, 0),
-       (1161, 2, 22, 23, 3, 2, 1),
-       (1162, 3, 22, 24, 3, 4, 2),
-       (1163, 4, 22, 25, 4, 4, 0),
-       (1164, 5, 22, 26, 4, 3, 1),
-       (1165, 6, 22, 27, 0, 1, 2),
-       (1166, 7, 22, 28, 1, 1, 0),
-       (1167, 8, 22, 29, 1, 0, 1),
-       (1168, 9, 22, 30, 1, 2, 2),
-       (1169, 10, 22, 31, 2, 2, 0),
-       (1170, 11, 22, 32, 2, 1, 1),
-       (1171, 12, 22, 33, 2, 3, 2),
-       (1172, 13, 22, 34, 3, 3, 0),
-       (1173, 14, 22, 35, 3, 2, 1),
-       (1174, 15, 22, 36, 3, 4, 2),
-       (1175, 16, 22, 37, 4, 4, 0),
-       (1176, 17, 22, 38, 4, 3, 1),
-       (1177, 18, 22, 39, 0, 1, 2),
-       (1178, 19, 22, 40, 1, 1, 0),
-       (1179, 20, 23, 21, 1, 0, 1),
-       (1180, 1, 23, 22, 1, 2, 2),
-       (1181, 2, 23, 24, 2, 2, 0),
-       (1182, 3, 23, 25, 2, 1, 1),
-       (1183, 4, 23, 26, 2, 3, 2),
-       (1184, 5, 23, 27, 3, 3, 0),
-       (1185, 6, 23, 28, 3, 2, 1),
-       (1186, 7, 23, 29, 3, 4, 2),
-       (1187, 8, 23, 30, 4, 4, 0),
-       (1188, 9, 23, 31, 4, 3, 1),
-       (1189, 10, 23, 32, 0, 1, 2),
-       (1190, 11, 23, 33, 1, 1, 0),
-       (1191, 12, 23, 34, 1, 0, 1),
-       (1192, 13, 23, 35, 1, 2, 2),
-       (1193, 14, 23, 36, 2, 2, 0),
-       (1194, 15, 23, 37, 2, 1, 1),
-       (1195, 16, 23, 38, 2, 3, 2),
-       (1196, 17, 23, 39, 3, 3, 0),
-       (1197, 18, 23, 40, 3, 2, 1),
-       (1198, 19, 24, 21, 3, 4, 2),
-       (1199, 20, 24, 22, 4, 4, 0),
-       (1200, 1, 24, 23, 4, 3, 1),
-       (1201, 2, 24, 25, 0, 1, 2),
-       (1202, 3, 24, 26, 1, 1, 0),
-       (1203, 4, 24, 27, 1, 0, 1),
-       (1204, 5, 24, 28, 1, 2, 2),
-       (1205, 6, 24, 29, 2, 2, 0),
-       (1206, 7, 24, 30, 2, 1, 1),
-       (1207, 8, 24, 31, 2, 3, 2),
-       (1208, 9, 24, 32, 3, 3, 0),
-       (1209, 10, 24, 33, 3, 2, 1),
-       (1210, 11, 24, 34, 3, 4, 2),
-       (1211, 12, 24, 35, 4, 4, 0),
-       (1212, 13, 24, 36, 4, 3, 1),
-       (1213, 14, 24, 37, 0, 1, 2),
-       (1214, 15, 24, 38, 1, 1, 0),
-       (1215, 16, 24, 39, 1, 0, 1),
-       (1216, 17, 24, 40, 1, 2, 2),
-       (1217, 18, 25, 21, 2, 2, 0),
-       (1218, 19, 25, 22, 2, 1, 1),
-       (1219, 20, 25, 23, 2, 3, 2),
-       (1220, 1, 25, 24, 3, 3, 0),
-       (1221, 2, 25, 26, 3, 2, 1),
-       (1222, 3, 25, 27, 3, 4, 2),
-       (1223, 4, 25, 28, 4, 4, 0),
-       (1224, 5, 25, 29, 4, 3, 1),
-       (1225, 6, 25, 30, 0, 1, 2),
-       (1226, 7, 25, 31, 1, 1, 0),
-       (1227, 8, 25, 32, 1, 0, 1),
-       (1228, 9, 25, 33, 1, 2, 2),
-       (1229, 10, 25, 34, 2, 2, 0),
-       (1230, 11, 25, 35, 2, 1, 1),
-       (1231, 12, 25, 36, 2, 3, 2),
-       (1232, 13, 25, 37, 3, 3, 0),
-       (1233, 14, 25, 38, 3, 2, 1),
-       (1234, 15, 25, 39, 3, 4, 2),
-       (1235, 16, 25, 40, 4, 4, 0),
-       (1236, 17, 26, 21, 4, 3, 1),
-       (1237, 18, 26, 22, 0, 1, 2),
-       (1238, 19, 26, 23, 1, 1, 0),
-       (1239, 20, 26, 24, 1, 0, 1),
-       (1240, 1, 26, 25, 1, 2, 2),
-       (1241, 2, 26, 27, 2, 2, 0),
-       (1242, 3, 26, 28, 2, 1, 1),
-       (1243, 4, 26, 29, 2, 3, 2),
-       (1244, 5, 26, 30, 3, 3, 0),
-       (1245, 6, 26, 31, 3, 2, 1),
-       (1246, 7, 26, 32, 3, 4, 2),
-       (1247, 8, 26, 33, 4, 4, 0),
-       (1248, 9, 26, 34, 4, 3, 1),
-       (1249, 10, 26, 35, 0, 1, 2),
-       (1250, 11, 26, 36, 1, 1, 0),
-       (1251, 12, 26, 37, 1, 0, 1),
-       (1252, 13, 26, 38, 1, 2, 2),
-       (1253, 14, 26, 39, 2, 2, 0),
-       (1254, 15, 26, 40, 2, 1, 1),
-       (1255, 16, 27, 21, 2, 3, 2),
-       (1256, 17, 27, 22, 3, 3, 0),
-       (1257, 18, 27, 23, 3, 2, 1),
-       (1258, 19, 27, 24, 3, 4, 2),
-       (1259, 20, 27, 25, 4, 4, 0),
-       (1260, 1, 27, 26, 4, 3, 1),
-       (1261, 2, 27, 28, 0, 1, 2),
-       (1262, 3, 27, 29, 1, 1, 0),
-       (1263, 4, 27, 30, 1, 0, 1),
-       (1264, 5, 27, 31, 1, 2, 2),
-       (1265, 6, 27, 32, 2, 2, 0),
-       (1266, 7, 27, 33, 2, 1, 1),
-       (1267, 8, 27, 34, 2, 3, 2),
-       (1268, 9, 27, 35, 3, 3, 0),
-       (1269, 10, 27, 36, 3, 2, 1),
-       (1270, 11, 27, 37, 3, 4, 2),
-       (1271, 12, 27, 38, 4, 4, 0),
-       (1272, 13, 27, 39, 4, 3, 1),
-       (1273, 14, 27, 40, 0, 1, 2),
-       (1274, 15, 28, 21, 1, 1, 0),
-       (1275, 16, 28, 22, 1, 0, 1),
-       (1276, 17, 28, 23, 1, 2, 2),
-       (1277, 18, 28, 24, 2, 2, 0),
-       (1278, 19, 28, 25, 3, 3, 0),
-       (1279, 20, 28, 26, 2, 1, 1),
-       (1280, 1, 28, 27, 2, 3, 2),
-       (1281, 2, 28, 29, 4, 4, 0),
-       (1282, 3, 28, 30, 3, 2, 1),
-       (1283, 4, 28, 31, 3, 4, 2),
-       (1284, 5, 28, 32, 1, 1, 0),
-       (1285, 6, 28, 33, 4, 3, 1),
-       (1286, 7, 28, 34, 0, 1, 2),
-       (1287, 8, 28, 35, 2, 2, 0),
-       (1288, 9, 28, 36, 1, 0, 1),
-       (1289, 10, 28, 37, 1, 2, 2),
-       (1290, 11, 28, 38, 3, 3, 0),
-       (1291, 12, 28, 39, 2, 1, 1),
-       (1292, 13, 28, 40, 2, 3, 2),
-       (1293, 14, 29, 21, 4, 4, 0),
-       (1294, 15, 29, 22, 3, 2, 1),
-       (1295, 16, 29, 23, 3, 4, 2),
-       (1296, 17, 29, 24, 1, 1, 0),
-       (1297, 18, 29, 25, 4, 3, 1),
-       (1298, 19, 29, 26, 0, 1, 2),
-       (1299, 20, 29, 27, 2, 2, 0),
-       (1300, 1, 29, 28, 1, 0, 1),
-       (1301, 2, 29, 30, 1, 2, 2),
-       (1302, 3, 29, 31, 3, 3, 0),
-       (1303, 4, 29, 32, 2, 1, 1),
-       (1304, 5, 29, 33, 2, 3, 2),
-       (1305, 6, 29, 34, 4, 4, 0),
-       (1306, 7, 29, 35, 3, 2, 1),
-       (1307, 8, 29, 36, 3, 4, 2),
-       (1308, 9, 29, 37, 1, 1, 0),
-       (1309, 10, 29, 38, 4, 3, 1),
-       (1310, 11, 29, 39, 0, 1, 2),
-       (1311, 12, 29, 40, 2, 2, 0),
-       (1312, 13, 30, 21, 1, 0, 1),
-       (1313, 14, 30, 22, 1, 2, 2),
-       (1314, 15, 30, 23, 3, 3, 0),
-       (1315, 16, 30, 24, 2, 1, 1),
-       (1316, 17, 30, 25, 2, 3, 2),
-       (1317, 18, 30, 26, 4, 4, 0),
-       (1318, 19, 30, 27, 3, 2, 1),
-       (1319, 20, 30, 28, 3, 4, 2),
-       (1320, 1, 30, 29, 1, 1, 0),
-       (1321, 2, 30, 31, 4, 3, 1),
-       (1322, 3, 30, 32, 0, 1, 2),
-       (1323, 4, 30, 33, 2, 2, 0),
-       (1324, 5, 30, 34, 1, 0, 1),
-       (1325, 6, 30, 35, 1, 2, 2),
-       (1326, 7, 30, 36, 3, 3, 0),
-       (1327, 8, 30, 37, 2, 1, 1),
-       (1328, 9, 30, 38, 2, 3, 2),
-       (1329, 10, 30, 39, 4, 4, 0),
-       (1330, 11, 30, 40, 3, 2, 1),
-       (1331, 12, 31, 21, 3, 4, 2),
-       (1332, 13, 31, 22, 1, 1, 0),
-       (1333, 14, 31, 23, 4, 3, 1),
-       (1334, 15, 31, 24, 0, 1, 2),
-       (1335, 16, 31, 25, 2, 2, 0),
-       (1336, 17, 31, 26, 1, 0, 1),
-       (1337, 18, 31, 27, 1, 2, 2),
-       (1338, 19, 31, 28, 3, 3, 0),
-       (1339, 20, 31, 29, 2, 1, 1),
-       (1340, 1, 31, 30, 2, 3, 2),
-       (1341, 2, 31, 32, 4, 4, 0),
-       (1342, 3, 31, 33, 3, 2, 1),
-       (1343, 4, 31, 34, 3, 4, 2),
-       (1344, 5, 31, 35, 1, 1, 0),
-       (1345, 6, 31, 36, 4, 3, 1),
-       (1346, 7, 31, 37, 0, 1, 2),
-       (1347, 8, 31, 38, 2, 2, 0),
-       (1348, 9, 31, 39, 1, 0, 1),
-       (1349, 10, 31, 40, 1, 2, 2),
-       (1350, 11, 32, 21, 3, 3, 0),
-       (1351, 12, 32, 22, 2, 1, 1),
-       (1352, 13, 32, 23, 2, 3, 2),
-       (1353, 14, 32, 24, 4, 4, 0),
-       (1354, 15, 32, 25, 3, 2, 1),
-       (1355, 16, 32, 26, 3, 4, 2),
-       (1356, 17, 32, 27, 1, 1, 0),
-       (1357, 18, 32, 28, 0, 1, 2),
-       (1358, 19, 32, 29, 2, 2, 0),
-       (1359, 20, 32, 30, 4, 3, 1),
-       (1360, 1, 32, 31, 1, 2, 2),
-       (1361, 2, 32, 33, 3, 3, 0),
-       (1362, 3, 32, 34, 1, 0, 1),
-       (1363, 4, 32, 35, 2, 3, 2),
-       (1364, 5, 32, 36, 4, 4, 0),
-       (1365, 6, 32, 37, 2, 1, 1),
-       (1366, 7, 32, 38, 3, 4, 2),
-       (1367, 8, 32, 39, 1, 1, 0),
-       (1368, 9, 32, 40, 3, 2, 1),
-       (1369, 10, 33, 21, 0, 1, 2),
-       (1370, 11, 33, 22, 2, 2, 0),
-       (1371, 12, 33, 23, 4, 3, 1),
-       (1372, 13, 33, 24, 1, 2, 2),
-       (1373, 14, 33, 25, 3, 3, 0),
-       (1374, 15, 33, 26, 1, 0, 1),
-       (1375, 16, 33, 27, 2, 3, 2),
-       (1376, 17, 33, 28, 4, 4, 0),
-       (1377, 18, 33, 29, 2, 1, 1),
-       (1378, 19, 33, 30, 3, 4, 2),
-       (1379, 20, 33, 31, 1, 1, 0),
-       (1380, 1, 33, 32, 3, 2, 1),
-       (1381, 2, 33, 34, 0, 1, 2),
-       (1382, 3, 33, 35, 2, 2, 0),
-       (1383, 4, 33, 36, 4, 3, 1),
-       (1384, 5, 33, 37, 1, 2, 2),
-       (1385, 6, 33, 38, 3, 3, 0),
-       (1386, 7, 33, 39, 1, 0, 1),
-       (1387, 8, 33, 40, 2, 3, 2),
-       (1388, 9, 34, 21, 4, 4, 0),
-       (1389, 10, 34, 22, 2, 1, 1),
-       (1390, 11, 34, 23, 1, 1, 0),
-       (1391, 12, 34, 24, 3, 4, 2),
-       (1392, 13, 34, 25, 2, 2, 0),
-       (1393, 14, 34, 26, 0, 1, 2),
-       (1394, 15, 34, 27, 3, 3, 0),
-       (1395, 16, 34, 28, 3, 2, 1),
-       (1396, 17, 34, 29, 1, 2, 2),
-       (1397, 18, 34, 30, 4, 4, 0),
-       (1398, 19, 34, 31, 4, 3, 1),
-       (1399, 20, 34, 32, 2, 3, 2),
-       (1400, 1, 34, 33, 1, 1, 0),
-       (1401, 2, 34, 35, 1, 0, 1),
-       (1402, 3, 34, 36, 3, 4, 2),
-       (1403, 4, 34, 37, 2, 2, 0),
-       (1404, 5, 34, 38, 2, 1, 1),
-       (1405, 6, 34, 39, 0, 1, 2),
-       (1406, 7, 34, 40, 3, 3, 0),
-       (1407, 8, 35, 21, 3, 2, 1),
-       (1408, 9, 35, 22, 1, 2, 2),
-       (1409, 10, 35, 23, 4, 4, 0),
-       (1410, 11, 35, 24, 4, 3, 1),
-       (1411, 12, 35, 25, 2, 3, 2),
-       (1412, 13, 35, 26, 1, 1, 0),
-       (1413, 14, 35, 27, 1, 0, 1),
-       (1414, 15, 35, 28, 3, 4, 2),
-       (1415, 16, 35, 29, 2, 2, 0),
-       (1416, 17, 35, 30, 2, 1, 1),
-       (1417, 18, 35, 31, 0, 1, 2),
-       (1418, 19, 35, 32, 3, 3, 0),
-       (1419, 20, 35, 33, 3, 2, 1),
-       (1420, 1, 35, 34, 1, 2, 2),
-       (1421, 2, 35, 36, 4, 4, 0),
-       (1422, 3, 35, 37, 4, 3, 1),
-       (1423, 4, 35, 38, 2, 3, 2),
-       (1424, 5, 35, 39, 1, 1, 0),
-       (1425, 6, 35, 40, 1, 0, 1),
-       (1426, 7, 36, 21, 3, 4, 2),
-       (1427, 8, 36, 22, 2, 2, 0),
-       (1428, 9, 36, 23, 2, 1, 1),
-       (1429, 10, 36, 24, 0, 1, 2),
-       (1430, 11, 36, 25, 3, 3, 0),
-       (1431, 12, 36, 26, 3, 2, 1),
-       (1432, 13, 36, 27, 1, 2, 2),
-       (1433, 14, 36, 28, 4, 4, 0),
-       (1434, 15, 36, 29, 4, 3, 1),
-       (1435, 16, 36, 30, 2, 3, 2),
-       (1436, 17, 36, 31, 1, 1, 0),
-       (1437, 18, 36, 32, 1, 0, 1),
-       (1438, 19, 36, 33, 3, 4, 2),
-       (1439, 20, 36, 34, 2, 2, 0),
-       (1440, 1, 36, 35, 2, 1, 1),
-       (1441, 2, 36, 37, 0, 1, 2),
-       (1442, 3, 36, 38, 3, 3, 0),
-       (1443, 4, 36, 39, 3, 2, 1),
-       (1444, 5, 36, 40, 1, 2, 2),
-       (1445, 6, 37, 21, 4, 4, 0),
-       (1446, 7, 37, 22, 4, 3, 1),
-       (1447, 8, 37, 23, 2, 3, 2),
-       (1448, 9, 37, 24, 1, 1, 0),
-       (1449, 10, 37, 25, 3, 4, 2),
-       (1450, 11, 37, 26, 1, 0, 1),
-       (1451, 12, 37, 27, 0, 1, 2),
-       (1452, 13, 37, 28, 2, 2, 0),
-       (1453, 14, 37, 29, 2, 1, 1),
-       (1454, 15, 37, 30, 1, 2, 2),
-       (1455, 16, 37, 31, 3, 3, 0),
-       (1456, 17, 37, 32, 3, 2, 1),
-       (1457, 18, 37, 33, 2, 3, 2),
-       (1458, 19, 37, 34, 4, 4, 0),
-       (1459, 20, 37, 35, 4, 3, 1),
-       (1460, 1, 37, 36, 3, 4, 2),
-       (1461, 2, 37, 38, 1, 1, 0),
-       (1462, 3, 37, 39, 1, 0, 1),
-       (1463, 4, 37, 40, 1, 2, 2),
-       (1464, 5, 38, 21, 2, 2, 0),
-       (1465, 6, 38, 22, 2, 1, 1),
-       (1466, 7, 38, 23, 2, 3, 2),
-       (1467, 8, 38, 24, 3, 3, 0),
-       (1468, 9, 38, 25, 3, 2, 1),
-       (1469, 10, 38, 26, 3, 4, 2),
-       (1470, 11, 38, 27, 4, 4, 0),
-       (1471, 12, 38, 28, 4, 3, 1),
-       (1472, 13, 38, 29, 0, 1, 2),
-       (1473, 14, 38, 30, 1, 1, 0),
-       (1474, 15, 38, 31, 1, 0, 1),
-       (1475, 16, 38, 32, 1, 2, 2),
-       (1476, 17, 38, 33, 2, 2, 0),
-       (1477, 18, 38, 34, 2, 1, 1),
-       (1478, 19, 38, 35, 2, 3, 2),
-       (1479, 20, 38, 36, 3, 3, 0),
-       (1480, 1, 38, 37, 3, 2, 1),
-       (1481, 2, 38, 39, 3, 4, 2),
-       (1482, 3, 38, 40, 4, 4, 0),
-       (1483, 4, 39, 21, 4, 3, 1),
-       (1484, 5, 39, 22, 0, 1, 2),
-       (1485, 6, 39, 23, 1, 1, 0),
-       (1486, 7, 39, 24, 1, 0, 1),
-       (1487, 8, 39, 25, 1, 2, 2),
-       (1488, 9, 39, 26, 2, 2, 0),
-       (1489, 10, 39, 27, 2, 1, 1),
-       (1490, 11, 39, 28, 2, 3, 2),
-       (1491, 12, 39, 29, 3, 3, 0),
-       (1492, 13, 39, 30, 3, 2, 1),
-       (1493, 14, 39, 31, 3, 4, 2),
-       (1494, 15, 39, 32, 4, 4, 0),
-       (1495, 16, 39, 33, 4, 3, 1),
-       (1496, 17, 39, 34, 0, 1, 2),
-       (1497, 18, 39, 35, 1, 1, 0),
-       (1498, 19, 39, 36, 1, 0, 1),
-       (1499, 20, 39, 37, 1, 2, 2),
-       (1500, 1, 39, 38, 2, 2, 0),
-       (1501, 2, 39, 40, 2, 1, 1),
-       (1502, 3, 40, 21, 2, 3, 2),
-       (1503, 4, 40, 22, 3, 3, 0),
-       (1504, 5, 40, 23, 3, 2, 1),
-       (1505, 6, 40, 24, 3, 4, 2),
-       (1506, 7, 40, 25, 4, 4, 0),
-       (1507, 8, 40, 26, 4, 3, 1),
-       (1508, 9, 40, 27, 0, 1, 2),
-       (1509, 10, 40, 28, 1, 1, 0),
-       (1510, 11, 40, 29, 1, 0, 1),
-       (1511, 12, 40, 30, 1, 2, 2),
-       (1512, 13, 40, 31, 2, 2, 0),
-       (1513, 14, 40, 32, 2, 1, 1),
-       (1514, 15, 40, 33, 2, 3, 2),
-       (1515, 16, 40, 34, 3, 3, 0),
-       (1516, 17, 40, 35, 3, 2, 1),
-       (1517, 18, 40, 36, 3, 4, 2),
-       (1518, 19, 40, 37, 4, 4, 0),
-       (1519, 20, 40, 38, 4, 3, 1),
-       (1520, 1, 40, 39, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (1, 1, 2, 1, 1, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (2, 1, 3, 1, 2, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (3, 1, 4, 1, 3, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (4, 1, 5, 1, 4, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (5, 1, 6, 1, 5, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (6, 1, 7, 1, 6, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (7, 1, 8, 1, 7, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (8, 1, 9, 1, 8, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (9, 1, 10, 1, 9, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (10, 1, 11, 1, 10, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (11, 1, 12, 1, 11, 0, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (12, 1, 13, 1, 12, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (13, 1, 14, 1, 13, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (14, 1, 15, 1, 14, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (15, 1, 16, 1, 15, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (16, 1, 17, 1, 16, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (17, 1, 18, 1, 17, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (18, 1, 19, 1, 18, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (19, 1, 20, 1, 19, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (20, 2, 1, 1, 20, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (21, 2, 3, 1, 1, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (22, 2, 4, 1, 2, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (23, 2, 5, 1, 3, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (24, 2, 6, 1, 4, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (25, 2, 7, 1, 5, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (26, 2, 8, 1, 6, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (27, 2, 9, 1, 7, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (28, 2, 10, 1, 8, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (29, 2, 11, 1, 9, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (30, 2, 12, 1, 10, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (31, 2, 13, 1, 11, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (32, 2, 14, 1, 12, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (33, 2, 15, 1, 13, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (34, 2, 16, 1, 14, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (35, 2, 17, 1, 15, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (36, 2, 18, 1, 16, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (37, 2, 19, 1, 17, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (38, 2, 20, 1, 18, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (39, 3, 1, 1, 19, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (40, 3, 2, 1, 20, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (41, 3, 4, 1, 1, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (42, 3, 5, 1, 2, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (43, 3, 6, 1, 3, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (44, 3, 7, 1, 4, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (45, 3, 8, 1, 5, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (46, 3, 9, 1, 6, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (47, 3, 10, 1, 7, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (48, 3, 11, 1, 8, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (49, 3, 12, 1, 9, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (50, 3, 13, 1, 10, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (51, 3, 14, 1, 11, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (52, 3, 15, 1, 12, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (53, 3, 16, 1, 13, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (54, 3, 17, 1, 14, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (55, 3, 18, 1, 15, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (56, 3, 19, 1, 16, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (57, 3, 20, 1, 17, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (58, 4, 1, 1, 18, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (59, 4, 2, 1, 19, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (60, 4, 3, 1, 20, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (61, 4, 5, 1, 1, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (62, 4, 6, 1, 2, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (63, 4, 7, 1, 3, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (64, 4, 8, 1, 4, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (65, 4, 9, 1, 5, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (66, 4, 10, 1, 6, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (67, 4, 11, 1, 7, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (68, 4, 12, 1, 8, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (69, 4, 13, 1, 9, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (70, 4, 14, 1, 10, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (71, 4, 15, 1, 11, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (72, 4, 16, 1, 12, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (73, 4, 17, 1, 13, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (74, 4, 18, 1, 14, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (75, 4, 19, 1, 15, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (76, 4, 20, 1, 16, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (77, 5, 1, 1, 17, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (78, 5, 2, 1, 18, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (79, 5, 3, 1, 19, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (80, 5, 4, 1, 20, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (81, 5, 6, 1, 1, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (82, 5, 7, 1, 2, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (83, 5, 8, 1, 3, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (84, 5, 9, 1, 4, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (85, 5, 10, 1, 5, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (86, 5, 11, 1, 6, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (87, 5, 12, 1, 7, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (88, 5, 13, 1, 8, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (89, 5, 14, 1, 9, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (90, 5, 15, 1, 10, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (91, 5, 16, 1, 11, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (92, 5, 17, 1, 12, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (93, 5, 18, 1, 13, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (94, 5, 19, 1, 14, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (95, 5, 20, 1, 15, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (96, 6, 1, 1, 16, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (97, 6, 2, 1, 17, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (98, 6, 3, 1, 18, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (99, 6, 4, 1, 19, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (100, 6, 5, 1, 20, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (101, 6, 7, 1, 1, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (102, 6, 8, 1, 2, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (103, 6, 9, 1, 3, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (104, 6, 10, 1, 4, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (105, 6, 11, 1, 5, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (106, 6, 12, 1, 6, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (107, 6, 13, 1, 7, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (108, 6, 14, 1, 8, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (109, 6, 15, 1, 9, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (110, 6, 16, 1, 10, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (111, 6, 17, 1, 11, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (112, 6, 18, 1, 12, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (113, 6, 19, 1, 13, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (114, 6, 20, 1, 14, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (115, 7, 1, 1, 15, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (116, 7, 2, 1, 16, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (117, 7, 3, 1, 17, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (118, 7, 4, 1, 18, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (119, 7, 5, 1, 19, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (120, 7, 6, 1, 20, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (121, 7, 8, 1, 1, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (122, 7, 9, 1, 2, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (123, 7, 10, 1, 3, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (124, 7, 11, 1, 4, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (125, 7, 12, 1, 5, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (126, 7, 13, 1, 6, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (127, 7, 14, 1, 7, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (128, 7, 15, 1, 8, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (129, 7, 16, 1, 9, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (130, 7, 17, 1, 10, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (131, 7, 18, 1, 11, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (132, 7, 19, 1, 12, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (133, 7, 20, 1, 13, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (134, 8, 1, 1, 14, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (135, 8, 2, 1, 15, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (136, 8, 3, 1, 16, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (137, 8, 4, 1, 17, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (138, 8, 5, 1, 18, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (139, 8, 6, 1, 19, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (140, 8, 7, 1, 20, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (141, 8, 9, 1, 1, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (142, 8, 10, 1, 2, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (143, 8, 11, 1, 3, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (144, 8, 12, 1, 4, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (145, 8, 13, 1, 5, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (146, 8, 14, 1, 6, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (147, 8, 15, 1, 7, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (148, 8, 16, 1, 8, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (149, 8, 17, 1, 9, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (150, 8, 18, 1, 10, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (151, 8, 19, 1, 11, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (152, 8, 20, 1, 12, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (153, 9, 1, 1, 13, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (154, 9, 2, 1, 14, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (155, 9, 3, 1, 15, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (156, 9, 4, 1, 16, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (157, 9, 5, 1, 17, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (158, 9, 6, 1, 18, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (159, 9, 7, 1, 19, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (160, 9, 8, 1, 20, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (161, 9, 10, 1, 1, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (162, 9, 11, 1, 2, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (163, 9, 12, 1, 3, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (164, 9, 13, 1, 4, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (165, 9, 14, 1, 5, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (166, 9, 15, 1, 6, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (167, 9, 16, 1, 7, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (168, 9, 17, 1, 8, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (169, 9, 18, 1, 9, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (170, 9, 19, 1, 10, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (171, 9, 20, 1, 11, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (172, 10, 1, 1, 12, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (173, 10, 2, 1, 13, 1, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (174, 10, 3, 1, 14, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (175, 10, 4, 1, 15, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (176, 10, 5, 1, 16, 1, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (177, 10, 6, 1, 17, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (178, 10, 7, 1, 18, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (179, 10, 8, 1, 19, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (180, 10, 9, 1, 20, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (181, 10, 11, 1, 1, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (182, 10, 12, 1, 2, 2, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (183, 10, 13, 1, 3, 3, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (184, 10, 14, 1, 4, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (185, 10, 15, 1, 5, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (186, 10, 16, 1, 6, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (187, 10, 17, 1, 7, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (188, 10, 18, 1, 8, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (189, 10, 19, 1, 9, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (190, 10, 20, 1, 10, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (191, 11, 1, 1, 11, 0, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (192, 11, 2, 1, 12, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (193, 11, 3, 1, 13, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (194, 11, 4, 1, 14, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (195, 11, 5, 1, 15, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (196, 11, 6, 1, 16, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (197, 11, 7, 1, 17, 2, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (198, 11, 8, 1, 18, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (199, 11, 9, 1, 19, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (200, 11, 10, 1, 20, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (201, 11, 12, 1, 1, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (202, 11, 13, 1, 2, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (203, 11, 14, 1, 3, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (204, 11, 15, 1, 4, 2, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (205, 11, 16, 1, 5, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (206, 11, 17, 1, 6, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (207, 11, 18, 1, 7, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (208, 11, 19, 1, 8, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (209, 11, 20, 1, 9, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (210, 12, 1, 1, 10, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (211, 12, 2, 1, 11, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (212, 12, 3, 1, 12, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (213, 12, 4, 1, 13, 2, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (214, 12, 5, 1, 14, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (215, 12, 6, 1, 15, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (216, 12, 7, 1, 16, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (217, 12, 8, 1, 17, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (218, 12, 9, 1, 18, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (219, 12, 10, 1, 19, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (220, 12, 11, 1, 20, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (221, 12, 13, 1, 1, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (222, 12, 14, 1, 2, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (223, 12, 15, 1, 3, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (224, 12, 16, 1, 4, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (225, 12, 17, 1, 5, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (226, 12, 18, 1, 6, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (227, 12, 19, 1, 7, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (228, 12, 20, 1, 8, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (229, 13, 1, 1, 9, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (230, 13, 2, 1, 10, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (231, 13, 3, 1, 11, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (232, 13, 4, 1, 12, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (233, 13, 5, 1, 13, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (234, 13, 6, 1, 14, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (235, 13, 7, 1, 15, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (236, 13, 8, 1, 16, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (237, 13, 9, 1, 17, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (238, 13, 10, 1, 18, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (239, 13, 11, 1, 19, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (240, 13, 12, 1, 20, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (241, 13, 14, 1, 1, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (242, 13, 15, 1, 2, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (243, 13, 16, 1, 3, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (244, 13, 17, 1, 4, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (245, 13, 18, 1, 5, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (246, 13, 19, 1, 6, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (247, 13, 20, 1, 7, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (248, 14, 1, 1, 8, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (249, 14, 2, 1, 9, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (250, 14, 3, 1, 10, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (251, 14, 4, 1, 11, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (252, 14, 5, 1, 12, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (253, 14, 6, 1, 13, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (254, 14, 7, 1, 14, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (255, 14, 8, 1, 15, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (256, 14, 9, 1, 16, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (257, 14, 10, 1, 17, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (258, 14, 11, 1, 18, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (259, 14, 12, 1, 19, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (260, 14, 13, 1, 20, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (261, 14, 15, 1, 1, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (262, 14, 16, 1, 2, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (263, 14, 17, 1, 3, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (264, 14, 18, 1, 4, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (265, 14, 19, 1, 5, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (266, 14, 20, 1, 6, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (267, 15, 1, 1, 7, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (268, 15, 2, 1, 8, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (269, 15, 3, 1, 9, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (270, 15, 4, 1, 10, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (271, 15, 5, 1, 11, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (272, 15, 6, 1, 12, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (273, 15, 7, 1, 13, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (274, 15, 8, 1, 14, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (275, 15, 9, 1, 15, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (276, 15, 10, 1, 16, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (277, 15, 11, 1, 17, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (278, 15, 12, 1, 18, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (279, 15, 13, 1, 19, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (280, 15, 14, 1, 20, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (281, 15, 16, 1, 1, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (282, 15, 17, 1, 2, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (283, 15, 18, 1, 3, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (284, 15, 19, 1, 4, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (285, 15, 20, 1, 5, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (286, 16, 1, 1, 6, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (287, 16, 2, 1, 7, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (288, 16, 3, 1, 8, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (289, 16, 4, 1, 9, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (290, 16, 5, 1, 10, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (291, 16, 6, 1, 11, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (292, 16, 7, 1, 12, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (293, 16, 8, 1, 13, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (294, 16, 9, 1, 14, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (295, 16, 10, 1, 15, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (296, 16, 11, 1, 16, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (297, 16, 12, 1, 17, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (298, 16, 13, 1, 18, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (299, 16, 14, 1, 19, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (300, 16, 15, 1, 20, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (301, 16, 17, 1, 1, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (302, 16, 18, 1, 2, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (303, 16, 19, 1, 3, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (304, 16, 20, 1, 4, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (305, 17, 1, 1, 5, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (306, 17, 2, 1, 6, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (307, 17, 3, 1, 7, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (308, 17, 4, 1, 8, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (309, 17, 5, 1, 9, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (310, 17, 6, 1, 10, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (311, 17, 7, 1, 11, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (312, 17, 8, 1, 12, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (313, 17, 9, 1, 13, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (314, 17, 10, 1, 14, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (315, 17, 11, 1, 15, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (316, 17, 12, 1, 16, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (317, 17, 13, 1, 17, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (318, 17, 14, 1, 18, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (319, 17, 15, 1, 19, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (320, 17, 16, 1, 20, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (321, 17, 18, 1, 1, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (322, 17, 19, 1, 2, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (323, 17, 20, 1, 3, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (324, 18, 1, 1, 4, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (325, 18, 2, 1, 5, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (326, 18, 3, 1, 6, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (327, 18, 4, 1, 7, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (328, 18, 5, 1, 8, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (329, 18, 6, 1, 9, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (330, 18, 7, 1, 10, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (331, 18, 8, 1, 11, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (332, 18, 9, 1, 12, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (333, 18, 10, 1, 13, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (334, 18, 11, 1, 14, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (335, 18, 12, 1, 15, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (336, 18, 13, 1, 16, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (337, 18, 14, 1, 17, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (338, 18, 15, 1, 18, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (339, 18, 16, 1, 19, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (340, 18, 17, 1, 20, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (341, 18, 19, 1, 1, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (342, 18, 20, 1, 2, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (343, 19, 1, 1, 3, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (344, 19, 2, 1, 4, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (345, 19, 3, 1, 5, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (346, 19, 4, 1, 6, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (347, 19, 5, 1, 7, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (348, 19, 6, 1, 8, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (349, 19, 7, 1, 9, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (350, 19, 8, 1, 10, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (351, 19, 9, 1, 11, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (352, 19, 10, 1, 13, 1, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (353, 19, 11, 1, 14, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (354, 19, 12, 1, 15, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (355, 19, 13, 1, 16, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (356, 19, 14, 1, 17, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (357, 19, 15, 1, 18, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (358, 19, 16, 1, 19, 1, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (359, 19, 17, 1, 20, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (360, 19, 18, 1, 1, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (361, 19, 20, 1, 2, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (362, 20, 1, 1, 3, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (363, 20, 2, 1, 4, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (364, 20, 3, 1, 5, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (365, 20, 4, 1, 6, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (366, 20, 5, 1, 7, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (367, 20, 6, 1, 8, 4, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (368, 20, 7, 1, 9, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (369, 20, 8, 1, 10, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (370, 20, 9, 1, 11, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (371, 20, 10, 1, 12, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (372, 20, 11, 1, 13, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (373, 20, 12, 1, 14, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (374, 20, 13, 1, 15, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (375, 20, 14, 1, 16, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (376, 20, 15, 1, 17, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (377, 20, 16, 1, 18, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (378, 20, 17, 1, 19, 3, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (379, 20, 18, 1, 20, 4, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (380, 20, 19, 1, 1, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (381, 43, 21, 2, 32, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (382, 43, 22, 2, 21, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (383, 43, 23, 2, 31, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (384, 43, 44, 2, 22, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (385, 43, 45, 2, 21, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (386, 43, 46, 2, 35, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (387, 43, 25, 2, 37, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (388, 43, 26, 2, 37, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (389, 43, 47, 2, 38, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (390, 43, 49, 2, 28, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (391, 43, 28, 2, 24, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (392, 43, 30, 2, 25, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (393, 43, 24, 2, 27, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (394, 43, 34, 2, 22, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (395, 43, 35, 2, 33, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (396, 43, 36, 2, 26, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (397, 43, 38, 2, 38, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (398, 43, 39, 2, 22, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (399, 21, 43, 2, 38, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (400, 21, 22, 2, 34, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (401, 21, 23, 2, 36, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (402, 21, 44, 2, 29, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (403, 21, 45, 2, 37, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (404, 21, 46, 2, 28, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (405, 21, 25, 2, 29, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (406, 21, 26, 2, 21, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (407, 21, 47, 2, 28, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (408, 21, 49, 2, 30, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (409, 21, 28, 2, 30, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (410, 21, 30, 2, 34, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (411, 21, 24, 2, 28, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (412, 21, 34, 2, 36, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (413, 21, 35, 2, 21, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (414, 21, 36, 2, 38, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (415, 21, 38, 2, 31, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (416, 21, 39, 2, 39, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (417, 22, 43, 2, 32, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (418, 22, 21, 2, 40, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (419, 22, 23, 2, 24, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (420, 22, 44, 2, 28, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (421, 22, 45, 2, 37, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (422, 22, 46, 2, 29, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (423, 22, 25, 2, 27, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (424, 22, 26, 2, 21, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (425, 22, 47, 2, 29, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (426, 22, 49, 2, 38, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (427, 22, 28, 2, 27, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (428, 22, 30, 2, 35, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (429, 22, 24, 2, 22, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (430, 22, 34, 2, 21, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (431, 22, 35, 2, 30, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (432, 22, 36, 2, 24, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (433, 22, 38, 2, 26, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (434, 22, 39, 2, 27, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (435, 23, 43, 2, 31, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (436, 23, 21, 2, 24, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (437, 23, 22, 2, 35, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (438, 23, 44, 2, 36, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (439, 23, 45, 2, 37, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (440, 23, 46, 2, 22, 6, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (441, 23, 25, 2, 23, 5, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (442, 23, 26, 2, 29, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (443, 23, 47, 2, 22, 6, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (444, 23, 49, 2, 39, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (445, 23, 28, 2, 24, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (446, 23, 30, 2, 36, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (447, 23, 24, 2, 35, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (448, 23, 34, 2, 22, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (449, 23, 35, 2, 25, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (450, 23, 36, 2, 28, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (451, 23, 38, 2, 21, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (452, 23, 39, 2, 31, 5, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (453, 44, 43, 2, 23, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (454, 44, 21, 2, 24, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (455, 44, 22, 2, 29, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (456, 44, 23, 2, 21, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (457, 44, 45, 2, 37, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (458, 44, 46, 2, 24, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (459, 44, 25, 2, 27, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (460, 44, 26, 2, 28, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (461, 44, 47, 2, 28, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (462, 44, 49, 2, 32, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (463, 44, 28, 2, 38, 4, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (464, 44, 30, 2, 34, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (465, 44, 24, 2, 21, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (466, 44, 34, 2, 37, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (467, 44, 35, 2, 25, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (468, 44, 36, 2, 36, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (469, 44, 38, 2, 22, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (470, 44, 39, 2, 28, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (471, 45, 43, 2, 40, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (472, 45, 21, 2, 25, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (473, 45, 22, 2, 31, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (474, 45, 23, 2, 30, 2, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (475, 45, 44, 2, 29, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (476, 45, 46, 2, 24, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (477, 45, 25, 2, 39, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (478, 45, 26, 2, 25, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (479, 45, 47, 2, 40, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (480, 45, 49, 2, 32, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (481, 45, 28, 2, 26, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (482, 45, 30, 2, 35, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (483, 45, 24, 2, 22, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (484, 45, 34, 2, 27, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (485, 45, 35, 2, 29, 2, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (486, 45, 36, 2, 25, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (487, 45, 38, 2, 39, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (488, 45, 39, 2, 27, 2, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (489, 46, 43, 2, 29, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (490, 46, 21, 2, 30, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (491, 46, 22, 2, 25, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (492, 46, 23, 2, 37, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (493, 46, 44, 2, 40, 0, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (494, 46, 45, 2, 25, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (495, 46, 25, 2, 35, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (496, 46, 26, 2, 35, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (497, 46, 47, 2, 29, 4, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (498, 46, 49, 2, 25, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (499, 46, 28, 2, 34, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (500, 46, 30, 2, 23, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (501, 46, 24, 2, 28, 5, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (502, 46, 34, 2, 31, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (503, 46, 35, 2, 32, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (504, 46, 36, 2, 28, 5, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (505, 46, 38, 2, 32, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (506, 46, 39, 2, 38, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (507, 25, 43, 2, 34, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (508, 25, 21, 2, 28, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (509, 25, 22, 2, 37, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (510, 25, 23, 2, 39, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (511, 25, 44, 2, 22, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (512, 25, 45, 2, 25, 4, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (513, 25, 46, 2, 26, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (514, 25, 26, 2, 38, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (515, 25, 47, 2, 24, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (516, 25, 49, 2, 31, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (517, 25, 28, 2, 23, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (518, 25, 30, 2, 24, 4, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (519, 25, 24, 2, 27, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (520, 25, 34, 2, 30, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (521, 25, 35, 2, 37, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (522, 25, 36, 2, 40, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (523, 25, 38, 2, 40, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (524, 25, 39, 2, 23, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (525, 26, 43, 2, 33, 4, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (526, 26, 21, 2, 33, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (527, 26, 22, 2, 31, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (528, 26, 23, 2, 34, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (529, 26, 44, 2, 37, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (530, 26, 45, 2, 22, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (531, 26, 46, 2, 34, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (532, 26, 25, 2, 39, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (533, 26, 47, 2, 31, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (534, 26, 49, 2, 40, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (535, 26, 28, 2, 32, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (536, 26, 30, 2, 38, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (537, 26, 24, 2, 21, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (538, 26, 34, 2, 21, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (539, 26, 35, 2, 34, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (540, 26, 36, 2, 27, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (541, 26, 38, 2, 30, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (542, 26, 39, 2, 39, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (543, 47, 43, 2, 34, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (544, 47, 21, 2, 22, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (545, 47, 22, 2, 21, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (546, 47, 23, 2, 36, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (547, 47, 44, 2, 37, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (548, 47, 45, 2, 21, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (549, 47, 46, 2, 21, 1, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (550, 47, 25, 2, 34, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (551, 47, 26, 2, 21, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (552, 47, 49, 2, 25, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (553, 47, 28, 2, 26, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (554, 47, 30, 2, 34, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (555, 47, 24, 2, 34, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (556, 47, 34, 2, 32, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (557, 47, 35, 2, 29, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (558, 47, 36, 2, 31, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (559, 47, 38, 2, 21, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (560, 47, 39, 2, 27, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (561, 49, 43, 2, 34, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (562, 49, 21, 2, 28, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (563, 49, 22, 2, 26, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (564, 49, 23, 2, 34, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (565, 49, 44, 2, 29, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (566, 49, 45, 2, 36, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (567, 49, 46, 2, 30, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (568, 49, 25, 2, 35, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (569, 49, 26, 2, 33, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (570, 49, 47, 2, 23, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (571, 49, 28, 2, 33, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (572, 49, 30, 2, 22, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (573, 49, 24, 2, 33, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (574, 49, 34, 2, 35, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (575, 49, 35, 2, 26, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (576, 49, 36, 2, 24, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (577, 49, 38, 2, 37, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (578, 49, 39, 2, 26, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (579, 28, 43, 2, 25, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (580, 28, 21, 2, 23, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (581, 28, 22, 2, 40, 0, 5, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (582, 28, 23, 2, 24, 5, 4, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (583, 28, 44, 2, 26, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (584, 28, 45, 2, 40, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (585, 28, 46, 2, 28, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (586, 28, 25, 2, 39, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (587, 28, 26, 2, 38, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (588, 28, 47, 2, 33, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (589, 28, 49, 2, 33, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (590, 28, 30, 2, 31, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (591, 28, 24, 2, 31, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (592, 28, 34, 2, 21, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (593, 28, 35, 2, 39, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (594, 28, 36, 2, 22, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (595, 28, 38, 2, 29, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (596, 28, 39, 2, 22, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (597, 30, 43, 2, 40, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (598, 30, 21, 2, 23, 3, 3, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (599, 30, 22, 2, 33, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (600, 30, 23, 2, 23, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (601, 30, 44, 2, 21, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (602, 30, 45, 2, 40, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (603, 30, 46, 2, 28, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (604, 30, 25, 2, 37, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (605, 30, 26, 2, 37, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (606, 30, 47, 2, 36, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (607, 30, 49, 2, 39, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (608, 30, 28, 2, 27, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (609, 30, 24, 2, 24, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (610, 30, 34, 2, 38, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (611, 30, 35, 2, 35, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (612, 30, 36, 2, 21, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (613, 30, 38, 2, 26, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (614, 30, 39, 2, 28, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (615, 24, 43, 2, 35, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (616, 24, 21, 2, 30, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (617, 24, 22, 2, 33, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (618, 24, 23, 2, 25, 0, 5, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (619, 24, 44, 2, 35, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (620, 24, 45, 2, 31, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (621, 24, 46, 2, 40, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (622, 24, 25, 2, 21, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (623, 24, 26, 2, 31, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (624, 24, 47, 2, 24, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (625, 24, 49, 2, 29, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (626, 24, 28, 2, 36, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (627, 24, 30, 2, 32, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (628, 24, 34, 2, 23, 3, 5, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (629, 24, 35, 2, 26, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (630, 24, 36, 2, 22, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (631, 24, 38, 2, 39, 3, 6, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (632, 24, 39, 2, 25, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (633, 34, 43, 2, 30, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (634, 34, 21, 2, 27, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (635, 34, 22, 2, 28, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (636, 34, 23, 2, 24, 0, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (637, 34, 44, 2, 26, 6, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (638, 34, 45, 2, 39, 7, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (639, 34, 46, 2, 34, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (640, 34, 25, 2, 36, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (641, 34, 26, 2, 38, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (642, 34, 47, 2, 37, 6, 3, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (643, 34, 49, 2, 36, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (644, 34, 28, 2, 37, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (645, 34, 30, 2, 21, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (646, 34, 24, 2, 28, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (647, 34, 35, 2, 23, 5, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (648, 34, 36, 2, 28, 5, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (649, 34, 38, 2, 39, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (650, 34, 39, 2, 27, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (651, 35, 43, 2, 31, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (652, 35, 21, 2, 34, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (653, 35, 22, 2, 30, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (654, 35, 23, 2, 37, 2, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (655, 35, 44, 2, 40, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (656, 35, 45, 2, 30, 5, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (657, 35, 46, 2, 25, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (658, 35, 25, 2, 30, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (659, 35, 26, 2, 34, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (660, 35, 47, 2, 24, 5, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (661, 35, 49, 2, 30, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (662, 35, 28, 2, 23, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (663, 35, 30, 2, 23, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (664, 35, 24, 2, 40, 4, 4, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (665, 35, 34, 2, 40, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (666, 35, 36, 2, 39, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (667, 35, 38, 2, 28, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (668, 35, 39, 2, 37, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (669, 36, 43, 2, 40, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (670, 36, 21, 2, 34, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (671, 36, 22, 2, 32, 2, 5, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (672, 36, 23, 2, 21, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (673, 36, 44, 2, 25, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (674, 36, 45, 2, 33, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (675, 36, 46, 2, 31, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (676, 36, 25, 2, 33, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (677, 36, 26, 2, 31, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (678, 36, 47, 2, 28, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (679, 36, 49, 2, 26, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (680, 36, 28, 2, 38, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (681, 36, 30, 2, 25, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (682, 36, 24, 2, 34, 3, 5, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (683, 36, 34, 2, 37, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (684, 36, 35, 2, 25, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (685, 36, 38, 2, 34, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (686, 36, 39, 2, 39, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (687, 38, 43, 2, 36, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (688, 38, 21, 2, 32, 3, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (689, 38, 22, 2, 29, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (690, 38, 23, 2, 32, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (691, 38, 44, 2, 37, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (692, 38, 45, 2, 29, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (693, 38, 46, 2, 35, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (694, 38, 25, 2, 32, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (695, 38, 26, 2, 29, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (696, 38, 47, 2, 22, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (697, 38, 49, 2, 34, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (698, 38, 28, 2, 26, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (699, 38, 30, 2, 37, 5, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (700, 38, 24, 2, 38, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (701, 38, 34, 2, 32, 1, 4, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (702, 38, 35, 2, 25, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (703, 38, 36, 2, 24, 4, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (704, 38, 39, 2, 37, 0, 1, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (705, 39, 43, 2, 37, 1, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (706, 39, 21, 2, 30, 1, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (707, 39, 22, 2, 40, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (708, 39, 23, 2, 28, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (709, 39, 44, 2, 32, 4, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (710, 39, 45, 2, 34, 1, 1, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (711, 39, 46, 2, 31, 3, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (712, 39, 25, 2, 32, 0, 0, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (713, 39, 26, 2, 30, 1, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (714, 39, 47, 2, 22, 0, 2, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (715, 39, 49, 2, 38, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (716, 39, 28, 2, 24, 2, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (717, 39, 30, 2, 26, 2, 0, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (718, 39, 24, 2, 35, 3, 1, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (719, 39, 34, 2, 32, 2, 2, 0);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (720, 39, 35, 2, 26, 4, 2, 1);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (721, 39, 36, 2, 37, 2, 3, 2);
+INSERT INTO football.game (idgame, home, away, season_id, referee_id, score_home, score_away, score) VALUES (722, 39, 38, 2, 30, 1, 0, 1);
