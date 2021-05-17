@@ -40,10 +40,10 @@ INSERT INTO Article VALUES
 
 CREATE TABLE Authors (
     aid INT,
-	rid INT,
+    rid INT,
     PRIMARY KEY (aid, rid),
-	FOREIGN KEY (aid) REFERENCES Article(aid),
-	FOREIGN KEY (rid) REFERENCES Researcher(rid)
+    FOREIGN KEY (aid) REFERENCES Article(aid),
+    FOREIGN KEY (rid) REFERENCES Researcher(rid)
 );
 
 INSERT INTO Authors VALUES 

@@ -53,7 +53,7 @@ DELIMITER //
 CREATE FUNCTION numCoauthored2 (rid1 INT(3), rid2 INT(3)) RETURNS INT
 BEGIN
     DECLARE numArticlesCoauthored INT;
-	SELECT COUNT(*) INTO numArticlesCoauthored
+	SELECT COUNT(*) INTO numArticlesCoauthored 
     FROM Authors AS AuthorsA 
     JOIN Authors AS AuthorsB USING (aid) 
     WHERE AuthorsA.rid = rid1 AND AuthorsB.rid = rid2;
