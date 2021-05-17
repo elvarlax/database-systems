@@ -2,10 +2,10 @@ CREATE DATABASE HotelDatabase;
 USE HotelDatabase;
 
 CREATE TABLE Hotel (
-    hotelNo VARCHAR(4),
-    hotelName VARCHAR(15),
-    city VARCHAR(15),
-    PRIMARY KEY (hotelNo)
+	hotelNo VARCHAR(4),
+	hotelName VARCHAR(15),
+	city VARCHAR(15),
+	PRIMARY KEY (hotelNo)
 );
 
 INSERT INTO Hotel VALUES ('H002', 'Grand Hotel', 'London');
@@ -15,10 +15,10 @@ INSERT INTO Hotel VALUES ('H011', 'Palads', 'Copenhagen');
 INSERT INTO Hotel VALUES ('H012', 'Piazza Hotel', 'Rome');
 
 CREATE TABLE Guest (
-    guestNo VARCHAR(4),
-    guestName VARCHAR(15),
-    guestAddress VARCHAR(25),
-    PRIMARY KEY (guestNo)
+	guestNo VARCHAR(4),
+	guestName VARCHAR(15),
+	guestAddress VARCHAR(25),
+	PRIMARY KEY (guestNo)
 );
 
 INSERT INTO Guest VALUES ('G221', 'Peter Schmidt', 'Lake Str. 5, Holte');
@@ -26,12 +26,12 @@ INSERT INTO Guest VALUES ('G324', 'Anders Jensen', 'High Str. 1, Lyngby');
 INSERT INTO Guest VALUES ('G329', 'Mary Hanson', 'Castle Blv. 2, Sorgenfri');
 
 CREATE TABLE Room (
-    hotelNo VARCHAR(4),
-    roomNo VARCHAR(3),
-    roomType ENUM('Single', 'Double', 'Family'),
-    price INT,
-    PRIMARY KEY (hotelNo, roomNo),
-    FOREIGN KEY (hotelNo) REFERENCES Hotel(hotelNo)
+	hotelNo VARCHAR(4),
+	roomNo VARCHAR(3),
+	roomType ENUM('Single', 'Double', 'Family'),
+	price INT,
+	PRIMARY KEY (hotelNo, roomNo),
+	FOREIGN KEY (hotelNo) REFERENCES Hotel(hotelNo)
 );
 
 INSERT INTO Room VALUES ('H002', '113', 'Family', 80);
@@ -45,12 +45,12 @@ INSERT INTO Room VALUES ('H011', '216', 'Single', 89);
 INSERT INTO Room VALUES ('H012', '101', 'Single', 83);
 
 CREATE TABLE Booking (
-    hotelNo VARCHAR(4),
-    roomNo VARCHAR(3),
-    night DATE,
-    guestNo VARCHAR(4),
-    isPaid BOOLEAN,
-    FOREIGN KEY (hotelNo, roomNo) REFERENCES Room(hotelNo, roomNo),
+	hotelNo VARCHAR(4),
+	roomNo VARCHAR(3),
+	night DATE,
+	guestNo VARCHAR(4),
+	isPaid BOOLEAN,
+	FOREIGN KEY (hotelNo, roomNo) REFERENCES Room(hotelNo, roomNo),
 	FOREIGN KEY (guestNo) REFERENCES Guest(guestNo)
 );
 
