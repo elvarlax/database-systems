@@ -15,9 +15,9 @@ WHERE isPaid = 0;
 /* Question 1.3:
 State an SQL query, which returns a table containing the hotelNo and roomNo of each room 
 that is not booked on the night '2021-08-10'. */
-(SELECT hotelNo, roomNo FROM Room)
-EXECPT
-(SELECT hotelNo, roomNo FROM Booking WHERE night = '2021-08-10')
+SELECT hotelNo, roomNo FROM Room
+EXCEPT
+SELECT hotelNo, roomNo FROM Booking WHERE night = '2021-08-10';
 
 /* Question 1.4:
 Define an SQL view (virtual table) named NumberOfRooms, which for each hotel
