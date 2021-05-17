@@ -29,7 +29,7 @@ INSERT INTO Researcher VALUES
 CREATE TABLE Article (
     aid INT,
     aname VARCHAR(30),
-	year YEAR,
+    year YEAR,
     PRIMARY KEY (aid)
 );
 
