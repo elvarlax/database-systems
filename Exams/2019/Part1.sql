@@ -40,7 +40,7 @@ will return the number of articles co-authored by the two researchers. */
 DELIMITER //
 CREATE FUNCTION numCoauthored1 (rid1 INT(3), rid2 INT(3)) RETURNS INT
 BEGIN
-	DECLARE numArticlesCoauthored INT;
+    DECLARE numArticlesCoauthored INT;
     SELECT COUNT(*) INTO numArticlesCoauthored 
     FROM Authors
     WHERE rid = rid1 AND aid IN (SELECT aid FROM Authors WHERE rid = rid2);
@@ -52,7 +52,7 @@ DELIMITER ;
 DELIMITER //
 CREATE FUNCTION numCoauthored2 (rid1 INT(3), rid2 INT(3)) RETURNS INT
 BEGIN
-	DECLARE numArticlesCoauthored INT;
+    DECLARE numArticlesCoauthored INT;
 	SELECT COUNT(*) INTO numArticlesCoauthored
     FROM Authors AS AuthorsA 
     JOIN Authors AS AuthorsB USING (aid) 
@@ -64,6 +64,5 @@ DELIMITER ;
 /* Question 1.5:
 State an SQL statement that uses the function to find the number of articles
 co-authored by the two researchers with numbers 1 and 3. */
-
 SELECT numCoauthored1(1, 3);
 SELECT numCoauthored2(1, 3);

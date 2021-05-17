@@ -40,10 +40,10 @@ INSERT INTO Article VALUES
 
 CREATE TABLE Authors (
     aid INT,
-    rid INT,
-	PRIMARY KEY (aid, rid),
-    FOREIGN KEY (aid) REFERENCES Article(aid),
-    FOREIGN KEY (rid) REFERENCES Researcher(rid)
+	rid INT,
+    PRIMARY KEY (aid, rid),
+	FOREIGN KEY (aid) REFERENCES Article(aid),
+	FOREIGN KEY (rid) REFERENCES Researcher(rid)
 );
 
 INSERT INTO Authors VALUES 
@@ -55,7 +55,7 @@ INSERT INTO Authors VALUES
 CREATE TABLE Project (
     pname VARCHAR(12),
     iname VARCHAR(5),
-	PRIMARY KEY (pname)
+    PRIMARY KEY (pname)
 );
 
 INSERT INTO Project VALUES 
