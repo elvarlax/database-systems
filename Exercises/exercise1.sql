@@ -94,7 +94,6 @@ UPDATE Department
 SET Building = 'Taylor'
 WHERE DeptName = 'Finance';
 
-/* IMPORTANT */
 /* Run the UniversityDB Script to restore tables to initial instances. */
 
 /* 2.28 Create a Database
