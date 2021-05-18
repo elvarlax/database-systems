@@ -1,6 +1,6 @@
 /* Question 1.1:
 State an SQL query, which returns a table containing the hotelNo of each hotel having a family room. */
-SELECT hotelNo
+SELECT DISTINCT hotelNo
 FROM Hotel
 NATURAL JOIN Room
 WHERE roomType = 'Family';
@@ -15,9 +15,15 @@ WHERE isPaid = 0;
 /* Question 1.3:
 State an SQL query, which returns a table containing the hotelNo and roomNo of each room 
 that is not booked on the night '2021-08-10'. */
+# EXCEPT
 SELECT hotelNo, roomNo FROM Room
 EXCEPT
 SELECT hotelNo, roomNo FROM Booking WHERE night = '2021-08-10';
+
+# NOT IN
+SELECT hotelNo, roomNo 
+FROM Room
+WHERE (hotelNo, roomNo) NOT IN (SELECT hotelNo, roomNo FROM Booking WHERE night = '2021-08-10');
 
 /* Question 1.4:
 Define an SQL view (virtual table) named NumberOfRooms, which for each hotel
