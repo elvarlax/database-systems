@@ -5,111 +5,110 @@ USE UniversityDB;
 /* 2.13 SELECT all attributes
 	Get all data in the Student table: */
 SELECT *
-FROM student;
+FROM Student;
 
 /* 2.14 SELECT all attributes
 	Get all data in the Course table: */
 SELECT *
-FROM course;
+FROM Course;
 
 /* 2.15 SELECT only one attribute
 	Get the name of all students: */
 SELECT StudName
-FROM student;
+FROM Student;
 
 /* 2.16 SELECT multiple attributes
 	Get the name and total credits of all students: */
 SELECT StudName, TotCredits
-FROM student;
+FROM Student;
 
 /* 2.17 SELECT multiple attributes
 	Get the name, salary and department of all instructors: */
-SELECT InstName, Salary, DeptName
-FROM instructor;
+SELECT InstName, DeptName, Salary
+FROM Instructor;
 
 /* 2.18 SELECT only some rows
    Get the names of all students with a total credit of more than 100. */
-SELECT StudName, TotCredits
-FROM student
+SELECT StudName
+FROM Student
 WHERE TotCredits > 100;
 
 /* 2.19 SELECT rows based on multiple conditions
 	Get the students in Computer Science with a total
 	credit of more than 100: */
-SELECT *
-FROM student
-WHERE DeptName = 'Comp. Sci.'
-  AND TotCredits > 100;
+SELECT StudName
+FROM Student
+WHERE TotCredits > 100 AND DeptName = 'Comp. Sci.';
 
 /* 2.20 SELECT rows based on multiple conditions
 	Get the rooms with a capacity between 25 and 50, or
 	located in the Painter building: */
-SELECT *
-FROM classroom
-WHERE Capacity BETWEEN 25 AND 50
-   OR Building = 'Painter';
+SELECT Room, Capacity
+FROM Classroom
+WHERE Capacity > 25 AND Capacity < 50 OR Building = 'Painter';
 
 /* 2.21 SELECT rows based on single condition
 	Get all department names not located in the Taylor building: */
 SELECT DeptName
-FROM department
+FROM Department
 WHERE Building != 'Taylor';
 
 /* 2.22 SELECT based on two tables
 	What are the Course ID, year and grade for all
 	courses taken by student Shankar: */
 SELECT CourseID, StudyYear, Grade
-FROM takes
-WHERE StudID = 12345;
+FROM Takes AS T, Student AS S
+WHERE T.StudID = S.StudID AND StudName = 'Shankar';
 
 /* 2.23 INSERT with multiple rows
 	Create two new Comp. Sci. courses CS-102 and CS-103
 	in table Course titled Weekly Seminar
 	and Monthly Seminar, both with 0 credits: */
-INSERT INTO course VALUES ('CS-102', 'Weekly Seminar', 'Comp. Sci.', 0);
-INSERT INTO course VALUES ('CS-103', 'Monthly Seminar', 'Comp. Sci.', 0);
+INSERT INTO Course VALUES 
+('CS-102', 'Weekly Seminar', 'Comp. Sci.', 0),
+('CS-103', 'Monthly Seminar', 'Comp. Sci.', 0);
 
 /* 2.24 INSERT with multiple NULL values
 	Create a section for both CS-102 and CS-103 in Fall
 	2009, both with SectionID 1: */
-INSERT INTO section VALUE ('CS-102', '1', 'Fall', 2009, NULL, NULL, NULL);
-INSERT INTO section VALUE ('CS-103', '1', 'Fall', 2009, NULL, NULL, NULL);
+INSERT INTO Section VALUES 
+('CS-102', 1, 'Fall', 2009, NULL, NULL, NULL),
+('CS-103', 1, 'Fall', 2009, NULL, NULL, NULL);
 
 /* 2.25 INSERT with SELECT and NULL
 	In table Takes enroll every student in the Comp. Sci.
 	department in the section for CS-102: */
-INSERT INTO takes
+INSERT INTO Takes
 SELECT StudID, 'CS-102', 1, 'Fall', 2009, NULL
-FROM student
+FROM Student
 WHERE DeptName = 'Comp. Sci.';
 
 /* 2.26 DELETE
 	Delete both courses CS-102 and CS-103 in the Takes table: */
-DELETE
-FROM takes
-WHERE CourseID = 'CS-102' OR 'CS-103';
+DELETE FROM Takes
+WHERE CourseID = 'CS-102' OR CourseID = 'CS-103';
 
 /* 2.27 Update
 	Move the Finance department to the Taylor building. */
-UPDATE department
+UPDATE Department
 SET Building = 'Taylor'
 WHERE DeptName = 'Finance';
 
+/* IMPORTANT */
 /* Run the UniversityDB Script to restore tables to initial instances. */
 
 /* 2.28 Create a Database
 	Write SQL DDL statements corresponding to the
 	Relation Schemas below for an Insurance Database.
+	
+	Person (DriverID, DriverName, Address)
+	Car (License, Model, ProdYear)
+	Accident (ReportNumber, AccDate, Location)
+	Owns (DriverID, License)
+	Participants (ReportNumber, License, DriverID, DamageAmount)
 
-   Person (DriverID, DriverName, Address)
-   Car (License, Model, ProdYear)
-   Accident (ReportNumber, AccDate, Location)
-   Owns (DriverID, License)
-   Participants (ReportNumber, License, DriverID,
-   DamageAmount)
-
-   Make any reasonable assumptions about data
-   types, and declare primary and foreign keys.
+	Make any reasonable assumptions about data
+	types, and declare primary and foreign keys.
 */
 CREATE DATABASE Insurance;
 USE Insurance;
