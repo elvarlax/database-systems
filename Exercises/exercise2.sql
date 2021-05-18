@@ -126,7 +126,7 @@ CREATE TABLE Testscores (
 	Student VARCHAR(20) NOT NULL,
 	Test VARCHAR(20) NOT NULL,
 	Score INT,
-	PRIMARY KEY (Student, test)
+	PRIMARY KEY (Student, Test)
 );
 
 INSERT INTO Testscores VALUES
