@@ -9,9 +9,9 @@ GROUP BY rid;
 /* Question 1.2:
 State an SQL query that returns for each Danish institution (having employees),
 the unique ids and names of the researchers employed at that institution. */
-SELECT rid, rname, iname
-FROM Researcher
-NATURAL JOIN Institution
+SELECT iname, rid, rname
+FROM Institution
+NATURAL JOIN Researcher
 WHERE country = 'DK';
 
 /* Question 1.3:
@@ -30,7 +30,12 @@ WHERE PA.pname IS NULL;
 # NOT EXISTS
 SELECT pname
 FROM Project P
-WHERE NOT EXISTS (SELECT NULL FROM Participates PA WHERE PA.pname = P.pname)
+WHERE NOT EXISTS (SELECT NULL FROM Participates PA WHERE PA.pname = P.pname);
+
+# EXCEPT
+SELECT pname FROM Project 
+EXCEPT 
+SELECT pname FROM participates;
 
 /* Question 1.4:
 Define an SQL function named numCoauthored, 
@@ -61,8 +66,22 @@ BEGIN
 END //
 DELIMITER ;
 
+# JOIN AuthorsB ON aid
+DELIMITER //
+CREATE FUNCTION numCoauthored3 (rid1 INT(3), rid2 INT(3)) RETURNS INT
+BEGIN
+    DECLARE numArticlesCoauthored INT;
+    SELECT COUNT(*) INTO numArticlesCoauthored 
+    FROM Authors AS AuthorsA 
+    JOIN Authors AS AuthorsB ON AuthorsA.aid = AuthorsB.aid
+    WHERE AuthorsA.rid = rid1 AND AuthorsB.rid = rid2;
+    RETURN numArticlesCoauthored;
+END //
+DELIMITER ;
+
 /* Question 1.5:
 State an SQL statement that uses the function to find the number of articles
 co-authored by the two researchers with numbers 1 and 3. */
 SELECT numCoauthored1(1, 3);
 SELECT numCoauthored2(1, 3);
+SELECT numCoauthored3(1, 3);
