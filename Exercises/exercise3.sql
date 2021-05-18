@@ -7,13 +7,28 @@ USE UniversityDB;
 	number of instructors in each department. Note:
 	Department(DeptName, Building, Budget)
 	Instructor(InstID, InstName, DeptName, Salary) */
-	
+SELECT DeptName, COUNT(InstID) AS TotalNumberOfInstructors
+FROM Department
+NATURAL LEFT OUTER JOIN Instructor
+GROUP BY DeptName;
 	
 /* 4.2.2 JOINs
 	Display the list of active students, along with titles of
 	the courses they take. The list should be sorted by
 	the student names */
+# USING
+SELECT StudName, Title
+FROM Student 
+NATURAL JOIN Takes
+JOIN Course USING (CourseID)
+ORDER BY StudName;
 
+# ON
+SELECT StudName, Title
+FROM Student 
+NATURAL JOIN Takes T
+JOIN Course C ON C.CourseID = T.CourseID
+ORDER BY StudName;
 
 /* 4.2.3 Referential Actions
 	Consider the CREATE TABLE commands for the
