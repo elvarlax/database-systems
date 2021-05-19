@@ -89,11 +89,11 @@ BEGIN
         SIGNAL SQLSTATE 'HY000'
 		SET MYSQL_ERRNO = 1525, 
         MESSAGE_TEXT = 'EndTime is equal to or after StartTime';
-    ELSEIF TimeOverlapWithTable(vTimeSlotID, vDayCode, vStartTime, vEndTime) THEN
+	ELSEIF TimeOverlapWithTable(vTimeSlotID, vDayCode, vStartTime, vEndTime) THEN
         SIGNAL SQLSTATE 'HY000'
         SET MYSQL_ERRNO = 1525, 
         MESSAGE_TEXT = 'Time interval overlaps with existing timeinterval for the same TimeSlotID';
-    ELSE
+	ELSE
         INSERT INTO TimeSlot VALUES (vTimeSlotID, vDayCode, vStartTime, vEndTime);
     END IF;
 END //
