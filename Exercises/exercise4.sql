@@ -7,7 +7,23 @@ USE UniversityDB;
 	takes as input a Building and returns the capacity of the building.
 	Test the function (i.e. execute an SQL command
 	containing a function call of that function). */
+DELIMITER //
+CREATE FUNCTION BuildingCapacityFct(vBuilding VARCHAR(15)) RETURNS INT
+BEGIN
+	DECLARE buildingCapacity INT;
+	SELECT SUM(Capacity) INTO buildingCapacity
+	FROM Classroom
+	WHERE Building = vBuilding;
+	RETURN buildingCapacity;
+END //
+DELIMITER ;
 
+SELECT BuildingCapacityFct('Watson');
+
+SELECT * FROM Classroom;
+
+SELECT * FROM Classroom
+WHERE Capacity > BuildingCapacityFct('Watson');
 
 /* 5.2.2 Procedure with Error Signalling
 	State informally constraints (besides the
