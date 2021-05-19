@@ -121,8 +121,27 @@ SELECT * FROM TimeSlot; #new timeslot is inserted
 	without using the InsertTimeSlot procedure), if
 	the insertion of the new row leads to a violation
 	of the constraints identified in the previous
-	exercise. Test the trigger by making INSERTs into TimeSLOT. */
+	exercise. Test the trigger by making INSERTs into TimeSlot. */
+DELIMITER //
+CREATE TRIGGER TimeSlot_Before_Insert
+BEFORE INSERT ON TimeSlot FOR EACH ROW
+BEGIN
+	IF NEW.EndTime <= NEW.StartTime THEN
+		SIGNAL SQLSTATE 'HY000'
+		SET MYSQL_ERRNO = 1525, 
+		MESSAGE_TEXT = 'EndTime is equal to or after StartTime';
+	ELSEIF TimeOverlapWithTable(NEW.TimeSlotID, NEW.DayCode, NEW.StartTime, NEW.EndTime) THEN
+		SIGNAL SQLSTATE 'HY000'
+		SET MYSQL_ERRNO = 1525, 
+		MESSAGE_TEXT = 'Time interval overlaps with existing timeinterval for the same TimeSlotID';
+	END IF;
+END //
+DELIMITER ;
 
+INSERT TimeSlot VALUES ('A', 'R', '08:00:00', '08:50:00'); # ok
+INSERT TimeSlot VALUES ('A', 'T', '08:50:00', '08:00:00'); # should give error message 'EndTime is equal to or after StartTime'
+INSERT TimeSlot VALUES ('A', 'M', '08:50:00', '08:00:00'); # should give error message 'EndTime is equal to or after StartTime'
+INSERT TimeSlot VALUES ('A', 'M', '08:10:00', '08:40:00'); # should give error message 'Time interval overlaps with existing timeinterval for the same TimeSlotID'
 
 /* 5.2.4 Create an Event of European Roulette
 	Design a Gambling Machine which rolls a ball on a
