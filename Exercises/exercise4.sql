@@ -48,24 +48,24 @@ RETURN vDayCode1 = vDayCode2
 AND ((vstartTime1 <= vStartTime2 AND vStartTime2 <= vEndTime1) 
 OR (vstartTime2 <= vStartTime1 AND vStartTime1 <= vEndTime2));
 
-#testing TimeOverlap function:
+# Testing TimeOverlap function:
 # different start
-SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'T', '08:00:00', '08:50:00'); #should return 0
-SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '09:00:00', '09:50:00'); #should return 0
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'T', '08:00:00', '08:50:00'); # should return 0
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '09:00:00', '09:50:00'); # should return 0
 
-# same start
-SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:00:00', '08:40:00'); #should return 1
-SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:00:00', '08:40:00'); #should return 1
+# Same start
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:00:00', '08:40:00'); # should return 1
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:00:00', '08:40:00'); # should return 1
 
-# first starts before second on the same day
-SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '08:40:00'); #should return 1
-SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '08:50:00'); #should return 1
-SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '09:00:00'); #should return 1
+# First starts before second on the same day
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '08:40:00'); # should return 1
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '08:50:00'); # should return 1
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '09:00:00'); # should return 1
 
-# second starts before first on the same day
-SELECT TimeOverlap('M', '08:10:00', '08:40:00', 'M', '08:00:00', '08:50:00'); #should return 1
-SELECT TimeOverlap('M', '08:10:00', '08:50:00', 'M', '08:00:00', '08:50:00'); #should return 1
-SELECT TimeOverlap('M', '08:10:00', '09:00:00', 'M', '08:00:00', '08:50:00'); #should return 1
+# Second starts before first on the same day
+SELECT TimeOverlap('M', '08:10:00', '08:40:00', 'M', '08:00:00', '08:50:00'); # should return 1
+SELECT TimeOverlap('M', '08:10:00', '08:50:00', 'M', '08:00:00', '08:50:00'); # should return 1
+SELECT TimeOverlap('M', '08:10:00', '09:00:00', 'M', '08:00:00', '08:50:00'); # should return 1
 
 CREATE FUNCTION TimeOverlapWithTable(vTimeSlotID VARCHAR(4), 
 vDayCode ENUM('M','T','W','R','F','S','U'), vStartTime TIME, vEndTime TIME)
@@ -75,9 +75,9 @@ SELECT * FROM TimeSlot
 WHERE TimeSlotID = vTimeSlotID 
 AND TimeOverlap(vDayCode, vStartTime, vEndTime, DayCode, StartTime, EndTime));
 
-SELECT TimeOverlapWithTable('A', 'M', '08:10:00', '08:40:00'); #should return 1
-SELECT TimeOverlapWithTable('A', 'M', '09:00:00', '09:50:00'); #should return 0
-SELECT TimeOverlapWithTable('A', 'T', '08:00:00', '08:50:00'); #should return 0
+SELECT TimeOverlapWithTable('A', 'M', '08:10:00', '08:40:00'); # should return 1
+SELECT TimeOverlapWithTable('A', 'M', '09:00:00', '09:50:00'); # should return 0
+SELECT TimeOverlapWithTable('A', 'T', '08:00:00', '08:50:00'); # should return 0
 
 DELIMITER //
 CREATE PROCEDURE InsertTimeSlot
@@ -138,6 +138,7 @@ BEGIN
 END //
 DELIMITER ;
 
+# Testing trigger
 INSERT TimeSlot VALUES ('A', 'R', '08:00:00', '08:50:00'); # ok
 INSERT TimeSlot VALUES ('A', 'T', '08:50:00', '08:00:00'); # should give error message 'EndTime is equal to or after StartTime'
 INSERT TimeSlot VALUES ('A', 'M', '08:50:00', '08:00:00'); # should give error message 'EndTime is equal to or after StartTime'
@@ -150,3 +151,15 @@ INSERT TimeSlot VALUES ('A', 'M', '08:10:00', '08:40:00'); # should give error m
 	Create an event RollBall that executes every 10
 	seconds and inserts RollNo (automatically counting from 1) 
 	and LuckyNo (i.e. random number between 0 and 36) into the table BallRolls. */
+SET GLOBAL event_scheduler = 1;
+
+CREATE TABLE BallRolls (
+	RollNo INTEGER AUTO_INCREMENT PRIMARY KEY,
+	LuckyNo INTEGER
+);
+
+CREATE EVENT RollBall
+ON SCHEDULE EVERY 10 SECOND
+DO
+INSERT BallRolls (LuckyNo) VALUES (FLOOR(37 * RAND()));
+SELECT * FROM BallRolls;
