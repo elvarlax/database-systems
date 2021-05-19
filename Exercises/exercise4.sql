@@ -40,7 +40,79 @@ WHERE Capacity > BuildingCapacityFct('Watson');
 	define one or several auxiliary functions to
 	express the error conditions.
 	Test systematically the auxiliary functions and procedure. */
+CREATE FUNCTION TimeOverlap(
+vDayCode1 ENUM('M','T','W','R','F','S','U'), vStartTime1 TIME, vEndTime1 TIME,
+vDayCode2 ENUM('M','T','W','R','F','S','U'), vStartTime2 TIME, vEndTime2 TIME)
+RETURNS BOOLEAN
+RETURN vDayCode1 = vDayCode2 
+AND ((vstartTime1 <= vStartTime2 AND vStartTime2 <= vEndTime1) 
+OR (vstartTime2 <= vStartTime1 AND vStartTime1 <= vEndTime2));
 
+#testing TimeOverlap function:
+# different start
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'T', '08:00:00', '08:50:00'); #should return 0
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '09:00:00', '09:50:00'); #should return 0
+
+# same start
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:00:00', '08:40:00'); #should return 1
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:00:00', '08:40:00'); #should return 1
+
+# first starts before second on the same day
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '08:40:00'); #should return 1
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '08:50:00'); #should return 1
+SELECT TimeOverlap('M', '08:00:00', '08:50:00', 'M', '08:10:00', '09:00:00'); #should return 1
+
+# second starts before first on the same day
+SELECT TimeOverlap('M', '08:10:00', '08:40:00', 'M', '08:00:00', '08:50:00'); #should return 1
+SELECT TimeOverlap('M', '08:10:00', '08:50:00', 'M', '08:00:00', '08:50:00'); #should return 1
+SELECT TimeOverlap('M', '08:10:00', '09:00:00', 'M', '08:00:00', '08:50:00'); #should return 1
+
+CREATE FUNCTION TimeOverlapWithTable(vTimeSlotID VARCHAR(4), 
+vDayCode ENUM('M','T','W','R','F','S','U'), vStartTime TIME, vEndTime TIME)
+RETURNS BOOLEAN
+RETURN EXISTS (
+SELECT * FROM TimeSlot 
+WHERE TimeSlotID = vTimeSlotID 
+AND TimeOverlap(vDayCode, vStartTime, vEndTime, DayCode, StartTime, EndTime));
+
+SELECT timeoverlapWithTable('A', 'M', '08:10:00', '08:40:00'); #should return 1
+SELECT timeoverlapWithTable('A', 'M', '09:00:00', '09:50:00'); #should return 0
+SELECT timeoverlapWithTable('A', 'T', '08:00:00', '08:50:00'); #should return 0
+
+DELIMITER //
+CREATE PROCEDURE InsertTimeSlot
+(IN vTimeSlotID VARCHAR(4),
+IN vDayCode ENUM('M','T','W','R','F','S','U'),
+IN vStartTime TIME, IN vEndTime TIME)
+BEGIN
+	IF vEndTime <= vStartTime # Bad time interval
+    THEN SIGNAL SQLSTATE 'HY000'
+	SET MYSQL_ERRNO = 1525,
+	MESSAGE_TEXT = 'EndTime is equal to or after StartTime';
+	END IF;
+	IF TimeOverlapWithTable(vTimeSlotID, vDayCode, vStartTime, vEndTime)
+		THEN SIGNAL SQLSTATE 'HY000'
+        SET MYSQL_ERRNO = 1525,
+        MESSAGE_TEXT = 'Time interval overlaps with existing timeinterval for the same TimeSlotID';
+	END IF;
+    INSERT INTO TimeSlot VALUES (vTimeSlotID, vDayCode, vStartTime, vEndTime);
+END // #END BEGIN
+DELIMITER ;
+
+# Testing procedure
+SELECT * FROM TimeSlot;
+CALL InsertTimeSlot('A', 'T', '08:50:00', '08:00:00'); 
+# should give error message 'EndTime is equal to or after StartTime'
+
+CALL InsertTimeSlot('A', 'M', '08:50:00', '08:00:00'); 
+# should give error message 'EndTime is equal to or after StartTime'
+
+CALL InsertTimeSlot('A', 'M', '08:10:00', '08:40:00'); 
+# should give error message 'time interval overlaps with existing timeinterval for the same TimeSlotID'
+
+SELECT * FROM TimeSlot; #no changes in TimeSlot
+CALL InsertTimeSlot('A', 'T', '08:00:00', '08:50:00'); # is succesfull
+SELECT * FROM TimeSlot; #new timeslot is inserted
 
 /* 5.2.3 Trigger with Error Signalling
 	Make a trigger TimeSlot_Before_Insert, which
