@@ -95,7 +95,7 @@ SHOW GRANTS FOR 'Linda'@'localhost';
 SHOW GRANTS FOR 'Susan'@'localhost';
 
 /* Connect as Karen and change your password to ‘KarenSecret’. */
-When connected as Karen:
+# When connected as Karen:
 SET PASSWORD = PASSWORD('KarenSecret')
 
 /* Try (as Karen) to execute some select statements
