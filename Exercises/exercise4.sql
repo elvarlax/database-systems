@@ -71,7 +71,7 @@ CREATE FUNCTION TimeOverlapWithTable(vTimeSlotID VARCHAR(4),
 vDayCode ENUM('M','T','W','R','F','S','U'), vStartTime TIME, vEndTime TIME)
 RETURNS BOOLEAN
 RETURN EXISTS (
-SELECT * FROM TimeSlot 
+SELECT * FROM TimeSlot
 WHERE TimeSlotID = vTimeSlotID 
 AND TimeOverlap(vDayCode, vStartTime, vEndTime, DayCode, StartTime, EndTime));
 
@@ -85,18 +85,18 @@ CREATE PROCEDURE InsertTimeSlot
 IN vDayCode ENUM('M','T','W','R','F','S','U'),
 IN vStartTime TIME, IN vEndTime TIME)
 BEGIN
-	IF vEndTime <= vStartTime # Bad time interval
-    THEN SIGNAL SQLSTATE 'HY000'
-	SET MYSQL_ERRNO = 1525,
-	MESSAGE_TEXT = 'EndTime is equal to or after StartTime';
-	END IF;
-	IF TimeOverlapWithTable(vTimeSlotID, vDayCode, vStartTime, vEndTime)
-		THEN SIGNAL SQLSTATE 'HY000'
-        SET MYSQL_ERRNO = 1525,
+	IF vEndTime <= vStartTime THEN
+        SIGNAL SQLSTATE 'HY000'
+		SET MYSQL_ERRNO = 1525, 
+        MESSAGE_TEXT = 'EndTime is equal to or after StartTime';
+    ELSEIF TimeOverlapWithTable(vTimeSlotID, vDayCode, vStartTime, vEndTime) THEN
+        SIGNAL SQLSTATE 'HY000'
+        SET MYSQL_ERRNO = 1525, 
         MESSAGE_TEXT = 'Time interval overlaps with existing timeinterval for the same TimeSlotID';
-	END IF;
-    INSERT INTO TimeSlot VALUES (vTimeSlotID, vDayCode, vStartTime, vEndTime);
-END // #END BEGIN
+    ELSE
+        INSERT INTO TimeSlot VALUES (vTimeSlotID, vDayCode, vStartTime, vEndTime);
+    END IF;
+END //
 DELIMITER ;
 
 # Testing procedure
